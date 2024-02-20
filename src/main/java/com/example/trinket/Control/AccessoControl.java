@@ -34,7 +34,6 @@ public class AccessoControl extends HttpServlet {
             try {
                 dispatcher.forward(request, response);
             } catch (ServletException | IOException ex) {
-                // Se si verifica un'altra eccezione durante il reindirizzamento, loggiamola
                 log("Errore durante il reindirizzamento alla pagina di errore", ex);
             }
         }

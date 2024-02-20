@@ -1,0 +1,106 @@
+/* Stili per la navbar */
+.navbar {
+    background-color: #999cff;
+    background-image: radial-gradient(at 85% 51%, hsla(210, 100%, 50%, 1) 0%, transparent 50%),
+    radial-gradient(at 74% 68%, hsla(240, 100%, 50%, 1) 0%, transparent 50%),
+    radial-gradient(at 64% 79%, hsla(270, 100%, 50%, 1) 0%, transparent 50%),
+    radial-gradient(at 75% 16%, hsla(300, 100%, 50%, 1) 0%, transparent 50%),
+    radial-gradient(at 90% 65%, hsla(330, 100%, 50%, 1) 0%, transparent 50%),
+    radial-gradient(at 91% 83%, hsla(0, 100%, 50%, 1) 0%, transparent 50%),
+    radial-gradient(at 72% 91%, hsla(30, 100%, 50%, 1) 0%, transparent 50%);
+    overflow: hidden; /* Per gestire eventuali elementi che sforano la navbar */
+    padding: 10px; /* Spaziatura interna della navbar */
+    display: flex; /* Utilizzo di flexbox per il layout */
+    align-items: center; /* Allineamento verticale */
+}
+
+/* Stili per il logo */
+.logo {
+    float: left; /* Allinea il logo a sinistra */
+}
+
+.logo img {
+    height: 50px; /* Altezza dell'immagine del logo */
+    width: auto; /* Larghezza automatica per mantenere le proporzioni */
+}
+
+/* Stili per il carrello e il profilo */
+.carrello {
+    float: right; /* Allinea il carrello a destra */
+    margin-right: 10px; /* Aggiunge un margine destro per separare dal profilo */
+}
+
+.profilo {
+    float: right; /* Allinea il profilo a destra */
+}
+
+.profilo img {
+    height: 50px; /* Altezza delle immagini di carrello e profilo */
+    width: auto; /* Larghezza automatica per mantenere le proporzioni */
+    margin-left: 10px; /* Aggiunge un margine sinistro tra le immagini */
+}
+
+.carrello img {
+    height: 50px; /* Altezza delle immagini di carrello e profilo */
+    width: auto; /* Larghezza automatica per mantenere le proporzioni */
+    margin-left: 10px; /* Aggiunge un margine sinistro tra le immagini */
+    transform: scale(1.8);
+}
+
+/* Stili per la ricerca */
+.cerca {
+    margin: 0 auto; /* Centra orizzontalmente il div cerca */
+    position: relative;
+    background: rgba(255, 255, 255, 0.664);
+    padding: 10px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-radius: 22px;
+    max-width: 500px; /* Aumenta il max-width per allungare il div cerca */
+    width: 80%; /* Imposta una larghezza percentuale per consentire la flessibilità */
+}
+
+.ombre {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    filter: blur(30px);
+    border-radius: 20px;
+
+}
+
+.bottoneRicerca {
+    cursor: pointer;
+    border: none;
+    background: none;
+    transition: transform 400ms, background 400ms;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    padding: 5px;
+}
+
+.bottoneRicerca img{
+    height: 30px;
+    width: 30px;
+}
+
+.bottoneRicerca:hover {
+    background: rgba(255, 255, 255, 0.411);
+}
+
+.barraRicerca {
+    flex: 1; /* Fai espandere la barra di ricerca per occupare lo spazio disponibile */
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    padding: 8px;
+    position: relative;
+}

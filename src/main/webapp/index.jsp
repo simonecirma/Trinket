@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+<%@ page errorPage="error.jsp" %>
 <%!
   String email = "";
   String result = "";
@@ -16,12 +16,17 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <title>Trinket</title>
+  <title>Easy Travel</title>
 </head>
 <body>
+<%@ include file="navbar.jsp" %>
 <form method="post" action="AccessoControl?action=Login">
-  <input type="email" name="email" placeholder="email">
-  <input type="password" name="password" placeholder="password">
+  <label>
+    Email: <input type="email" name="email" placeholder="email">
+  </label>
+  <label>
+    Password: <input type="password" name="password" placeholder="password">
+  </label>
   <input type="submit" value="Accedi">
 </form>
 <%
