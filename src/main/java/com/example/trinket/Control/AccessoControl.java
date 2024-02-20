@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet(name = "AccessoControl", value = "/AccessoControl")
 public class AccessoControl extends HttpServlet {
@@ -23,16 +22,11 @@ public class AccessoControl extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        try {
-            if (action != null) {
-                if (action.equalsIgnoreCase("Login")) {
-                    login(request, response);
-                }
+        if (action != null) {
+            if (action.equalsIgnoreCase("Login")) {
+                login(request, response);
             }
-        } catch (SQLException e) {
-            request.setAttribute("errorMessage", "Si è verificato un errore: " + e.getMessage());
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
-            dispatcher.forward(request, response);        }
+        }
     }
 
     @Override
@@ -40,7 +34,7 @@ public class AccessoControl extends HttpServlet {
         doGet(request, response);
     }
 
-    public void login(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+    public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UtenteBean admin;
         String email = request.getParameter("email");
         String password = request.getParameter("password");
