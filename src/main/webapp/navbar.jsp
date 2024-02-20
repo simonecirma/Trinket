@@ -1,6 +1,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" %>
-<html>
+<!DOCTYPE html>
+<html lang="it">
 <head>
     <title>Trinket</title>
 </head>
