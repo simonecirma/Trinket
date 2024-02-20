@@ -1,5 +1,6 @@
 package com.example.trinket.Model;
 
+import com.example.trinket.GestioneErrori;
 import com.example.trinket.Model.Bean.UtenteBean;
 
 import javax.naming.Context;
@@ -29,7 +30,7 @@ public class UtenteModel {
         }
     }
 
-    public UtenteBean login(String email, String password) throws SQLException {
+    public UtenteBean login(String email, String password) throws GestioneErrori {
         try(
             Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM " +TABLE_NAME_UTENTE+ " WHERE Email = ? AND Password = ? ")){
@@ -50,8 +51,7 @@ public class UtenteModel {
                 return bean;
             }
         }catch (SQLException e) {
-            logger.log(Level.WARNING, e.getMessage());
-            throw e;
+            throw new GestioneErrori("Errore Durante L'Accesso Ai Dati Dell'Utente");
         }
     }
 }
