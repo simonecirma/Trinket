@@ -29,52 +29,29 @@ public class UtenteModel {
         }
     }
 
-    public UtenteBean login(String email, String password) throws SQLException {
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
+    public UtenteBean login(String email, String password) {
         UtenteBean bean = new UtenteBean();
         String sql = "SELECT * FROM " +TABLE_NAME_UTENTE+ " WHERE Email = ? AND Password = ? ";
-        try{
-            con = ds.getConnection();
-            ps = con.prepareStatement(sql);
+        try(
+            Connection con = ds.getConnection();
+            PreparedStatement ps = con.prepareStatement(sql)){
             ps.setString(1, email);
             ps.setString(2, password);
-            rs = ps.executeQuery();
-            while(rs.next()){
-                bean.setId(rs.getInt("ID"));
-                bean.setNome(rs.getString("Nome"));
-                bean.setCognome(rs.getString("Cognome"));
-                bean.setEmail(rs.getString("Email"));
-                bean.setPassword(rs.getString("Password"));
-                bean.setIndirizzo(rs.getString("Indirizzo"));
-                bean.setNumeroCivico(rs.getInt("NumeroCivico"));
-                bean.setCap(rs.getInt("CAP"));
-                bean.setCitta(rs.getString("Città"));
-                bean.setProvincia(rs.getString("Provincia"));
-                bean.setDataDiNascita(rs.getDate("DataDiNascita"));
-                bean.setNumeroTelefono(rs.getString("NumeroTelefono"));
-                bean.setImmagine(rs.getString("Immagine"));
-                bean.setFlagAmm(rs.getBoolean("FlagAmm"));
+            try(ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    bean.setNome(rs.getString("Nome"));
+                    bean.setCognome(rs.getString("Cognome"));
+                    bean.setEmail(rs.getString("Email"));
+                    bean.setPassword(rs.getString("Password"));
+                    bean.setDataDiNascita(rs.getDate("DataDiNascita"));
+                    bean.setImmagine(rs.getString("Immagine"));
+                    bean.setFlagAmm(rs.getBoolean("FlagAmm"));
+                }
             }
         }catch (SQLException e) {
             logger.log(Level.WARNING, e.getMessage());
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
-            if (con != null) {
-                con.close();
-            }
         }
-        if (bean == null || bean.getEmail() == null || bean.getEmail().trim().isEmpty()) {
-            return null;
-        } else {
-            return bean;
-        }
+        return bean;
     }
 }
 

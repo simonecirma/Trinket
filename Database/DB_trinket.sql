@@ -4,21 +4,34 @@ USE trinket;
 
 CREATE TABLE Utente
 (
-    ID int NOT NULL AUTO_INCREMENT,
     Nome varchar(20) NOT NULL,
     Cognome varchar (20) NOT NULL,
     Email varchar (50) NOT NULL,
     Password varchar (20) NOT NULL,
-    Indirizzo varchar (50) NOT NULL,
-    NumeroCivico int NOT NULL,
-    CAP int NOT NULL,
-    Città varchar (20) NOT NULL,
-    Provincia varchar (20) NOT NULL,
     DataDiNascita date NOT NULL,
     NumeroTelefono varchar (20) NOT NULL,
     Immagine varchar (50) NOT NULL,
     FlagAmm bit NOT NULL,
-    PRIMARY KEY (ID)
+    PRIMARY KEY (Email)
+);
+
+CREATE TABLE IndirizzoSpedizione
+(
+    IDIndirizzo int NOT NULL AUTO_INCREMENT,
+    Indirizzo varchar (50) NOT NULL,
+    NumeroCivico int NOT NULL,
+    CAP int NOT NULL,
+    Città varchar (100) NOT NULL,
+    Provincia varchar (20) NOT NULL,
+    PRIMARY KEY (IDIndirizzo)
+);
+
+CREATE TABLE Inserisce
+(
+    IDIndirizzo int NOT NULL,
+    Email varchar (50) NOT NULL,
+    FOREIGN KEY (IDIndirizzo) REFERENCES IndirizzoSpedizione(IDIndirizzo) ON UPDATE cascade ON DELETE cascade,
+    FOREIGN KEY (Email) REFERENCES Utente(Email) ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE MetodoDiPagamento
@@ -32,9 +45,9 @@ CREATE TABLE MetodoDiPagamento
 CREATE TABLE Possiede
 (
     NumeroCarta char (16) NOT NULL,
-    ID int NOT NULL,
+    Email varchar (50) NOT NULL,
     FOREIGN KEY (NumeroCarta) REFERENCES MetodoDiPagamento(NumeroCarta) ON UPDATE cascade ON DELETE cascade,
-    FOREIGN KEY (ID) REFERENCES Utente(ID) ON UPDATE cascade ON DELETE cascade
+    FOREIGN KEY (Email) REFERENCES Utente(Email) ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE StatoOrdine
@@ -50,10 +63,10 @@ CREATE TABLE Ordine
     Fattura varchar(100),
     PrezzoTotale float,
     StatoOrdine varchar (30) NOT NULL,
-    ID int  NOT NULL,
+    Email varchar (50)  NOT NULL,
     PRIMARY KEY (IdOrdine),
     FOREIGN KEY (StatoOrdine) REFERENCES StatoOrdine(Stato) ON UPDATE cascade ON DELETE cascade,
-    FOREIGN KEY (ID) REFERENCES Utente(ID) ON UPDATE cascade ON DELETE cascade
+    FOREIGN KEY (Email) REFERENCES Utente(Email) ON UPDATE cascade ON DELETE cascade
 );
 
 CREATE TABLE Tipologia
@@ -102,24 +115,26 @@ CREATE TABLE Composto
     FOREIGN KEY (IdOrdine) REFERENCES Ordine(IdOrdine) ON UPDATE cascade ON DELETE cascade
 );
 
-CREATE TABLE Recensione
-(
-    CodRecensione int NOT NULL AUTO_INCREMENT,
-    Descrizione text NOT NULL,
-    Valutazione int NOT NULL,
-    CodSeriale varchar(20) NOT NULL,
-    ID int NOT NULL,
-    PRIMARY KEY(CodRecensione),
-    FOREIGN KEY(CodSeriale) REFERENCES Pacchetto(CodSeriale) ON UPDATE cascade ON DELETE cascade,
-    FOREIGN KEY(ID) REFERENCES Utente(ID) ON UPDATE cascade ON DELETE cascade
-);
+INSERT INTO Utente (Nome, Cognome, Email, Password, DataDiNascita, NumeroTelefono,Immagine, FlagAmm)
+VALUES ('Donato','Folgieri','df@gmail.com','donato','2001-07-21','+393917598493','',0);
+INSERT INTO Utente (Nome, Cognome, Email, Password, DataDiNascita, NumeroTelefono,Immagine, FlagAmm)
+VALUES ('Simone','Cirma','sc@gmail.com','simone', '2001-05-27','+393478902231','',0);
+INSERT INTO Utente (Nome, Cognome, Email, Password, DataDiNascita, NumeroTelefono,Immagine, FlagAmm)
+VALUES ('Giuseppe','Rossi','gp@gmail.com','giuseppe', '1965-03-06','+393756789768','',1);
 
-INSERT INTO Utente (Nome, Cognome, Email, Password, Indirizzo, NumeroCivico, CAP, Città, Provincia, DataDiNascita, NumeroTelefono,Immagine, FlagAmm)
-VALUES ('Donato','Folgieri','df@gmail.com','donato', 'via nazionale','23', '82016','Napoli','Napoli','2001-07-21','+393917598493','',0);
-INSERT INTO Utente (Nome, Cognome, Email, Password, Indirizzo, NumeroCivico, CAP, Città, Provincia, DataDiNascita, NumeroTelefono,Immagine, FlagAmm)
-VALUES ('Simone','Cirma','sc@gmail.com','simone', 'via marittima','85', '87201','Aversa','Caserta','2001-05-27','+393478902231','',0);
-INSERT INTO Utente (Nome, Cognome, Email, Password, Indirizzo, NumeroCivico, CAP, Città, Provincia, DataDiNascita, NumeroTelefono,Immagine, FlagAmm)
-VALUES ('Giuseppe','Rossi','gp@gmail.com','giuseppe', 'via panoramica','76', '89301','Agropoli','Napoli','1965-03-06','+393756789768','',1);
+INSERT INTO IndirizzoSpedizione (Indirizzo, NumeroCivico, CAP, Città, Provincia)
+VALUES ('Via Barracco', '4', '81027', 'San Felice a Cancello', 'CE');
+INSERT INTO IndirizzoSpedizione (Indirizzo, NumeroCivico, CAP, Città, Provincia)
+VALUES ('Via Cupa', '68', '81028', 'Santa Maria A Vico', 'CE');
+INSERT INTO IndirizzoSpedizione (Indirizzo, NumeroCivico, CAP, Città, Provincia)
+VALUES ('Via Napoli','23', '81024', 'Maddaloni', 'CE');
+
+INSERT INTO Inserisce (IDIndirizzo, Email)
+VALUES ('01', 'df@gmail.com');
+INSERT INTO Inserisce (IDIndirizzo, Email)
+VALUES ('02', 'sc@gmail.com');
+INSERT INTO Inserisce (IDIndirizzo, Email)
+VALUES ('03', 'gp@gmail.com');
 
 SET @CartaDonato='1234567891234567';
 SET @CartaSimone='9876543210987654';
@@ -132,12 +147,12 @@ VALUES (@CartaSimone, '2030-06-01','Simone Cirma');
 INSERT INTO MetodoDiPagamento (NumeroCarta, Scadenza, Titolare)
 VALUES (@CartaGiuseppe, '2028-01-01','Giuseppe Rossi');
 
-INSERT INTO Possiede (NumeroCarta, ID)
-VALUES (@CartaDonato,'01');
-INSERT INTO Possiede (NumeroCarta, ID)
-VALUES (@CartaSimone,'02');
-INSERT INTO Possiede (NumeroCarta, ID)
-VALUES (@CartaGiuseppe,'03');
+INSERT INTO Possiede (NumeroCarta, Email)
+VALUES (@CartaDonato,'df@gmail.com');
+INSERT INTO Possiede (NumeroCarta, Email)
+VALUES (@CartaSimone,'sc@gmail.com');
+INSERT INTO Possiede (NumeroCarta, Email)
+VALUES (@CartaGiuseppe,'gp@gmail.com');
 
 INSERT INTO StatoOrdine (Stato)
 VALUES ('In Elaborazione');
@@ -148,12 +163,12 @@ VALUES ('In Consegna');
 INSERT INTO StatoOrdine (Stato)
 VALUES ('Consegnato');
 
-INSERT INTO Ordine (DataAcquisto, PrezzoTotale, StatoOrdine, ID)
-VALUES ('2022-01-01','200.00','In Elaborazione','01');
-INSERT INTO Ordine (DataAcquisto, PrezzoTotale, StatoOrdine, ID)
-VALUES ('2023-05-05','59.00','Consegnato','02');
-INSERT INTO Ordine (DataAcquisto, PrezzoTotale, StatoOrdine, ID)
-VALUES ('2023-03-03','400.00','In Consegna','03');
+INSERT INTO Ordine (DataAcquisto, PrezzoTotale, StatoOrdine, Email)
+VALUES ('2022-01-01','200.00','In Elaborazione','df@gmail.com');
+INSERT INTO Ordine (DataAcquisto, PrezzoTotale, StatoOrdine, Email)
+VALUES ('2023-05-05','59.00','Consegnato','sc@gmail.com');
+INSERT INTO Ordine (DataAcquisto, PrezzoTotale, StatoOrdine, Email)
+VALUES ('2023-03-03','400.00','In Consegna','gp@gmail.com');
 
 INSERT INTO Tipologia (TipoPacchetto)
 VALUES ('Terme e SPA');
@@ -285,10 +300,3 @@ INSERT INTO Composto (Quantità, CodSeriale, IdOrdine)
 VALUES ('2',@SMARTBOXE3code,'03');
 INSERT INTO Composto (Quantità, CodSeriale, IdOrdine)
 VALUES ('1',@SMARTBOXE4code,'03');
-
-INSERT INTO Recensione (Descrizione, Valutazione, CodSeriale, ID)
-VALUES ('Esperienza da rifare', '4',@SMARTBOXE1code,'01' );
-INSERT INTO Recensione (Descrizione, Valutazione, CodSeriale, ID)
-VALUES ('Assoutamente fantastico', '5',@SMARTBOXE2code,'02' );
-INSERT INTO Recensione (Descrizione, Valutazione, CodSeriale, ID)
-VALUES ('Assolutamente sconsigliato, le strutture elencate nella box non accettano il pacchetto', '1',@SMARTBOXE3code,'03' );
