@@ -20,17 +20,28 @@ public class AccessoControl extends HttpServlet {
     private final UtenteModel utenteModel = new UtenteModel();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         String action = request.getParameter("action");
-        if (action != null) {
-            if (action.equalsIgnoreCase("Login")) {
-                login(request, response);
+        try {
+            if (action != null) {
+                if (action.equalsIgnoreCase("Login")) {
+                    login(request, response);
+                }
+            }
+        }catch (ServletException | IOException e) {
+            request.setAttribute("errorMessage", "Si è verificato un errore: " + e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
+            try {
+                dispatcher.forward(request, response);
+            } catch (ServletException | IOException ex) {
+                // Se si verifica un'altra eccezione durante il reindirizzamento, loggiamola
+                log("Errore durante il reindirizzamento alla pagina di errore", ex);
             }
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         doGet(request, response);
     }
 
