@@ -1,0 +1,9 @@
+<Context>
+    <Resource name="jdbc/trinket"
+              auth="Container"
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              type="javax.sql.DataSource"
+              username="root"
+              password="ebalance"
+              url="jdbc:mysql://localhost:3306/trinket?serverTimezone=Europe/Rome&amp;useSSL=false"/>
+</Context>
