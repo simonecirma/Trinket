@@ -1,6 +1,5 @@
 package com.example.trinket.Control;
 
-import com.example.trinket.GestioneErrori;
 import com.example.trinket.Model.Bean.UtenteBean;
 import com.example.trinket.Model.UtenteModel;
 
@@ -12,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(name = "AccessoControl", value = "/AccessoControl")
 public class AccessoControl extends HttpServlet {
@@ -21,7 +21,7 @@ public class AccessoControl extends HttpServlet {
     private final UtenteModel utenteModel = new UtenteModel();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         try {
             if (action != null) {
@@ -29,21 +29,18 @@ public class AccessoControl extends HttpServlet {
                     login(request, response);
                 }
             }
-        } catch (GestioneErrori e) {
-            try {
-                throw new GestioneErrori("Errore durante il login");
-            } catch (GestioneErrori ex) {
-                throw new RuntimeException(ex);
-            }
-        }
+        } catch (SQLException e) {
+            request.setAttribute("errorMessage", "Si è verificato un errore: " + e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
+            dispatcher.forward(request, response);        }
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
-    public void login(HttpServletRequest request, HttpServletResponse response) throws GestioneErrori {
+    public void login(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
         UtenteBean admin;
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -67,7 +64,9 @@ public class AccessoControl extends HttpServlet {
                 dispatcher.forward(request, response);
             }
         } catch (ServletException | IOException e) {
-            throw new GestioneErrori("Errore Durante Il Login");
+            request.setAttribute("errorMessage", "Si è verificato un errore: " + e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
+            dispatcher.forward(request, response);
         }
     }
 }
