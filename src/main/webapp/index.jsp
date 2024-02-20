@@ -7,7 +7,7 @@
 <%
   synchronized (session) {
     session = request.getSession();
-    email = (String) session.getAttribute("email");
+    email = (String) session.getAttribute("Email");
   }
 
   result = (String) request.getAttribute("result");
@@ -23,21 +23,18 @@
   <input type="email" name="email" placeholder="email">
   <input type="password" name="password" placeholder="password">
   <input type="submit" value="Accedi">
-  <%
-    if(email != null){
-  %>
-  <h1>CIAO</h1>
-  <%
-    }
-  %>
-  <%
-    if (result != null) {
-  %>
-  <h3><%=result%>
-  </h3>
-  <%
-    }
-  %>
 </form>
+<%
+  if(email != null){
+%>
+<h1>CIAO</h1>
+<%
+  }
+  if (result != null) {
+%>
+<h3><%=result%></h3>
+<%
+  }
+%>
 </body>
 </html>

@@ -29,16 +29,16 @@ public class UtenteModel {
         }
     }
 
-    public UtenteBean login(String email, String password) {
-        UtenteBean bean = new UtenteBean();
-        String sql = "SELECT * FROM " +TABLE_NAME_UTENTE+ " WHERE Email = ? AND Password = ? ";
+    public UtenteBean login(String email, String password) throws SQLException {
         try(
             Connection con = ds.getConnection();
-            PreparedStatement ps = con.prepareStatement(sql)){
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM " +TABLE_NAME_UTENTE+ " WHERE Email = ? AND Password = ? ")){
             ps.setString(1, email);
             ps.setString(2, password);
             try(ResultSet rs = ps.executeQuery()) {
+                UtenteBean bean = null;
                 while (rs.next()) {
+                    bean = new UtenteBean();
                     bean.setNome(rs.getString("Nome"));
                     bean.setCognome(rs.getString("Cognome"));
                     bean.setEmail(rs.getString("Email"));
@@ -47,11 +47,12 @@ public class UtenteModel {
                     bean.setImmagine(rs.getString("Immagine"));
                     bean.setFlagAmm(rs.getBoolean("FlagAmm"));
                 }
+                return bean;
             }
         }catch (SQLException e) {
             logger.log(Level.WARNING, e.getMessage());
+            throw e;
         }
-        return bean;
     }
 }
 

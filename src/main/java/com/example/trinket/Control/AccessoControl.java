@@ -1,5 +1,6 @@
 package com.example.trinket.Control;
 
+import com.example.trinket.GestioneErrori;
 import com.example.trinket.Model.Bean.UtenteBean;
 import com.example.trinket.Model.UtenteModel;
 
@@ -18,29 +19,28 @@ public class AccessoControl extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    private UtenteModel utenteModel = new UtenteModel();
+    private final UtenteModel utenteModel = new UtenteModel();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         String action = request.getParameter("action");
         try {
             if (action != null) {
                 if (action.equalsIgnoreCase("Login")) {
-                    UtenteBean bean;
-                    bean = login(request, response);
+                    login(request, response);
                 }
             }
-        } catch (SQLException e) {
+        } catch (SQLException | GestioneErrori e) {
             throw new RuntimeException(e);
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         doGet(request, response);
     }
 
-    public UtenteBean login(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+    public void login(HttpServletRequest request, HttpServletResponse response) throws SQLException, GestioneErrori {
         UtenteBean admin;
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -63,11 +63,8 @@ public class AccessoControl extends HttpServlet {
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
                 dispatcher.forward(request, response);
             }
-        } catch (ServletException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (ServletException | IOException e) {
+            throw new GestioneErrori("Errore Durante Il Login");
         }
-        return admin;
     }
 }
