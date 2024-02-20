@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet(name = "AccessoControl", value = "/AccessoControl")
 public class AccessoControl extends HttpServlet {
@@ -30,8 +29,12 @@ public class AccessoControl extends HttpServlet {
                     login(request, response);
                 }
             }
-        } catch (SQLException | GestioneErrori e) {
-            throw new RuntimeException(e);
+        } catch (GestioneErrori e) {
+            try {
+                throw new GestioneErrori("Errore durante il login");
+            } catch (GestioneErrori ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 
@@ -40,7 +43,7 @@ public class AccessoControl extends HttpServlet {
         doGet(request, response);
     }
 
-    public void login(HttpServletRequest request, HttpServletResponse response) throws SQLException, GestioneErrori {
+    public void login(HttpServletRequest request, HttpServletResponse response) throws GestioneErrori {
         UtenteBean admin;
         String email = request.getParameter("email");
         String password = request.getParameter("password");
