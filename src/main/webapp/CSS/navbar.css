@@ -22,33 +22,48 @@
 .logo img {
     height: 50px; /* Altezza dell'immagine del logo */
     width: auto; /* Larghezza automatica per mantenere le proporzioni */
+    transform: scale(1.5);
+    margin-left: 10px;
 }
 
 /* Stili per il carrello e il profilo */
 .carrello {
     float: right; /* Allinea il carrello a destra */
     margin-right: 10px; /* Aggiunge un margine destro per separare dal profilo */
+    transition: transform 0.3s; /* Aggiunge un effetto di transizione fluida */
+}
+
+.carrello:hover{
+    transform: scale(1.2); /* Ingrandisce l'immagine al passaggio del mouse */
 }
 
 .profilo {
     float: right; /* Allinea il profilo a destra */
+    transition: transform 0.3s; /* Aggiunge un effetto di transizione fluida */
+}
+
+.profilo:hover{
+    transform: scale(1.2); /* Ingrandisce l'immagine al passaggio del mouse */
 }
 
 .profilo img {
-    height: 50px; /* Altezza delle immagini di carrello e profilo */
+    height: 60px; /* Altezza delle immagini di carrello e profilo */
     width: auto; /* Larghezza automatica per mantenere le proporzioni */
     margin-left: 10px; /* Aggiunge un margine sinistro tra le immagini */
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%; /* Imposta il bordo circolare */
 }
 
 .carrello img {
-    height: 50px; /* Altezza delle immagini di carrello e profilo */
-    width: auto; /* Larghezza automatica per mantenere le proporzioni */
+    height: 60px; /* Altezza delle immagini di carrello e profilo */
+    width: 65px; /* Larghezza automatica per mantenere le proporzioni */
     margin-left: 10px; /* Aggiunge un margine sinistro tra le immagini */
-    transform: scale(1.8);
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%; /* Imposta il bordo circolare */
 }
 
 /* Stili per la ricerca */
-.cerca {
+.cerca{
     margin: 0 auto; /* Centra orizzontalmente il div cerca */
     position: relative;
     background: rgba(255, 255, 255, 0.664);
@@ -60,6 +75,27 @@
     border-radius: 22px;
     max-width: 500px; /* Aumenta il max-width per allungare il div cerca */
     width: 80%; /* Imposta una larghezza percentuale per consentire la flessibilità */
+    height: 50px;
+}
+
+.contenitoreBarra{
+    margin: 0 auto; /* Centra orizzontalmente il div cerca */
+    position: relative;
+    background: rgba(255, 255, 255, 0.664);
+    padding: 10px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    border-radius: 22px;
+    max-width: 500px; /* Aumenta il max-width per allungare il div cerca */
+    width: 80%; /* Imposta una larghezza percentuale per consentire la flessibilità */
+    height: 35px;
+    transition: transform 0.3s; /* Aggiunge un effetto di transizione fluida */
+}
+
+.contenitoreBarra:hover{
+    transform: scale(1.05); /* Ingrandisce l'immagine al passaggio del mouse */
 }
 
 .ombre {
@@ -72,7 +108,6 @@
     z-index: -1;
     filter: blur(30px);
     border-radius: 20px;
-
 }
 
 .bottoneRicerca {
@@ -88,8 +123,8 @@
 }
 
 .bottoneRicerca img{
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
 }
 
 .bottoneRicerca:hover {

@@ -21,7 +21,7 @@
             <button class="bottoneRicerca">
                     <img src="Immagini/Cerca.png" alt="Cerca">
             </button>
-            <label>
+            <label class="contenitoreBarra">
                 <input type="text" name="text" class="barraRicerca" placeholder="Cerca">
             </label>
         </div>
