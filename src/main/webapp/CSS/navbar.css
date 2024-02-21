@@ -1,13 +1,11 @@
 /* Stili per la navbar */
 .navbar {
     background-color: #999cff;
-    background-image: radial-gradient(at 85% 51%, hsla(210, 100%, 50%, 1) 0%, transparent 50%),
-    radial-gradient(at 74% 68%, hsla(240, 100%, 50%, 1) 0%, transparent 50%),
-    radial-gradient(at 64% 79%, hsla(270, 100%, 50%, 1) 0%, transparent 50%),
-    radial-gradient(at 75% 16%, hsla(300, 100%, 50%, 1) 0%, transparent 50%),
-    radial-gradient(at 90% 65%, hsla(330, 100%, 50%, 1) 0%, transparent 50%),
-    radial-gradient(at 91% 83%, hsla(0, 100%, 50%, 1) 0%, transparent 50%),
-    radial-gradient(at 72% 91%, hsla(30, 100%, 50%, 1) 0%, transparent 50%);
+    background-image: radial-gradient(at 40% 6%, hsla(210, 100%, 50%, 1) 0%, transparent 50%),
+    radial-gradient(at 60% 20%, hsla(240, 100%, 50%, 1) 0%, transparent 50%),
+    radial-gradient(at 40% 60%, hsla(270, 100%, 50%, 1) 0%, transparent 50%),
+    radial-gradient(at 40% 60%, hsla(300, 100%, 50%, 1) 0%, transparent 50%),
+    radial-gradient(at 55% 80%, hsla(330, 100%, 50%, 1) 0%, transparent 50%);
     overflow: hidden; /* Per gestire eventuali elementi che sforano la navbar */
     padding: 10px; /* Spaziatura interna della navbar */
     display: flex; /* Utilizzo di flexbox per il layout */
@@ -20,7 +18,7 @@
 }
 
 .logo img {
-    height: 50px; /* Altezza dell'immagine del logo */
+    height: 60px; /* Altezza dell'immagine del logo */
     width: auto; /* Larghezza automatica per mantenere le proporzioni */
     transform: scale(1.5);
     margin-left: 10px;
@@ -75,7 +73,7 @@
     border-radius: 22px;
     max-width: 500px; /* Aumenta il max-width per allungare il div cerca */
     width: 80%; /* Imposta una larghezza percentuale per consentire la flessibilità */
-    height: 50px;
+    height: 40px;
 }
 
 .contenitoreBarra{
@@ -90,7 +88,7 @@
     border-radius: 22px;
     max-width: 500px; /* Aumenta il max-width per allungare il div cerca */
     width: 80%; /* Imposta una larghezza percentuale per consentire la flessibilità */
-    height: 35px;
+    height: 25px;
     transition: transform 0.3s; /* Aggiunge un effetto di transizione fluida */
 }
 
