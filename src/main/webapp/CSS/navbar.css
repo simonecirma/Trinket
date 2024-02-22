@@ -135,7 +135,7 @@
     height: 100%;
 }
 
-.card {
+.menuTendina {
     display: none;
     position: absolute;
     top: calc(100% + 10px);
@@ -150,11 +150,11 @@
     width: auto;
 }
 
-.card:hover {
+.menuTendina:hover {
     background: hsla(300, 100%, 50%, 0.5)
 }
 
-.card a {
+.menuTendina a {
     display: block;
     padding: 5px 0; /* Aggiungi spaziatura tra i link */
     text-decoration: none; /* Rimuovi il sottolineato predefinito */

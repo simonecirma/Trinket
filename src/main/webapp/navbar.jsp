@@ -73,7 +73,7 @@
         %>
                 <div class="profilo">
                     <img src="Immagini/Profilo.png" alt="Profilo" id="profilo">
-                    <div class="card" id="card">
+                    <div class="menuTendina" id="menuTendina">
                         <!-- Contenuto del menu a tendina -->
                         <a href="profilo.jsp">Profilo</a>
                         <a href="#">I Miei Ordini</a>
@@ -89,7 +89,7 @@
     <script>
         // Ottieni il link del profilo e il menu a tendina
         var profilo = document.getElementById("profilo");
-        var menuTendina = document.getElementById("card");
+        var menuTendina = document.getElementById("menuTendina");
 
         // Aggiungi un gestore di eventi al clic sul link del profilo
         profilo.addEventListener("click", function(e) {

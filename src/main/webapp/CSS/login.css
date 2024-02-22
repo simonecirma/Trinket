@@ -1,0 +1,142 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 0.4em;
+    background-color: #999cff;
+    border-radius: 20px;
+}
+
+#heading {
+    text-align: center;
+    margin: 2em;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 1.2em;
+}
+
+.field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    border-radius: 25px;
+    padding: 0.6em;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: rgb(47, 47, 246);
+    box-shadow: inset 2px 5px 10px rgba(255, 0, 255, 0.7);
+}
+
+.field input:-webkit-autofill,
+.field input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px #2f2ff6 inset; /* Cambia il colore di riempimento */
+    -webkit-text-fill-color: rgb(0, 0, 0); /* Cambia il colore del testo */
+    border-radius: 25px; /* Aggiunge il bordo arrotondato per il campo */
+}
+
+.input-icon {
+    height: 1.3em;
+    width: 1.3em;
+    fill: rgba(255, 0, 255, 0.7);
+}
+
+.input-field {
+    background: none;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: rgb(0, 0, 0);
+}
+
+.form .btn {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 1em;
+}
+
+.button1 {
+    padding: 0.5em;
+    padding-left: 1.1em;
+    padding-right: 1.1em;
+    border-radius: 5px;
+    margin-right: 0.5em;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-image: linear-gradient(163deg, #0080ff 0%, #8000ff 100%);
+    color: rgb(0, 0, 0);
+}
+
+.button1:hover {
+    background-image: linear-gradient(163deg, #999cff 0%, #0000ff 100%);
+    color: rgb(255, 0, 255);
+}
+
+.button2 {
+    padding: 0.5em;
+    padding-left: 2.3em;
+    padding-right: 2.3em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-image: linear-gradient(163deg, #0080ff 0%, #8000ff 100%);
+    color: rgb(0, 0, 0);
+}
+
+.button2:hover {
+    background-image: linear-gradient(163deg, #999cff 0%, #0000ff 100%);
+    color: rgb(255, 0, 255);
+}
+
+.button3 {
+    margin-bottom: 3em;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-image: linear-gradient(163deg, #0080ff 0%, #8000ff 100%);
+    color: rgb(0, 0, 0);
+}
+
+.button3:hover {
+    background-image: linear-gradient(163deg, #a00000fa 0%, #d10050 100%);
+    color: rgb(255, 255, 255);
+}
+
+.card {
+    position: absolute;
+    top: calc(50vh - 4vh); /* Calcola il 50% dell'altezza della finestra meno metà dell'altezza della navbar */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: linear-gradient(163deg, #ff00ff 0%, #8000ff 100%);
+    border-radius: 22px;
+    transition: all .3s;
+    width: 20%;
+    height: 30%;
+}
+
+.card2 {
+    border-radius: 0;
+    transition: all .2s;
+}
+
+.card2:hover {
+    transform: scale(0.98);
+    border-radius: 20px;
+}
+
+.card:hover {
+    box-shadow: 0 0 30px 1px rgba(255, 0, 255, 0.5);
+}
+
+.result {
+    text-align: center; /* Per centrare il testo */
+    color: #000000; /* Colore del testo */
+    margin-top: 10px; /* Spazio sopra il risultato */
+}
