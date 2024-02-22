@@ -6,19 +6,21 @@
     radial-gradient(at 40% 60%, hsla(270, 100%, 50%, 1) 0%, transparent 50%),
     radial-gradient(at 40% 60%, hsla(300, 100%, 50%, 1) 0%, transparent 50%),
     radial-gradient(at 55% 80%, hsla(330, 100%, 50%, 1) 0%, transparent 50%);
-    overflow: hidden; /* Per gestire eventuali elementi che sforano la navbar */
+    overflow: visible; /* Per gestire eventuali elementi che sforano la navbar */
     padding: 10px; /* Spaziatura interna della navbar */
     display: flex; /* Utilizzo di flexbox per il layout */
     align-items: center; /* Allineamento verticale */
+    height: 4vh;
 }
 
 /* Stili per il logo */
 .logo {
+    height: 100%; /* Altezza dell'immagine del logo */
     float: left; /* Allinea il logo a sinistra */
 }
 
 .logo img {
-    height: 60px; /* Altezza dell'immagine del logo */
+    height: 100%; /* Altezza dell'immagine del logo */
     width: auto; /* Larghezza automatica per mantenere le proporzioni */
     transform: scale(1.5);
     margin-left: 10px;
@@ -26,6 +28,7 @@
 
 /* Stili per il carrello e il profilo */
 .carrello {
+    height: 100%; /* Altezza dell'immagine del logo */
     float: right; /* Allinea il carrello a destra */
     margin-right: 10px; /* Aggiunge un margine destro per separare dal profilo */
     transition: transform 0.3s; /* Aggiunge un effetto di transizione fluida */
@@ -36,8 +39,10 @@
 }
 
 .profilo {
+    height: 100%; /* Altezza dell'immagine del logo */
     float: right; /* Allinea il profilo a destra */
     transition: transform 0.3s; /* Aggiunge un effetto di transizione fluida */
+    position: relative; /* Aggiungi questo per posizionare il menu a tendina rispetto a questo elemento */
 }
 
 .profilo:hover{
@@ -45,23 +50,20 @@
 }
 
 .profilo img {
-    height: 60px; /* Altezza delle immagini di carrello e profilo */
+    height: 100%; /* Altezza dell'immagine del logo */
     width: auto; /* Larghezza automatica per mantenere le proporzioni */
     margin-left: 10px; /* Aggiunge un margine sinistro tra le immagini */
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%; /* Imposta il bordo circolare */
 }
 
 .carrello img {
-    height: 60px; /* Altezza delle immagini di carrello e profilo */
-    width: 65px; /* Larghezza automatica per mantenere le proporzioni */
+    height: 100%; /* Altezza dell'immagine del logo */
+    width: auto; /* Larghezza automatica per mantenere le proporzioni */
     margin-left: 10px; /* Aggiunge un margine sinistro tra le immagini */
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%; /* Imposta il bordo circolare */
 }
 
 /* Stili per la ricerca */
 .cerca{
+    height: 50%; /* Altezza dell'immagine del logo */
     margin: 0 auto; /* Centra orizzontalmente il div cerca */
     position: relative;
     background: rgba(255, 255, 255, 0.664);
@@ -69,26 +71,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
     border-radius: 22px;
-    max-width: 500px; /* Aumenta il max-width per allungare il div cerca */
-    width: 80%; /* Imposta una larghezza percentuale per consentire la flessibilità */
-    height: 40px;
+    width: 25%; /* Imposta una larghezza percentuale per consentire la flessibilità */
 }
 
 .contenitoreBarra{
-    margin: 0 auto; /* Centra orizzontalmente il div cerca */
+    height: 50%; /* Altezza dell'immagine del logo */
+    margin: 0 2%; /* Centra orizzontalmente il div cerca */
     position: relative;
-    background: rgba(255, 255, 255, 0.664);
-    padding: 10px 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
     border-radius: 22px;
-    max-width: 500px; /* Aumenta il max-width per allungare il div cerca */
-    width: 80%; /* Imposta una larghezza percentuale per consentire la flessibilità */
-    height: 25px;
+    min-width: 90%; /* Imposta una larghezza percentuale per consentire la flessibilità */
     transition: transform 0.3s; /* Aggiunge un effetto di transizione fluida */
 }
 
@@ -117,12 +112,13 @@
     justify-content: center;
     align-items: center;
     border-radius: 12px;
-    padding: 5px;
+    height: 150%; /* Altezza dell'immagine del logo */
+    min-width: 9%;
 }
 
 .bottoneRicerca img{
-    height: 40px;
-    width: 40px;
+    height: 100%;
+    width: 100%;
 }
 
 .bottoneRicerca:hover {
@@ -136,4 +132,32 @@
     border: none;
     padding: 8px;
     position: relative;
+    height: 100%;
+}
+
+.card {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    right: -10px; /* Imposta il menu a tendina allineato con il bordo destro della navbar */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    height: auto;
+    background-color: hsla(240, 100%, 50%, 0.5);
+    transition: background-color 0.5s ease-in-out; /* Applica la transizione solo al colore di sfondo */
+    width: auto;
+}
+
+.card:hover {
+    background: hsla(300, 100%, 50%, 0.5)
+}
+
+.card a {
+    display: block;
+    padding: 5px 0; /* Aggiungi spaziatura tra i link */
+    text-decoration: none; /* Rimuovi il sottolineato predefinito */
+    color: #333; /* Imposta il colore del testo */
+    white-space: nowrap; /* Impedisce al testo di andare a capo */
 }

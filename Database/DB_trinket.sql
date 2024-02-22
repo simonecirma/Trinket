@@ -118,9 +118,9 @@ CREATE TABLE Composto
 INSERT INTO Utente (Nome, Cognome, Email, Password, DataDiNascita, NumeroTelefono,Immagine, FlagAmm)
 VALUES ('Donato','Folgieri','df@gmail.com','donato','2001-07-21','+393917598493','',0);
 INSERT INTO Utente (Nome, Cognome, Email, Password, DataDiNascita, NumeroTelefono,Immagine, FlagAmm)
-VALUES ('Simone','Cirma','sc@gmail.com','simone', '2001-05-27','+393478902231','',0);
+VALUES ('Simone','Cirma','sc@gmail.com','simone', '2001-05-27','+393478902231','',1);
 INSERT INTO Utente (Nome, Cognome, Email, Password, DataDiNascita, NumeroTelefono,Immagine, FlagAmm)
-VALUES ('Giuseppe','Rossi','gp@gmail.com','giuseppe', '1965-03-06','+393756789768','',1);
+VALUES ('Giuseppe','Rossi','gp@gmail.com','giuseppe', '1965-03-06','+393756789768','',0);
 
 INSERT INTO IndirizzoSpedizione (Indirizzo, NumeroCivico, CAP, Città, Provincia)
 VALUES ('Via Barracco', '4', '81027', 'San Felice a Cancello', 'CE');

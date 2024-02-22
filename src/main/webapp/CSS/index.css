@@ -1,0 +1,43 @@
+.logout {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #999cff;
+    background-image: radial-gradient(at 40% 6%, hsla(210, 100%, 50%, 0.4) 0%, transparent 50%),
+    radial-gradient(at 60% 20%, hsla(240, 100%, 50%, 0.4) 0%, transparent 50%),
+    radial-gradient(at 40% 60%, hsla(270, 100%, 50%, 0.4) 0%, transparent 50%),
+    radial-gradient(at 40% 60%, hsla(300, 100%, 50%, 0.4) 0%, transparent 50%),
+    radial-gradient(at 55% 80%, hsla(330, 100%, 50%, 0.4) 0%, transparent 50%);
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.logout.show {
+    opacity: 1;
+}
+
+.login {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #999cff;
+    background-image: radial-gradient(at 40% 6%, hsla(210, 100%, 50%, 0.4) 0%, transparent 50%),
+    radial-gradient(at 60% 20%, hsla(240, 100%, 50%, 0.4) 0%, transparent 50%),
+    radial-gradient(at 40% 60%, hsla(270, 100%, 50%, 0.4) 0%, transparent 50%),
+    radial-gradient(at 40% 60%, hsla(300, 100%, 50%, 0.4) 0%, transparent 50%),
+    radial-gradient(at 55% 80%, hsla(330, 100%, 50%, 0.4) 0%, transparent 50%);
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.login.show {
+    opacity: 1;
+}

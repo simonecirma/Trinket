@@ -1,45 +1,62 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page errorPage="error.jsp" %>
-<%!
-  String email = "";
-  String result = "";
-%>
-<%
-  synchronized (session) {
-    session = request.getSession();
-    email = (String) session.getAttribute("Email");
-  }
 
-  result = (String) request.getAttribute("result");
-%>
+<% String notifica = (String)  request.getAttribute("notifica"); %>
 
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <title>Easy Travel</title>
+  <link href="CSS/index.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <%@ include file="navbar.jsp" %>
-<form method="post" action="AccessoControl?action=Login">
-  <label>
-    Email: <input type="email" name="email" placeholder="email">
-  </label>
-  <label>
-    Password: <input type="password" name="password" placeholder="password">
-  </label>
-  <input type="submit" value="Accedi">
-</form>
+
 <%
   if(email != null){
 %>
-<h1>CIAO</h1>
+    <div id="loginAlert" class="login">
+        Benvenuto <%= nome%>!
+    </div>
 <%
   }
-  if (result != null) {
+
+  if(notifica != null){
 %>
-<h3><%=result%></h3>
+    <div id="logoutAlert" class="logout">
+      <%= notifica%>
+    </div>
 <%
   }
 %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var notification = document.getElementById('logoutAlert');
+
+    // Mostro la notifica
+    notification.classList.add('show');
+
+    // Nascondo la notifica dopo 3 secondi
+    setTimeout(function() {
+      notification.classList.remove('show');
+    }, 3000);
+  });
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+      var notification = document.getElementById('loginAlert');
+
+      // Mostro la notifica
+      notification.classList.add('show');
+
+      // Nascondo la notifica dopo 3 secondi
+      setTimeout(function() {
+          notification.classList.remove('show');
+      }, 3000);
+  });
+
+</script>
 </body>
 </html>
+

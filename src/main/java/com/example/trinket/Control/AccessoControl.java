@@ -26,6 +26,8 @@ public class AccessoControl extends HttpServlet {
             if (action != null) {
                 if (action.equalsIgnoreCase("Login")) {
                     login(request, response);
+                }else if (action.equalsIgnoreCase("Logout")){
+                    logout(request, response);
                 }
             }
         }catch (ServletException | IOException e) {
@@ -64,7 +66,7 @@ public class AccessoControl extends HttpServlet {
                 dispatcher.forward(request, response);
             }else {
                 request.setAttribute("result", "Credenziali sbagliate riprova!");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
                 dispatcher.forward(request, response);
             }
         } catch (ServletException | IOException e) {
@@ -72,5 +74,13 @@ public class AccessoControl extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
             dispatcher.forward(request, response);
         }
+    }
+
+    public void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        session.invalidate();
+        request.setAttribute("notifica", "Logout Effettuato! ");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+        dispatcher.forward(request, response);
     }
 }
