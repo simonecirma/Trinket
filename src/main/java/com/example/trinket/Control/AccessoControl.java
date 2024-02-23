@@ -7,10 +7,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.sql.Date;
 
 @WebServlet(name = "AccessoControl", value = "/AccessoControl")
@@ -19,6 +16,11 @@ public class AccessoControl extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private final UtenteModel utenteModel = new UtenteModel();
+
+    String index = "/index.jsp";
+    String errorMessage = "errorMessage";
+    String messaggio = "Si è verificato un errore: ";
+    String errore = "/error.jsp";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -34,8 +36,8 @@ public class AccessoControl extends HttpServlet {
                 }
             }
         }catch (ServletException | IOException e) {
-            request.setAttribute("errorMessage", "Si è verificato un errore: " + e.getMessage());
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
+            request.setAttribute(errorMessage, messaggio + e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher(errore);
             try {
                 dispatcher.forward(request, response);
             } catch (ServletException | IOException ex) {
@@ -65,7 +67,7 @@ public class AccessoControl extends HttpServlet {
                 session.setAttribute("Immagine", admin.getImmagine());
                 session.setAttribute("FlagAmm", admin.isFlagAmm());
 
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher(index);
                 dispatcher.forward(request, response);
             }else {
                 request.setAttribute("result", "Credenziali sbagliate riprova!");
@@ -73,8 +75,8 @@ public class AccessoControl extends HttpServlet {
                 dispatcher.forward(request, response);
             }
         } catch (ServletException | IOException e) {
-            request.setAttribute("errorMessage", "Si è verificato un errore: " + e.getMessage());
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
+            request.setAttribute(errorMessage, messaggio + e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher(errore);
             dispatcher.forward(request, response);
         }
     }
@@ -83,7 +85,7 @@ public class AccessoControl extends HttpServlet {
         HttpSession session = request.getSession();
         session.invalidate();
         request.setAttribute("notifica", "Logout Effettuato! ");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(index);
         dispatcher.forward(request, response);
     }
 
@@ -95,8 +97,10 @@ public class AccessoControl extends HttpServlet {
         Date dataDiNascita = Date.valueOf(request.getParameter("dataDiNascita"));
         Part file = request.getPart("immagine");
         String immagine = file.getSubmittedFileName();
-        String path = request.getServletContext().getRealPath("") + "Immagini" + File.separator + "ImgUtente" + File.separator + immagine;
-        try(FileOutputStream fos = new FileOutputStream(path);
+        String directory = "Immagini/ImgUtente/";
+        String path = request.getServletContext().getRealPath("/");
+        String path2 = path + directory + immagine;
+        try(FileOutputStream fos = new FileOutputStream(path2);
         InputStream is = file.getInputStream()){
             byte[] data = new byte[is.available()];
             if(is.read(data) > 0)
@@ -104,12 +108,12 @@ public class AccessoControl extends HttpServlet {
                 fos.write(data);
             }
         }catch(IOException e){
-            request.setAttribute("errorMessage", "Si è verificato un errore: " + e.getMessage());
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
+            request.setAttribute(errorMessage, messaggio + e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher(errore);
             dispatcher.forward(request, response);
         }
         utenteModel.registrati(nome, cognome, email, password, dataDiNascita, immagine);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(index);
         dispatcher.forward(request, response);
     }
 }

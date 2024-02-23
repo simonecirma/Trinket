@@ -9,7 +9,7 @@ CREATE TABLE Utente
     Email varchar (50) NOT NULL,
     Password varchar (20) NOT NULL,
     DataDiNascita date NOT NULL,
-    Immagine varchar (50) NOT NULL,
+    Immagine varchar (50),
     FlagAmm bit NOT NULL,
     PRIMARY KEY (Email)
 );
