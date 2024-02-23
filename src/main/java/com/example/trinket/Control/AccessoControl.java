@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.*;
 import java.sql.Date;
+import java.util.UUID;
 
 @WebServlet(name = "AccessoControl", value = "/AccessoControl")
 public class AccessoControl extends HttpServlet {
@@ -17,10 +18,10 @@ public class AccessoControl extends HttpServlet {
 
     private final UtenteModel utenteModel = new UtenteModel();
 
-    String index = "/index.jsp";
-    String errorMessage = "errorMessage";
-    String messaggio = "Si è verificato un errore: ";
-    String errore = "/error.jsp";
+    private final static String index = "/index.jsp";
+    private final static String errorMessage = "errorMessage";
+    private final static String messaggio = "Si è verificato un errore: ";
+    private final static String errore = "/error.jsp";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -96,10 +97,10 @@ public class AccessoControl extends HttpServlet {
         String password = request.getParameter("password");
         Date dataDiNascita = Date.valueOf(request.getParameter("dataDiNascita"));
         Part file = request.getPart("immagine");
-        String immagine = file.getSubmittedFileName();
+        String immagine = UUID.randomUUID() + "_" +file.getSubmittedFileName();
         String directory = "Immagini/ImgUtente/";
-        String path = request.getServletContext().getRealPath("/");
-        String path2 = path + directory + immagine;
+        String path = request.getServletContext().getRealPath("/") +directory;
+        String path2 = path + immagine;
         try(FileOutputStream fos = new FileOutputStream(path2);
         InputStream is = file.getInputStream()){
             byte[] data = new byte[is.available()];
