@@ -161,3 +161,77 @@
     color: #333; /* Imposta il colore del testo */
     white-space: nowrap; /* Impedisce al testo di andare a capo */
 }
+
+/* Media query per schermi di larghezza maggiore o uguale a 768px */
+@media screen and (min-width: 768px) {
+    .navbar {
+        height: 6vh; /* Aumenta l'altezza della navbar */
+    }
+
+    .logo img {
+        transform: scale(2); /* Aumenta le dimensioni del logo */
+    }
+
+    .carrello,
+    .profilo {
+        height: 120%; /* Aumenta le dimensioni del carrello e del profilo */
+    }
+
+    .bottoneRicerca {
+        min-width: 15%; /* Aumenta la larghezza minima del bottone di ricerca */
+    }
+
+    .barraRicerca {
+        max-width: 90%; /* Imposta una larghezza massima per la barra di ricerca */
+    }
+}
+
+/* Media query per schermi di larghezza inferiore a 768px */
+@media screen and (max-width: 767px) {
+    .navbar {
+        height: 3vh; /* Riduci l'altezza della navbar */
+    }
+
+    .logo img {
+        transform: scale(1.8); /* Riduci le dimensioni del logo */
+    }
+
+    .bottoneRicerca {
+        min-width: 15%; /* Aumenta la larghezza minima del bottone di ricerca */
+    }
+
+    .barraRicerca {
+        max-width: 90%; /* Imposta una larghezza massima per la barra di ricerca */
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .bottoneRicerca {
+        min-width: 18%; /* Aumenta la larghezza minima del bottone di ricerca */
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .bottoneRicerca {
+        min-width: 20%; /* Aumenta la larghezza minima del bottone di ricerca */
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .bottoneRicerca {
+        min-width: 22%; /* Aumenta la larghezza minima del bottone di ricerca */
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .bottoneRicerca {
+        min-width: 25%; /* Aumenta la larghezza minima del bottone di ricerca */
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .bottoneRicerca {
+        display: none
+    }
+}
+

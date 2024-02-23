@@ -44,7 +44,7 @@
 
             <div class="btn">
                 <button type="submit" class="button1" value="Login" name="action">Login</button>
-                <button class="button2">Registrati</button>
+                <button type="button" class="button2" onclick="location.href='registrati.jsp'">Registrati</button>
             </div>
 
             <button class="button3">Password Dimenticata</button>

@@ -9,7 +9,6 @@ CREATE TABLE Utente
     Email varchar (50) NOT NULL,
     Password varchar (20) NOT NULL,
     DataDiNascita date NOT NULL,
-    NumeroTelefono varchar (20) NOT NULL,
     Immagine varchar (50) NOT NULL,
     FlagAmm bit NOT NULL,
     PRIMARY KEY (Email)
@@ -115,12 +114,12 @@ CREATE TABLE Composto
     FOREIGN KEY (IdOrdine) REFERENCES Ordine(IdOrdine) ON UPDATE cascade ON DELETE cascade
 );
 
-INSERT INTO Utente (Nome, Cognome, Email, Password, DataDiNascita, NumeroTelefono,Immagine, FlagAmm)
-VALUES ('Donato','Folgieri','df@gmail.com','donato','2001-07-21','+393917598493','',0);
-INSERT INTO Utente (Nome, Cognome, Email, Password, DataDiNascita, NumeroTelefono,Immagine, FlagAmm)
-VALUES ('Simone','Cirma','sc@gmail.com','simone', '2001-05-27','+393478902231','',1);
-INSERT INTO Utente (Nome, Cognome, Email, Password, DataDiNascita, NumeroTelefono,Immagine, FlagAmm)
-VALUES ('Giuseppe','Rossi','gp@gmail.com','giuseppe', '1965-03-06','+393756789768','',0);
+INSERT INTO Utente (Nome, Cognome, Email, Password, DataDiNascita, Immagine, FlagAmm)
+VALUES ('Donato','Folgieri','df@gmail.com','donato','2001-07-21','',0);
+INSERT INTO Utente (Nome, Cognome, Email, Password, DataDiNascita, Immagine, FlagAmm)
+VALUES ('Simone','Cirma','sc@gmail.com','simone', '2001-05-27','',1);
+INSERT INTO Utente (Nome, Cognome, Email, Password, DataDiNascita, Immagine, FlagAmm)
+VALUES ('Giuseppe','Rossi','gp@gmail.com','giuseppe', '1965-03-06','',0);
 
 INSERT INTO IndirizzoSpedizione (Indirizzo, NumeroCivico, CAP, Città, Provincia)
 VALUES ('Via Barracco', '4', '81027', 'San Felice a Cancello', 'CE');

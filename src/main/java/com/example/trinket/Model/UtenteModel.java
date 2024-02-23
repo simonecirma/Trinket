@@ -6,10 +6,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -52,6 +49,25 @@ public class UtenteModel {
             logger.log(Level.WARNING, e.getMessage());
         }
         return bean;
+    }
+
+    public void registrati(String nome, String cognome, String email, String password, Date dataDiNascita, String immagine) {
+        try (
+             Connection con = ds.getConnection();
+             PreparedStatement ps = con.prepareStatement
+                ("INSERT INTO " + TABLE_NAME_UTENTE + "(Nome, Cognome, Email, Password, DataDiNascita, Immagine, FlagAmm) " +
+                "VALUES(?, ?, ?, ?, ?, ?, ?)")) {
+            ps.setString(1, nome);
+            ps.setString(2, cognome);
+            ps.setString(3, email);
+            ps.setString(4, password);
+            ps.setDate(5, dataDiNascita);
+            ps.setString(6, immagine);
+            ps.setInt(7, 0);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
     }
 }
 

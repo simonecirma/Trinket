@@ -6,11 +6,12 @@ import com.example.trinket.Model.UtenteModel;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Date;
 
 @WebServlet(name = "AccessoControl", value = "/AccessoControl")
 public class AccessoControl extends HttpServlet {
@@ -28,6 +29,8 @@ public class AccessoControl extends HttpServlet {
                     login(request, response);
                 }else if (action.equalsIgnoreCase("Logout")){
                     logout(request, response);
+                }else if (action.equalsIgnoreCase("Registrazione")){
+                    registrazione(request, response);
                 }
             }
         }catch (ServletException | IOException e) {
@@ -80,6 +83,32 @@ public class AccessoControl extends HttpServlet {
         HttpSession session = request.getSession();
         session.invalidate();
         request.setAttribute("notifica", "Logout Effettuato! ");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    public void registrazione(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String nome = request.getParameter("nome");
+        String cognome = request.getParameter("cognome");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        Date dataDiNascita = Date.valueOf(request.getParameter("dataDiNascita"));
+        Part file = request.getPart("immagine");
+        String immagine = file.getSubmittedFileName();
+        String path = request.getServletContext().getRealPath("") + "Immagini" + File.separator + "ImgUtente" + File.separator + immagine;
+        try(FileOutputStream fos = new FileOutputStream(path);
+        InputStream is = file.getInputStream()){
+            byte[] data = new byte[is.available()];
+            if(is.read(data) > 0)
+            {
+                fos.write(data);
+            }
+        }catch(IOException e){
+            request.setAttribute("errorMessage", "Si è verificato un errore: " + e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/error.jsp");
+            dispatcher.forward(request, response);
+        }
+        utenteModel.registrati(nome, cognome, email, password, dataDiNascita, immagine);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
         dispatcher.forward(request, response);
     }
