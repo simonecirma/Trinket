@@ -18,10 +18,10 @@ public class AccessoControl extends HttpServlet {
 
     private final UtenteModel utenteModel = new UtenteModel();
 
-    private final static String index = "/index.jsp";
-    private final static String errorMessage = "errorMessage";
-    private final static String messaggio = "Si è verificato un errore: ";
-    private final static String errore = "/error.jsp";
+    private static final  String INDEX = "/index.jsp";
+    private static final  String ERROR_MESSAGE = "errorMessage";
+    private static final  String MESSAGGIO = "Si è verificato un errore: ";
+    private static final  String ERRORE = "/error.jsp";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -37,8 +37,8 @@ public class AccessoControl extends HttpServlet {
                 }
             }
         }catch (ServletException | IOException e) {
-            request.setAttribute(errorMessage, messaggio + e.getMessage());
-            RequestDispatcher dispatcher = request.getRequestDispatcher(errore);
+            request.setAttribute(ERROR_MESSAGE, MESSAGGIO + e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher(ERRORE);
             try {
                 dispatcher.forward(request, response);
             } catch (ServletException | IOException ex) {
@@ -68,7 +68,7 @@ public class AccessoControl extends HttpServlet {
                 session.setAttribute("Immagine", admin.getImmagine());
                 session.setAttribute("FlagAmm", admin.isFlagAmm());
 
-                RequestDispatcher dispatcher = request.getRequestDispatcher(index);
+                RequestDispatcher dispatcher = request.getRequestDispatcher(INDEX);
                 dispatcher.forward(request, response);
             }else {
                 request.setAttribute("result", "Credenziali sbagliate riprova!");
@@ -76,8 +76,8 @@ public class AccessoControl extends HttpServlet {
                 dispatcher.forward(request, response);
             }
         } catch (ServletException | IOException e) {
-            request.setAttribute(errorMessage, messaggio + e.getMessage());
-            RequestDispatcher dispatcher = request.getRequestDispatcher(errore);
+            request.setAttribute(ERROR_MESSAGE, MESSAGGIO + e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher(ERRORE);
             dispatcher.forward(request, response);
         }
     }
@@ -86,7 +86,7 @@ public class AccessoControl extends HttpServlet {
         HttpSession session = request.getSession();
         session.invalidate();
         request.setAttribute("notifica", "Logout Effettuato! ");
-        RequestDispatcher dispatcher = request.getRequestDispatcher(index);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(INDEX);
         dispatcher.forward(request, response);
     }
 
@@ -109,12 +109,12 @@ public class AccessoControl extends HttpServlet {
                 fos.write(data);
             }
         }catch(IOException e){
-            request.setAttribute(errorMessage, messaggio + e.getMessage());
-            RequestDispatcher dispatcher = request.getRequestDispatcher(errore);
+            request.setAttribute(ERROR_MESSAGE, MESSAGGIO + e.getMessage());
+            RequestDispatcher dispatcher = request.getRequestDispatcher(ERRORE);
             dispatcher.forward(request, response);
         }
         utenteModel.registrati(nome, cognome, email, password, dataDiNascita, immagine);
-        RequestDispatcher dispatcher = request.getRequestDispatcher(index);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(INDEX);
         dispatcher.forward(request, response);
     }
 }
