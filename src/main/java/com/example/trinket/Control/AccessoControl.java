@@ -97,7 +97,7 @@ public class AccessoControl extends HttpServlet {
         String password = request.getParameter("password");
         Date dataDiNascita = Date.valueOf(request.getParameter("dataDiNascita"));
         Part file = request.getPart("immagine");
-        String immagine = UUID.randomUUID() + "_" +file.getSubmittedFileName();
+        String immagine = String.valueOf(UUID.randomUUID());
         String directory = "Immagini/ImgUtente/";
         String path = request.getServletContext().getRealPath("/") +directory;
         String path2 = path + immagine;
