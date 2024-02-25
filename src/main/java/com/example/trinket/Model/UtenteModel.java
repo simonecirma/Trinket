@@ -26,7 +26,7 @@ public class UtenteModel {
         }
     }
 
-    public UtenteBean login(String email, String password)  {
+    public synchronized UtenteBean login(String email, String password)  {
         UtenteBean bean = null;
         try(
             Connection con = ds.getConnection();
@@ -51,7 +51,7 @@ public class UtenteModel {
         return bean;
     }
 
-    public void registrati(String nome, String cognome, String email, String password, Date dataDiNascita, String immagine) {
+    public synchronized void registrati(String nome, String cognome, String email, String password, Date dataDiNascita, String immagine) {
         try (
              Connection con = ds.getConnection();
              PreparedStatement ps = con.prepareStatement
@@ -68,6 +68,23 @@ public class UtenteModel {
         } catch (SQLException e) {
             logger.log(Level.WARNING, e.getMessage());
         }
+    }
+
+    public boolean ricercaEmail(String email){
+        boolean trovato = false;
+        try(
+            Connection con = ds.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM " +TABLE_NAME_UTENTE+ " WHERE Email = ?")){
+            ps.setString(1,email);
+            try(ResultSet rs = ps.executeQuery()){
+                if(rs.next()){
+                    trovato = true;
+                }
+            }
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+        return trovato;
     }
 }
 

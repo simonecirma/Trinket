@@ -12,7 +12,7 @@
 #heading {
     text-align: center;
     margin: 2em;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgb(255, 255, 255);
     font-size: 1.2em;
 }
 
@@ -33,7 +33,7 @@
 .field input:-webkit-autofill,
 .field input:-webkit-autofill:focus {
     -webkit-box-shadow: 0 0 0 30px #2f2ff6 inset; /* Cambia il colore di riempimento */
-    -webkit-text-fill-color: rgb(0, 0, 0); /* Cambia il colore del testo */
+    -webkit-text-fill-color: rgb(255, 255, 255); /* Cambia il colore del testo */
     border-radius: 25px; /* Aggiunge il bordo arrotondato per il campo */
 }
 
@@ -48,7 +48,7 @@
     border: none;
     outline: none;
     width: 100%;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
 .form .btn {
@@ -66,7 +66,7 @@
     outline: none;
     transition: .4s ease-in-out;
     background-image: linear-gradient(163deg, #0080ff 0%, #8000ff 100%);
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
 .button1:hover {
@@ -81,7 +81,7 @@
     outline: none;
     transition: .4s ease-in-out;
     background-image: linear-gradient(163deg, #0080ff 0%, #8000ff 100%);
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
 .button2:hover {
@@ -97,12 +97,12 @@
     outline: none;
     transition: .4s ease-in-out;
     background-image: linear-gradient(163deg, #0080ff 0%, #8000ff 100%);
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
 .button3:hover {
     background-image: linear-gradient(163deg, #a00000fa 0%, #d10050 100%);
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }
 
 .card {
@@ -154,4 +154,26 @@
     text-align: center; /* Per centrare il testo */
     color: #000000; /* Colore del testo */
     margin-top: 10px; /* Spazio sopra il risultato */
+}
+
+.logout {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #999cff;
+    background-image: radial-gradient(at 40% 6%, hsla(210, 100%, 50%, 0.4) 0%, transparent 50%),
+    radial-gradient(at 60% 20%, hsla(240, 100%, 50%, 0.4) 0%, transparent 50%),
+    radial-gradient(at 40% 60%, hsla(270, 100%, 50%, 0.4) 0%, transparent 50%),
+    radial-gradient(at 40% 60%, hsla(300, 100%, 50%, 0.4) 0%, transparent 50%),
+    radial-gradient(at 55% 80%, hsla(330, 100%, 50%, 0.4) 0%, transparent 50%);
+    color: #000000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.logout.show {
+    opacity: 1;
 }

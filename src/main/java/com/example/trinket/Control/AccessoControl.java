@@ -34,6 +34,8 @@ public class AccessoControl extends HttpServlet {
                     logout(request, response);
                 }else if (action.equalsIgnoreCase("Registrazione")){
                     registrazione(request, response);
+                }else if(action.equalsIgnoreCase("verificaEmail")){
+                    verificaEmail(request, response);
                 }
             }
         }catch (ServletException | IOException e) {
@@ -114,7 +116,24 @@ public class AccessoControl extends HttpServlet {
             dispatcher.forward(request, response);
         }
         utenteModel.registrati(nome, cognome, email, password, dataDiNascita, immagine);
-        RequestDispatcher dispatcher = request.getRequestDispatcher(INDEX);
+        request.setAttribute("notifica", "Registrazione Effettuata! ");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
         dispatcher.forward(request, response);
+    }
+
+    public void verificaEmail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String email = request.getParameter("email");
+        boolean trovato = utenteModel.ricercaEmail(email);
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
+        if(trovato){
+            PrintWriter out = response.getWriter();
+            out.print("trovato");
+            out.flush();
+        }else{
+            PrintWriter out = response.getWriter();
+            out.print("non trovato");
+            out.flush();
+        }
     }
 }

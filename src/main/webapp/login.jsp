@@ -1,5 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<% String notifica = (String)  request.getAttribute("notifica"); %>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -8,6 +10,16 @@
 </head>
 <body>
 <%@ include file="navbar.jsp" %>
+
+<%
+if(notifica != null){
+%>
+<div id="logoutAlert" class="logout">
+    <%= notifica%>
+</div>
+<%
+    }
+%>
 
 <div class="card">
     <div class="card2">
@@ -51,6 +63,20 @@
         </form>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var notification = document.getElementById('logoutAlert');
+
+        // Mostro la notifica
+        notification.classList.add('show');
+
+        // Nascondo la notifica dopo 3 secondi
+        setTimeout(function() {
+            notification.classList.remove('show');
+        }, 3000);
+    });
+</script>
 
 </body>
 </html>
