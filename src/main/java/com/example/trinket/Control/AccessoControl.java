@@ -22,6 +22,8 @@ public class AccessoControl extends HttpServlet {
     private static final  String ERROR_MESSAGE = "errorMessage";
     private static final  String MESSAGGIO = "Si è verificato un errore: ";
     private static final  String ERRORE = "/error.jsp";
+    private static final  String EMAIL = "email";
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -56,7 +58,7 @@ public class AccessoControl extends HttpServlet {
 
     public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UtenteBean admin;
-        String email = request.getParameter("email");
+        String email = request.getParameter(EMAIL);
         String password = request.getParameter("password");
         HttpSession session = request.getSession(true);
         try {
@@ -95,7 +97,7 @@ public class AccessoControl extends HttpServlet {
     public void registrazione(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nome = request.getParameter("nome");
         String cognome = request.getParameter("cognome");
-        String email = request.getParameter("email");
+        String email = request.getParameter(EMAIL);
         String password = request.getParameter("password");
         Date dataDiNascita = Date.valueOf(request.getParameter("dataDiNascita"));
         Part file = request.getPart("immagine");
@@ -122,7 +124,7 @@ public class AccessoControl extends HttpServlet {
     }
 
     public void verificaEmail(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String email = request.getParameter("email");
+        String email = request.getParameter(EMAIL);
         boolean trovato = utenteModel.ricercaEmail(email);
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
