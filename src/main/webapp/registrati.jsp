@@ -79,39 +79,54 @@
         var passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*.-_])(?=.{8,})/;
         var nome = document.registrati.nome.value;
         var cognome = document.registrati.cognome.value;
-        var dataDiNascita = document.registrati.dataDiNascita.value;
+        var dataDiNascitaInput = document.registrati.dataDiNascita.value;
+        var dataDiOggi = new Date();
+        var dataLimite = new Date();
+        dataLimite.setFullYear(dataDiOggi.getFullYear() - 18);
 
-        if(password === ""){
+        if (password === "") {
             alert("La Password è obbligatoria! ");
             document.registrati.password.focus();
             return false;
-        }else if(!passwordPattern.test(password)){
+        } else if (!passwordPattern.test(password)) {
             alert("La Password è errata! Deve contenere almeno 8 caratteri, una lettera maiuscola, una lettera minuscola, un numero e un carattere speciale!");
             document.registrati.password.focus();
             return false;
         }
 
-        if(password !== password2){
+        if (password !== password2) {
             alert("Le Password sono diverse! ");
-            document.registrati.password.focus();
+            document.registrati.password2.focus();
             return false;
         }
 
-        if(nome === ""){
+        if (nome === "") {
             alert("Il nome è obbligatorio! ");
-            document.registrati.password.focus();
+            document.registrati.nome.focus();
             return false;
         }
 
-        if(cognome === ""){
+        if (cognome === "") {
             alert("Il cognome è obbligatorio! ");
-            document.registrati.password.focus();
+            document.registrati.cognome.focus();
             return false;
         }
 
-        if(dataDiNascita === ""){
+        if (dataDiNascitaInput === "") {
             alert("La Data Di Nascita è obbligatoria! ");
-            document.registrati.password.focus();
+            document.registrati.dataDiNascita.focus();
+            return false;
+        } else{
+            var dataDiNascita = new Date(dataDiNascitaInput);
+        }
+
+        if(dataDiNascita > dataDiOggi){
+            alert("Inserisci una data valida");
+            document.registrati.dataDiNascita.focus();
+            return false;
+        }else if(dataDiNascita > dataLimite){
+            alert("Per registrarti devi avere almeno 18 anni");
+            document.registrati.dataDiNascita.focus();
             return false;
         }
 
