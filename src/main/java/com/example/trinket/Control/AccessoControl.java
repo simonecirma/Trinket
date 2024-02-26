@@ -38,6 +38,8 @@ public class AccessoControl extends HttpServlet {
                     registrazione(request, response);
                 }else if(action.equalsIgnoreCase("verificaEmail")){
                     verificaEmail(request, response);
+                }else if(action.equalsIgnoreCase("RecuperaPassword")){
+                    recuperaPassword(request, response);
                 }
             }
         }catch (ServletException | IOException e) {
@@ -136,6 +138,32 @@ public class AccessoControl extends HttpServlet {
             PrintWriter out = response.getWriter();
             out.print("non trovato");
             out.flush();
+        }
+    }
+
+    public void recuperaPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String email = request.getParameter(EMAIL);
+        String nome = request.getParameter("nome");
+        String cognome = request.getParameter("cognome");
+        String password = request.getParameter("password");
+        Date dataDiNascita = Date.valueOf(request.getParameter("dataDiNascita"));
+
+        boolean trovato = utenteModel.ricercaEmail(email);
+        if(!trovato){
+            request.setAttribute("notifica", "Non è stato trovato nessun account associato a questa email");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/recuperaPassword.jsp");
+            dispatcher.forward(request, response);
+        }else{
+            boolean modifica = utenteModel.modificaPassword(nome, cognome, email, password, dataDiNascita);
+            if(modifica) {
+                request.setAttribute("notifica", "Password modificata correttamente! ");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+                dispatcher.forward(request, response);
+            }else{
+                request.setAttribute("notifica", "I campi inseriti non sono corretti! ");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/recuperaPassword.jsp");
+                dispatcher.forward(request, response);
+            }
         }
     }
 }

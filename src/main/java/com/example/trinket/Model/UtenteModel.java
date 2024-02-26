@@ -86,5 +86,26 @@ public class UtenteModel {
         }
         return trovato;
     }
+
+    public boolean modificaPassword( String nome, String cognome, String email, String password, Date dataDiNascita){
+        boolean modifica = false;
+        try(
+            Connection con = ds.getConnection();
+            PreparedStatement ps = con.prepareStatement( "UPDATE " +TABLE_NAME_UTENTE+
+            " SET Password = ? WHERE Nome = ? AND Cognome = ? AND Email = ? AND DataDiNascita = ? ")){
+            ps.setString(1, password);
+            ps.setString(2, nome);
+            ps.setString(3,cognome);
+            ps.setString(4, email);
+            ps.setDate(5, dataDiNascita);
+            int i = ps.executeUpdate();
+            if(i > 0){
+                modifica = true;
+            }
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+        return modifica;
+    }
 }
 

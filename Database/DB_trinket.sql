@@ -6,8 +6,8 @@ CREATE TABLE Utente
 (
     Nome varchar(20) NOT NULL,
     Cognome varchar (20) NOT NULL,
-    Email varchar (50) NOT NULL,
-    Password varchar (20) NOT NULL,
+    Email varchar (50) NOT NULL COLLATE utf8mb4_bin,
+    Password varchar (20) NOT NULL 	COLLATE utf8mb4_bin,
     DataDiNascita date NOT NULL,
     Immagine varchar (50),
     FlagAmm bit NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE IndirizzoSpedizione
 CREATE TABLE Inserisce
 (
     IDIndirizzo int NOT NULL,
-    Email varchar (50) NOT NULL,
+    Email varchar (50) NOT NULL COLLATE utf8mb4_bin,
     FOREIGN KEY (IDIndirizzo) REFERENCES IndirizzoSpedizione(IDIndirizzo) ON UPDATE cascade ON DELETE cascade,
     FOREIGN KEY (Email) REFERENCES Utente(Email) ON UPDATE cascade ON DELETE cascade
 );
@@ -44,7 +44,7 @@ CREATE TABLE MetodoDiPagamento
 CREATE TABLE Possiede
 (
     NumeroCarta char (16) NOT NULL,
-    Email varchar (50) NOT NULL,
+    Email varchar (50) NOT NULL COLLATE utf8mb4_bin,
     FOREIGN KEY (NumeroCarta) REFERENCES MetodoDiPagamento(NumeroCarta) ON UPDATE cascade ON DELETE cascade,
     FOREIGN KEY (Email) REFERENCES Utente(Email) ON UPDATE cascade ON DELETE cascade
 );
@@ -62,7 +62,7 @@ CREATE TABLE Ordine
     Fattura varchar(100),
     PrezzoTotale float,
     StatoOrdine varchar (30) NOT NULL,
-    Email varchar (50)  NOT NULL,
+    Email varchar (50)  NOT NULL COLLATE utf8mb4_bin,
     PRIMARY KEY (IdOrdine),
     FOREIGN KEY (StatoOrdine) REFERENCES StatoOrdine(Stato) ON UPDATE cascade ON DELETE cascade,
     FOREIGN KEY (Email) REFERENCES Utente(Email) ON UPDATE cascade ON DELETE cascade

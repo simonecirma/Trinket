@@ -14,7 +14,7 @@
 <%
 if(notifica != null){
 %>
-<div id="logoutAlert" class="logout">
+<div id="Alert" class="notifica">
     <%= notifica%>
 </div>
 <%
@@ -59,14 +59,14 @@ if(notifica != null){
                 <button type="button" class="button2" onclick="location.href='registrati.jsp'">Registrati</button>
             </div>
 
-            <button class="button3">Password Dimenticata</button>
+            <button type="button" class="button3" onclick="location.href='recuperaPassword.jsp'" >Password Dimenticata</button>
         </form>
     </div>
 </div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var notification = document.getElementById('logoutAlert');
+        var notification = document.getElementById('Alert');
 
         // Mostro la notifica
         notification.classList.add('show');

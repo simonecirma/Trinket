@@ -37,12 +37,6 @@
     border-radius: 25px; /* Aggiunge il bordo arrotondato per il campo */
 }
 
-.input-icon {
-    height: 1.3em;
-    width: 1.3em;
-    fill: rgba(255, 0, 255, 0.7);
-}
-
 .input-field {
     background: none;
     border: none;
@@ -107,10 +101,4 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .card:hover {
     box-shadow: 0 0 30px 1px rgba(255, 0, 255, 0.5);
-}
-
-.result {
-    text-align: center; /* Per centrare il testo */
-    color: #000000; /* Colore del testo */
-    margin-top: 10px; /* Spazio sopra il risultato */
 }
