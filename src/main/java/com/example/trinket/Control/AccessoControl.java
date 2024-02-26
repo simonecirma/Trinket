@@ -23,6 +23,12 @@ public class AccessoControl extends HttpServlet {
     private static final  String MESSAGGIO = "Si è verificato un errore: ";
     private static final  String ERRORE = "/error.jsp";
     private static final  String EMAIL = "email";
+    private static final  String PASSWORD = "password";
+    private static final  String LOGIN = "/login.jsp";
+    private static final  String NOTIFICA = "notifica";
+
+
+
 
 
     @Override
@@ -61,7 +67,7 @@ public class AccessoControl extends HttpServlet {
     public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UtenteBean admin;
         String email = request.getParameter(EMAIL);
-        String password = request.getParameter("password");
+        String password = request.getParameter(PASSWORD);
         HttpSession session = request.getSession(true);
         try {
             admin = utenteModel.login(email, password);
@@ -78,7 +84,7 @@ public class AccessoControl extends HttpServlet {
                 dispatcher.forward(request, response);
             }else {
                 request.setAttribute("result", "Credenziali sbagliate riprova!");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+                RequestDispatcher dispatcher = request.getRequestDispatcher(LOGIN);
                 dispatcher.forward(request, response);
             }
         } catch (ServletException | IOException e) {
@@ -91,7 +97,7 @@ public class AccessoControl extends HttpServlet {
     public void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.invalidate();
-        request.setAttribute("notifica", "Logout Effettuato! ");
+        request.setAttribute(NOTIFICA, "Logout Effettuato! ");
         RequestDispatcher dispatcher = request.getRequestDispatcher(INDEX);
         dispatcher.forward(request, response);
     }
@@ -100,7 +106,7 @@ public class AccessoControl extends HttpServlet {
         String nome = request.getParameter("nome");
         String cognome = request.getParameter("cognome");
         String email = request.getParameter(EMAIL);
-        String password = request.getParameter("password");
+        String password = request.getParameter(PASSWORD);
         Date dataDiNascita = Date.valueOf(request.getParameter("dataDiNascita"));
         Part file = request.getPart("immagine");
         String immagine = String.valueOf(UUID.randomUUID());
@@ -120,8 +126,8 @@ public class AccessoControl extends HttpServlet {
             dispatcher.forward(request, response);
         }
         utenteModel.registrati(nome, cognome, email, password, dataDiNascita, immagine);
-        request.setAttribute("notifica", "Registrazione Effettuata! ");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+        request.setAttribute(NOTIFICA, "Registrazione Effettuata! ");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(LOGIN);
         dispatcher.forward(request, response);
     }
 
@@ -145,22 +151,22 @@ public class AccessoControl extends HttpServlet {
         String email = request.getParameter(EMAIL);
         String nome = request.getParameter("nome");
         String cognome = request.getParameter("cognome");
-        String password = request.getParameter("password");
+        String password = request.getParameter(PASSWORD);
         Date dataDiNascita = Date.valueOf(request.getParameter("dataDiNascita"));
 
         boolean trovato = utenteModel.ricercaEmail(email);
         if(!trovato){
-            request.setAttribute("notifica", "Non è stato trovato nessun account associato a questa email");
+            request.setAttribute(NOTIFICA, "Non è stato trovato nessun account associato a questa email");
             RequestDispatcher dispatcher = request.getRequestDispatcher("/recuperaPassword.jsp");
             dispatcher.forward(request, response);
         }else{
             boolean modifica = utenteModel.modificaPassword(nome, cognome, email, password, dataDiNascita);
             if(modifica) {
-                request.setAttribute("notifica", "Password modificata correttamente! ");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+                request.setAttribute(NOTIFICA, "Password modificata correttamente! ");
+                RequestDispatcher dispatcher = request.getRequestDispatcher(LOGIN);
                 dispatcher.forward(request, response);
             }else{
-                request.setAttribute("notifica", "I campi inseriti non sono corretti! ");
+                request.setAttribute(NOTIFICA, "I campi inseriti non sono corretti! ");
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/recuperaPassword.jsp");
                 dispatcher.forward(request, response);
             }
