@@ -1,18 +1,29 @@
 package com.example.trinket.Model;
 
-import com.example.trinket.Model.Bean.UtenteBean;
+import com.example.trinket.Model.Bean.IndirizzoBean;
+import com.example.trinket.Model.Bean.MetodoPagamentoBean;
+import com.example.trinket.Model.Bean.OrdineBean;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class UtenteModel {
     private static final Logger logger = Logger.getLogger(UtenteModel.class.getName());
-    private static final String TABLE_NAME_UTENTE = "Utente";
+    private static final String TABLE_NAME_INDIRIZZO = "IndirizzoSpedizione";
+    private static final String TABLE_NAME_INSERISCE = "Inserisce";
+    private static final String TABLE_NAME_PAGAMENTO = "MetodoDiPagamento";
+    private static final String TABLE_NAME_POSSIEDE = "Possiede";
+    private static final String TABLE_NAME_ORDINE = "Ordine";
+
+
+
     private static DataSource ds;
 
     static {
@@ -26,86 +37,75 @@ public class UtenteModel {
         }
     }
 
-    public synchronized UtenteBean login(String email, String password)  {
-        UtenteBean bean = null;
+    public List<IndirizzoBean> ricercaIndirizzi (String email){
+        List<IndirizzoBean> indirizzi = new ArrayList<>();
         try(
             Connection con = ds.getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM " +TABLE_NAME_UTENTE+ " WHERE Email = ? AND Password = ? ")){
+            PreparedStatement ps = con.prepareStatement("SELECT i.Indirizzo, i.NumeroCivico, i.CAP, i.Città," +
+                    " i.Provincia FROM " +TABLE_NAME_INDIRIZZO+ " i, " +TABLE_NAME_INSERISCE+
+                    " n WHERE n.Email = ? AND i.IDIndirizzo=n.IDIndirizzo")) {
             ps.setString(1, email);
-            ps.setString(2, password);
-            try(ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    bean = new UtenteBean();
-                    bean.setNome(rs.getString("Nome"));
-                    bean.setCognome(rs.getString("Cognome"));
-                    bean.setEmail(rs.getString("Email"));
-                    bean.setPassword(rs.getString("Password"));
-                    bean.setDataDiNascita(rs.getDate("DataDiNascita"));
-                    bean.setImmagine(rs.getString("Immagine"));
-                    bean.setFlagAmm(rs.getBoolean("FlagAmm"));
-                }
-            }
-        }catch (SQLException e) {
-            logger.log(Level.WARNING, e.getMessage());
-        }
-        return bean;
-    }
-
-    public synchronized void registrati(String nome, String cognome, String email, String password, Date dataDiNascita, String immagine) {
-        try (
-             Connection con = ds.getConnection();
-             PreparedStatement ps = con.prepareStatement
-                ("INSERT INTO " + TABLE_NAME_UTENTE + "(Nome, Cognome, Email, Password, DataDiNascita, Immagine, FlagAmm) " +
-                "VALUES(?, ?, ?, ?, ?, ?, ?)")) {
-            ps.setString(1, nome);
-            ps.setString(2, cognome);
-            ps.setString(3, email);
-            ps.setString(4, password);
-            ps.setDate(5, dataDiNascita);
-            ps.setString(6, immagine);
-            ps.setInt(7, 0);
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            logger.log(Level.WARNING, e.getMessage());
-        }
-    }
-
-    public boolean ricercaEmail(String email){
-        boolean trovato = false;
-        try(
-            Connection con = ds.getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM " +TABLE_NAME_UTENTE+ " WHERE Email = ?")){
-            ps.setString(1,email);
             try(ResultSet rs = ps.executeQuery()){
-                if(rs.next()){
-                    trovato = true;
+                while (rs.next()) {
+                    IndirizzoBean bean = new IndirizzoBean();
+                    bean.setIndirizzo(rs.getString("Indirizzo"));
+                    bean.setNumeroCivico(rs.getInt("NumeroCivico"));
+                    bean.setCap(rs.getInt("CAP"));
+                    bean.setCitta(rs.getString("Città"));
+                    bean.setProvincia(rs.getString("Provincia"));
+                    indirizzi.add(bean);
                 }
             }
         } catch (SQLException e) {
             logger.log(Level.WARNING, e.getMessage());
         }
-        return trovato;
+        return indirizzi;
     }
 
-    public boolean modificaPassword( String nome, String cognome, String email, String password, Date dataDiNascita){
-        boolean modifica = false;
+    public List<MetodoPagamentoBean> ricercaMetodoPagamento (String email){
+        List<MetodoPagamentoBean> carte = new ArrayList<>();
         try(
             Connection con = ds.getConnection();
-            PreparedStatement ps = con.prepareStatement( "UPDATE " +TABLE_NAME_UTENTE+
-            " SET Password = ? WHERE Nome = ? AND Cognome = ? AND Email = ? AND DataDiNascita = ? ")){
-            ps.setString(1, password);
-            ps.setString(2, nome);
-            ps.setString(3,cognome);
-            ps.setString(4, email);
-            ps.setDate(5, dataDiNascita);
-            int i = ps.executeUpdate();
-            if(i > 0){
-                modifica = true;
+            PreparedStatement ps = con.prepareStatement("SELECT p.NumeroCarta, m.Scadenza, m.Titolare FROM " +
+            "" +TABLE_NAME_PAGAMENTO+ " m," +TABLE_NAME_POSSIEDE+ " p  WHERE p.NumeroCarta = m.NumeroCarta " +
+            "AND m.Email = ?")) {
+            ps.setString(1, email);
+            try(ResultSet rs = ps.executeQuery()){
+                while (rs.next()) {
+                    MetodoPagamentoBean bean = new MetodoPagamentoBean();
+                    bean.setNumeroCarta(rs.getString("NumeroCarta"));
+                    bean.setScadenza(rs.getDate("Scadenza"));
+                    bean.setTitolare(rs.getString("Titolare"));
+                    carte.add(bean);
+                }
             }
         } catch (SQLException e) {
             logger.log(Level.WARNING, e.getMessage());
         }
-        return modifica;
+        return carte;
+    }
+
+    public List<OrdineBean> ricercaOrdiniUtente (String email){
+        List<OrdineBean> ordini = new ArrayList<>();
+        try(
+            Connection con = ds.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM " +TABLE_NAME_ORDINE+
+            " WHERE Email = ?")) {
+            ps.setString(1, email);
+            try(ResultSet rs = ps.executeQuery()){
+                while (rs.next()) {
+                    OrdineBean bean = new OrdineBean();
+                    bean.setDataAcquisto(rs.getDate("DataAcquisto"));
+                    bean.setFattura(rs.getString("Fattura"));
+                    bean.setPrezzoTotale(rs.getFloat("PrezzoTotale"));
+                    bean.setStatoOrdine(rs.getString("StatoOrdine"));
+                    ordini.add(bean);
+                }
+            }
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+        return ordini;
     }
 }
 

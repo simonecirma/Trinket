@@ -1,7 +1,7 @@
 package com.example.trinket.Control;
 
+import com.example.trinket.Model.AccessoModel;
 import com.example.trinket.Model.Bean.UtenteBean;
-import com.example.trinket.Model.UtenteModel;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,7 +16,7 @@ public class AccessoControl extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    private final UtenteModel utenteModel = new UtenteModel();
+    private final AccessoModel accessoModel = new AccessoModel();
 
     private static final  String INDEX = "/index.jsp";
     private static final  String ERROR_MESSAGE = "errorMessage";
@@ -70,7 +70,7 @@ public class AccessoControl extends HttpServlet {
         String password = request.getParameter(PASSWORD);
         HttpSession session = request.getSession(true);
         try {
-            admin = utenteModel.login(email, password);
+            admin = accessoModel.login(email, password);
             if (admin != null) {
                 session.setAttribute("Nome", admin.getNome());
                 session.setAttribute("Cognome", admin.getCognome());
@@ -125,7 +125,7 @@ public class AccessoControl extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher(ERRORE);
             dispatcher.forward(request, response);
         }
-        utenteModel.registrati(nome, cognome, email, password, dataDiNascita, immagine);
+        accessoModel.registrati(nome, cognome, email, password, dataDiNascita, immagine);
         request.setAttribute(NOTIFICA, "Registrazione Effettuata! ");
         RequestDispatcher dispatcher = request.getRequestDispatcher(LOGIN);
         dispatcher.forward(request, response);
@@ -133,7 +133,7 @@ public class AccessoControl extends HttpServlet {
 
     public void verificaEmail(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String email = request.getParameter(EMAIL);
-        boolean trovato = utenteModel.ricercaEmail(email);
+        boolean trovato = accessoModel.ricercaEmail(email);
         response.setContentType("text/plain");
         response.setCharacterEncoding("UTF-8");
         if(trovato){
@@ -154,13 +154,13 @@ public class AccessoControl extends HttpServlet {
         String password = request.getParameter(PASSWORD);
         Date dataDiNascita = Date.valueOf(request.getParameter("dataDiNascita"));
 
-        boolean trovato = utenteModel.ricercaEmail(email);
+        boolean trovato = accessoModel.ricercaEmail(email);
         if(!trovato){
             request.setAttribute(NOTIFICA, "Non è stato trovato nessun account associato a questa email");
             RequestDispatcher dispatcher = request.getRequestDispatcher("/recuperaPassword.jsp");
             dispatcher.forward(request, response);
         }else{
-            boolean modifica = utenteModel.modificaPassword(nome, cognome, email, password, dataDiNascita);
+            boolean modifica = accessoModel.modificaPassword(nome, cognome, email, password, dataDiNascita);
             if(modifica) {
                 request.setAttribute(NOTIFICA, "Password modificata correttamente! ");
                 RequestDispatcher dispatcher = request.getRequestDispatcher(LOGIN);
