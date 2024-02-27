@@ -28,39 +28,27 @@
             <p id="heading">Recupera Password</p>
 
             <div class="field">
-                <label>
-                    <input type="text" name ="nome" class="input-field" placeholder="Nome Utente">
-                </label>
+                <input type="text" name ="nome" class="input-field" placeholder="Nome Utente">
             </div>
 
             <div class="field">
-                <label>
-                    <input type="text" name ="cognome" class="input-field" placeholder="Cognome">
-                </label>
+                <input type="text" name ="cognome" class="input-field" placeholder="Cognome">
             </div>
 
             <div class="field">
-                <label>
-                    <input type="email" name ="email" class="input-field" placeholder="Email">
-                </label>
+                <input type="email" name ="email" class="input-field" placeholder="Email">
             </div>
 
             <div class="field">
-                <label>
-                    <input type="password" name ="password" class="input-field" placeholder=" Nuova Password">
-                </label>
+                <input type="password" name ="password" class="input-field" placeholder=" Nuova Password">
             </div>
 
             <div class="field">
-                <label>
-                    <input type="password" name ="password2" class="input-field" placeholder="Conferma Nuova Password">
-                </label>
+                <input type="password" name ="password2" class="input-field" placeholder="Conferma Nuova Password">
             </div>
 
             <div class="field">
-                <label>
-                    Data Di Nascita: <input type="date" name ="dataDiNascita" class="input-field" placeholder="Data Di Nascita">
-                </label>
+                Data Di Nascita: <input type="date" name ="dataDiNascita" class="input-field" placeholder="Data Di Nascita">
             </div>
 
             <button type="submit" class="button3">Conferma Password!</button>

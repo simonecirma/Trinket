@@ -17,33 +17,23 @@
             <p id="heading">Registrazione</p>
 
             <div class="field">
-                <label>
-                    <input type="text" name ="nome" class="input-field" placeholder="Nome">
-                </label>
+                <input type="text" name ="nome" class="input-field" placeholder="Nome">
             </div>
 
             <div class="field">
-                <label>
-                    <input type="text" name ="cognome" class="input-field" placeholder="Cognome">
-                </label>
+                <input type="text" name ="cognome" class="input-field" placeholder="Cognome">
             </div>
 
             <div class="field">
-                <label>
-                    <input type="email" name ="email" class="input-field" placeholder="Email">
-                </label>
+                <input type="email" name ="email" class="input-field" placeholder="Email">
             </div>
 
             <div class="field">
-                <label>
-                    <input type="password" name ="password" class="input-field" placeholder="Password">
-                </label>
+                <input type="password" name ="password" class="input-field" placeholder="Password">
             </div>
 
             <div class="field">
-                <label>
-                    <input type="password" name ="password2" class="input-field" placeholder="Conferma Password">
-                </label>
+                <input type="password" name ="password2" class="input-field" placeholder="Conferma Password">
             </div>
 
             <div class="field">
