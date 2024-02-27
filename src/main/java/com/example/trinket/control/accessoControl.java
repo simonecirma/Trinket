@@ -1,7 +1,7 @@
-package com.example.trinket.Control;
+package com.example.trinket.control;
 
-import com.example.trinket.Model.AccessoModel;
-import com.example.trinket.Model.Bean.UtenteBean;
+import com.example.trinket.model.accessoModel;
+import com.example.trinket.model.bean.utenteBean;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,11 +12,11 @@ import java.sql.Date;
 import java.util.UUID;
 
 @WebServlet(name = "AccessoControl", value = "/AccessoControl")
-public class AccessoControl extends HttpServlet {
+public class accessoControl extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    private final AccessoModel accessoModel = new AccessoModel();
+    private final com.example.trinket.model.accessoModel accessoModel = new accessoModel();
 
     private static final  String INDEX = "/index.jsp";
     private static final  String ERROR_MESSAGE = "errorMessage";
@@ -65,7 +65,7 @@ public class AccessoControl extends HttpServlet {
     }
 
     public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UtenteBean admin;
+        utenteBean admin;
         String email = request.getParameter(EMAIL);
         String password = request.getParameter(PASSWORD);
         HttpSession session = request.getSession(true);

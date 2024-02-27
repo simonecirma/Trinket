@@ -1,13 +1,13 @@
-package com.example.trinket.Model.Bean;
+package com.example.trinket.model.bean;
 
-public class StatoOrdineBean {
+public class statoOrdineBean {
     String stato;
 
-    public StatoOrdineBean(String stato) {
+    public statoOrdineBean(String stato) {
         this.stato = stato;
     }
 
-    public StatoOrdineBean() {}
+    public statoOrdineBean() {}
 
     public String getStato() {
         return stato;

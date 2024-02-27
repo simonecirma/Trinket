@@ -1,8 +1,8 @@
-package com.example.trinket.Model.Bean;
+package com.example.trinket.model.bean;
 
 import java.util.Date;
 
-public class UtenteBean {
+public class utenteBean {
     private String nome;
     private String cognome;
     private String email;
@@ -11,7 +11,7 @@ public class UtenteBean {
     private String immagine;
     private boolean flagAmm;
 
-    public UtenteBean(String nome, String cognome, String email, String password, Date dataDiNascita, String immagine, boolean flagAmm) {
+    public utenteBean(String nome, String cognome, String email, String password, Date dataDiNascita, String immagine, boolean flagAmm) {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
@@ -21,7 +21,7 @@ public class UtenteBean {
         this.flagAmm = flagAmm;
     }
 
-    public UtenteBean() {
+    public utenteBean() {
     }
 
     public String getNome() {

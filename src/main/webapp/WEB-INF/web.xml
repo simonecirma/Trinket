@@ -6,7 +6,7 @@
 
     <servlet>
         <servlet-name>AccessoControl</servlet-name>
-        <servlet-class>com.example.trinket.Control.AccessoControl</servlet-class>
+        <servlet-class>com.example.trinket.control.accessoControl</servlet-class>
         <multipart-config>
             <max-file-size>10485760</max-file-size> <!-- 10 MB -->
             <max-request-size>20971520</max-request-size> <!-- 20 MB -->
