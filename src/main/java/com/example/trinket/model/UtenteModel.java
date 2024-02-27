@@ -1,8 +1,8 @@
 package com.example.trinket.model;
 
-import com.example.trinket.model.bean.indirizzoBean;
-import com.example.trinket.model.bean.metodoPagamentoBean;
-import com.example.trinket.model.bean.ordineBean;
+import com.example.trinket.model.bean.IndirizzoBean;
+import com.example.trinket.model.bean.MetodoPagamentoBean;
+import com.example.trinket.model.bean.OrdineBean;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class utenteModel {
-    private static final Logger logger = Logger.getLogger(utenteModel.class.getName());
+public class UtenteModel {
+    private static final Logger logger = Logger.getLogger(UtenteModel.class.getName());
     private static final String TABLE_NAME_INDIRIZZO = "IndirizzoSpedizione";
     private static final String TABLE_NAME_INSERISCE = "Inserisce";
     private static final String TABLE_NAME_PAGAMENTO = "MetodoDiPagamento";
@@ -37,8 +37,8 @@ public class utenteModel {
         }
     }
 
-    public List<indirizzoBean> ricercaIndirizzi (String email){
-        List<indirizzoBean> indirizzi = new ArrayList<>();
+    public List<IndirizzoBean> ricercaIndirizzi (String email){
+        List<IndirizzoBean> indirizzi = new ArrayList<>();
         try(
             Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT i.Indirizzo, i.NumeroCivico, i.CAP, i.Città," +
@@ -47,7 +47,7 @@ public class utenteModel {
             ps.setString(1, email);
             try(ResultSet rs = ps.executeQuery()){
                 while (rs.next()) {
-                    indirizzoBean bean = new indirizzoBean();
+                    IndirizzoBean bean = new IndirizzoBean();
                     bean.setIndirizzo(rs.getString("Indirizzo"));
                     bean.setNumeroCivico(rs.getInt("NumeroCivico"));
                     bean.setCap(rs.getInt("CAP"));
@@ -62,8 +62,8 @@ public class utenteModel {
         return indirizzi;
     }
 
-    public List<metodoPagamentoBean> ricercaMetodoPagamento (String email){
-        List<metodoPagamentoBean> carte = new ArrayList<>();
+    public List<MetodoPagamentoBean> ricercaMetodoPagamento (String email){
+        List<MetodoPagamentoBean> carte = new ArrayList<>();
         try(
             Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT p.NumeroCarta, m.Scadenza, m.Titolare FROM " +
@@ -72,7 +72,7 @@ public class utenteModel {
             ps.setString(1, email);
             try(ResultSet rs = ps.executeQuery()){
                 while (rs.next()) {
-                    metodoPagamentoBean bean = new metodoPagamentoBean();
+                    MetodoPagamentoBean bean = new MetodoPagamentoBean();
                     bean.setNumeroCarta(rs.getString("NumeroCarta"));
                     bean.setScadenza(rs.getDate("Scadenza"));
                     bean.setTitolare(rs.getString("Titolare"));
@@ -85,8 +85,8 @@ public class utenteModel {
         return carte;
     }
 
-    public List<ordineBean> ricercaOrdiniUtente (String email){
-        List<ordineBean> ordini = new ArrayList<>();
+    public List<OrdineBean> ricercaOrdiniUtente (String email){
+        List<OrdineBean> ordini = new ArrayList<>();
         try(
             Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT * FROM " +TABLE_NAME_ORDINE+
@@ -94,7 +94,7 @@ public class utenteModel {
             ps.setString(1, email);
             try(ResultSet rs = ps.executeQuery()){
                 while (rs.next()) {
-                    ordineBean bean = new ordineBean();
+                    OrdineBean bean = new OrdineBean();
                     bean.setDataAcquisto(rs.getDate("DataAcquisto"));
                     bean.setFattura(rs.getString("Fattura"));
                     bean.setPrezzoTotale(rs.getFloat("PrezzoTotale"));

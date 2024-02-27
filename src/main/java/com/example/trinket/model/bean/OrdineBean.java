@@ -2,14 +2,14 @@ package com.example.trinket.model.bean;
 
 import java.sql.Date;
 
-public class ordineBean {
+public class OrdineBean {
     Date dataAcquisto;
     String fattura;
     float prezzoTotale;
     String statoOrdine;
     String email;
 
-    public ordineBean(Date dataAcquisto, String fattura, float prezzoTotale, String statoOrdine, String email) {
+    public OrdineBean(Date dataAcquisto, String fattura, float prezzoTotale, String statoOrdine, String email) {
         this.dataAcquisto = dataAcquisto;
         this.fattura = fattura;
         this.prezzoTotale = prezzoTotale;
@@ -17,7 +17,7 @@ public class ordineBean {
         this.email = email;
     }
 
-    public ordineBean() {}
+    public OrdineBean() {}
 
     public Date getDataAcquisto() {
         return dataAcquisto;

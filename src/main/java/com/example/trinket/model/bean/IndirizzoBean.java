@@ -1,13 +1,13 @@
 package com.example.trinket.model.bean;
 
-public class indirizzoBean {
+public class IndirizzoBean {
     String indirizzo;
     int numeroCivico;
     int cap;
     String citta;
     String provincia;
 
-    public indirizzoBean(String indirizzo, int numeroCivico, int cap, String citta, String provincia) {
+    public IndirizzoBean(String indirizzo, int numeroCivico, int cap, String citta, String provincia) {
         this.indirizzo = indirizzo;
         this.numeroCivico = numeroCivico;
         this.cap = cap;
@@ -15,7 +15,7 @@ public class indirizzoBean {
         this.provincia = provincia;
     }
 
-    public indirizzoBean() {
+    public IndirizzoBean() {
     }
 
     public String getIndirizzo() {

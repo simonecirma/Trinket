@@ -1,6 +1,6 @@
 package com.example.trinket.model;
 
-import com.example.trinket.model.bean.utenteBean;
+import com.example.trinket.model.bean.UtenteBean;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -10,8 +10,8 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class accessoModel {
-    private static final Logger logger = Logger.getLogger(utenteModel.class.getName());
+public class AccessoModel {
+    private static final Logger logger = Logger.getLogger(AccessoModel.class.getName());
     private static final String TABLE_NAME_UTENTE = "Utente";
     private static DataSource ds;
 
@@ -26,8 +26,8 @@ public class accessoModel {
         }
     }
 
-    public synchronized utenteBean login(String email, String password)  {
-        utenteBean bean = null;
+    public synchronized UtenteBean login(String email, String password)  {
+        UtenteBean bean = null;
         try(
                 Connection con = ds.getConnection();
                 PreparedStatement ps = con.prepareStatement("SELECT * FROM " +TABLE_NAME_UTENTE+ " WHERE Email = ? AND Password = ? ")){
@@ -35,7 +35,7 @@ public class accessoModel {
             ps.setString(2, password);
             try(ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    bean = new utenteBean();
+                    bean = new UtenteBean();
                     bean.setNome(rs.getString("Nome"));
                     bean.setCognome(rs.getString("Cognome"));
                     bean.setEmail(rs.getString("Email"));

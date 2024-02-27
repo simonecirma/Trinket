@@ -2,18 +2,18 @@ package com.example.trinket.model.bean;
 
 import java.sql.Date;
 
-public class metodoPagamentoBean {
+public class MetodoPagamentoBean {
     String numeroCarta;
     Date scadenza;
     String titolare;
 
-    public metodoPagamentoBean(String numeroCarta, Date scadenza, String titolare) {
+    public MetodoPagamentoBean(String numeroCarta, Date scadenza, String titolare) {
         this.numeroCarta = numeroCarta;
         this.scadenza = scadenza;
         this.titolare = titolare;
     }
 
-    public metodoPagamentoBean() {}
+    public MetodoPagamentoBean() {}
 
     public String getNumeroCarta() {
         return numeroCarta;
