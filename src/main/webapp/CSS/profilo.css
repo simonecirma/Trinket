@@ -1,0 +1,59 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.intestazioneProfilo{
+    background-color: #6464d5;
+    width: 200px; /* Larghezza dei div */
+    margin-right: 20px; /* Spazio tra i div */
+    order: 1; /* Ordine di visualizzazione */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.menu {
+    background-color: #0080ff;
+    width: 200px; /* Larghezza dei div */
+    margin-right: 20px; /* Spazio tra i div */
+    order: 2; /* Ordine di visualizzazione */
+}
+
+.fotoProfilo {
+    position: relative;
+    display: flex;
+    justify-content: center;
+        align-items: center; /* Centra verticalmente */
+}
+
+.uploadLabel {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #337ab7;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.fotoProfilo:hover .uploadLabel {
+    opacity: 1;
+}
+
+.iconaProfilo{
+    width:90%;
+    height: 100%;
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+
+.nomeUtente{
+    display: flex;
+    justify-content: center;
+}

@@ -114,7 +114,7 @@ public class AccessoControl extends HttpServlet {
         String path = request.getServletContext().getRealPath("/") +directory;
         String path2 = path + immagine;
         try(FileOutputStream fos = new FileOutputStream(path2);
-        InputStream is = file.getInputStream()){
+            InputStream is = file.getInputStream()){
             byte[] data = new byte[is.available()];
             if(is.read(data) > 0)
             {
@@ -173,3 +173,4 @@ public class AccessoControl extends HttpServlet {
         }
     }
 }
+

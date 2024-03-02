@@ -48,7 +48,9 @@
             </div>
 
             <div class="field">
+                <label>
                 Data Di Nascita: <input type="date" name ="dataDiNascita" class="input-field" placeholder="Data Di Nascita">
+                </label>
             </div>
 
             <button type="submit" class="button3">Conferma Password!</button>

@@ -21,6 +21,8 @@ public class UtenteModel {
     private static final String TABLE_NAME_PAGAMENTO = "MetodoDiPagamento";
     private static final String TABLE_NAME_POSSIEDE = "Possiede";
     private static final String TABLE_NAME_ORDINE = "Ordine";
+    private static final String TABLE_NAME_UTENTE = "Utente";
+
 
 
 
@@ -106,6 +108,19 @@ public class UtenteModel {
             logger.log(Level.WARNING, e.getMessage());
         }
         return ordini;
+    }
+
+    public void inserisciImmagine (String immagine, String email){
+        try (
+             Connection con = ds.getConnection();
+             PreparedStatement ps = con.prepareStatement
+             ("UPDATE " + TABLE_NAME_UTENTE + " SET Immagine = ? WHERE Email = ?")){
+                ps.setString(1, immagine);
+                ps.setString(2, email);
+                ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

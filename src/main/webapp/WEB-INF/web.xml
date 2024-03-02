@@ -14,9 +14,24 @@
         </multipart-config>
     </servlet>
 
+    <servlet>
+        <servlet-name>UtenteControl</servlet-name>
+        <servlet-class>com.example.trinket.control.UtenteControl</servlet-class>
+        <multipart-config>
+            <max-file-size>10485760</max-file-size> <!-- 10 MB -->
+            <max-request-size>20971520</max-request-size> <!-- 20 MB -->
+            <file-size-threshold>0</file-size-threshold>
+        </multipart-config>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>AccessoControl</servlet-name>
         <url-pattern>/AccessoControl</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>UtenteControl</servlet-name>
+        <url-pattern>/UtenteControl</url-pattern>
     </servlet-mapping>
 </web-app>
 
