@@ -119,7 +119,7 @@ public class UtenteModel {
                 ps.setString(2, email);
                 ps.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.WARNING, e.getMessage());
         }
     }
 }

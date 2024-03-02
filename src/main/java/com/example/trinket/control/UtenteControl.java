@@ -19,12 +19,9 @@ public class UtenteControl extends HttpServlet {
     private static final  String ERROR_MESSAGE = "errorMessage";
     private static final  String MESSAGGIO = "Si è verificato un errore: ";
     private static final  String ERRORE = "/error.jsp";
-    private static final  String NOTIFICA = "notifica";
-
-
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         String action = request.getParameter("action");
 
         try {
@@ -45,7 +42,7 @@ public class UtenteControl extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         doGet(request, response);
     }
 

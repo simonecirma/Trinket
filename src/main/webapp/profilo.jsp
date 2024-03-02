@@ -30,9 +30,16 @@
 
         <div class="menu">
             <table>
-                <tr> <td> Dati personali </td> </tr>
-                <tr> <td> Metodi di pagamento </td> </tr>
-                <tr> <td> Indirizzi di spedizione </td> </tr>
+                <caption style="display: none;">Informazioni Profilo</caption>
+                <tr>
+                    <th>Dati personali</th>
+                </tr>
+                <tr>
+                    <th>Metodi di pagamento</th>
+                </tr>
+                <tr>
+                    <th>Indirizzi di spedizione</th>
+                </tr>
             </table>
         </div>
     </div>
