@@ -31,25 +31,36 @@
         <div class="menu">
             <table>
                 <caption style="display: none;">Informazioni Profilo</caption>
-                <tr>
+                <tr onclick="showSection('datiPersonali')">
                     <th>Dati personali</th>
                 </tr>
-                <tr>
+                <tr onclick="showSection('metodiPagamento')">
                     <th>Metodi di pagamento</th>
                 </tr>
-                <tr>
+                <tr onclick="showSection('indirizziSpedizione')">
                     <th>Indirizzi di spedizione</th>
                 </tr>
             </table>
         </div>
     </div>
+    <div class= "card">
+        <div id="datiPersonali" class="informazioniProfilo">
+            CIAOOOOO
+        </div>
+        <div id="metodiPagamento" class="informazioniProfilo" style="display: none;">
+            MAAAMMT
+        </div>
+        <div id="indirizziSpedizione" class="informazioniProfilo" style="display: none;">
+            PAAAAATT
+        </div>
+    </div>
 
     <script>
-        document.getElementById("uploadInput").addEventListener("change", function() {
+        document.getElementById("uploadInput").addEventListener("change", function () {
             var file = this.files[0];
             if (file) {
                 var reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = function (e) {
                     document.querySelector(".iconaProfilo").src = e.target.result;
                 }
                 reader.readAsDataURL(file);
@@ -57,6 +68,14 @@
                 document.getElementById("submitButton").style.display = "inline-block";
             }
         });
+
+        function showSection(sectionId) {
+            var sections = document.getElementsByClassName('informazioniProfilo');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].style.display = 'none';
+            }
+            document.getElementById(sectionId).style.display = 'block';
+        }
     </script>
 </body>
 </html>
