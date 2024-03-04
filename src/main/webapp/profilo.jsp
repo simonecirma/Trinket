@@ -20,7 +20,7 @@
                     <% }else{ %>
                         <img src="Immagini/ImgUtente/<%=immagine%>" class="iconaProfilo" alt="Foto Profilo">
                         <input type="file" id="uploadInput" style="display: none;" name="immagineProfilo">
-                        <button id="uploadLabel" class="uploadLabel" type="button" onclick="document.getElementById('uploadInput').click()">Scegli Immagine</button>
+                        <button id="uploadLabel" class="uploadLabel" type="button" onclick="document.getElementById('uploadInput').click()">Cambia Immagine</button>
                     <% } %>
                     <button id="submitButton" class="uploadLabel" type="submit" style="display: none;">Salva</button>
                 </form>
@@ -32,13 +32,13 @@
             <table>
                 <caption style="display: none;">Informazioni Profilo</caption>
                 <tr onclick="showSection('datiPersonali')">
-                    <th>Dati personali</th>
+                    <th><button class="infProfilo">Dati personali</button></th>
                 </tr>
                 <tr onclick="showSection('metodiPagamento')">
-                    <th>Metodi di pagamento</th>
+                    <th><button class="infProfilo">Metodi di pagamento</button></th>
                 </tr>
                 <tr onclick="showSection('indirizziSpedizione')">
-                    <th>Indirizzi di spedizione</th>
+                    <th><button class="infProfilo">Indirizzi di spedizione</button></th>
                 </tr>
             </table>
         </div>
