@@ -122,5 +122,23 @@ public class UtenteModel {
             logger.log(Level.WARNING, e.getMessage());
         }
     }
+
+    public void modificaInformazioni (String nome, String cognome, String email, String password, Date dataDiNascita, String email2){
+        List<OrdineBean> ordini = new ArrayList<>();
+        try(
+                Connection con = ds.getConnection();
+                PreparedStatement ps = con.prepareStatement("UPDATE " +TABLE_NAME_UTENTE+ " SET Nome = ?, Cognome = ?," +
+                " Email = ?, Password = ?, DataDiNascita = ? WHERE Email = ? ")) {
+            ps.setString(1, nome);
+            ps.setString(2, cognome);
+            ps.setString(3, email);
+            ps.setString(4, password);
+            ps.setDate(5, dataDiNascita);
+            ps.setString(6, email2);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+    }
 }
 

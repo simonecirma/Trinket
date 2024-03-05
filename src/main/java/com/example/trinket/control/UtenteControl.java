@@ -9,6 +9,7 @@ import javax.servlet.http.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Date;
 import java.util.UUID;
 
 @WebServlet(name = "UtenteControl", value = "/UtenteControl")
@@ -28,6 +29,8 @@ public class UtenteControl extends HttpServlet {
             if (action != null) {
                 if (action.equalsIgnoreCase("ImmagineProfilo")) {
                     inserisciImmagine(request, response);
+                }else if (action.equalsIgnoreCase("ModificaInformazioni")) {
+                    modificaInformazioni(request, response);
                 }
             }
         } catch (Exception e) {
@@ -67,6 +70,24 @@ public class UtenteControl extends HttpServlet {
         }
         utenteModel.inserisciImmagine(immagine, email);
         request.getSession().setAttribute("Immagine", immagine);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/profilo.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    public void modificaInformazioni(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String nome = request.getParameter("nome");
+        String cognome = request.getParameter("cognome");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        Date dataDiNascita = Date.valueOf(request.getParameter("dataDiNascita"));
+        String email2 = (String) request.getSession().getAttribute("Email");
+        utenteModel.modificaInformazioni(nome, cognome, email, password, dataDiNascita, email2);
+        request.getSession().setAttribute("Nome", nome);
+        request.getSession().setAttribute("Cognome", cognome);
+        request.getSession().setAttribute("Email", email);
+        request.getSession().setAttribute("Password", password);
+        request.getSession().setAttribute("dataDiNascita", dataDiNascita);
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("/profilo.jsp");
         dispatcher.forward(request, response);
     }
