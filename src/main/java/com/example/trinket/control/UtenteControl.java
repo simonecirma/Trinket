@@ -20,6 +20,8 @@ public class UtenteControl extends HttpServlet {
     private static final  String ERROR_MESSAGE = "errorMessage";
     private static final  String MESSAGGIO = "Si è verificato un errore: ";
     private static final  String ERRORE = "/error.jsp";
+    private static final  String EMAIL = "Email";
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -51,7 +53,7 @@ public class UtenteControl extends HttpServlet {
 
     public void inserisciImmagine(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Part file = request.getPart("immagineProfilo");
-        String email = (String) request.getSession().getAttribute("Email");
+        String email = (String) request.getSession().getAttribute(EMAIL);
         String immagine = String.valueOf(UUID.randomUUID());
         String directory = "Immagini/ImgUtente/";
         String path = request.getServletContext().getRealPath("/") +directory;
@@ -80,11 +82,11 @@ public class UtenteControl extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         Date dataDiNascita = Date.valueOf(request.getParameter("dataDiNascita"));
-        String email2 = (String) request.getSession().getAttribute("Email");
+        String email2 = (String) request.getSession().getAttribute(EMAIL);
         utenteModel.modificaInformazioni(nome, cognome, email, password, dataDiNascita, email2);
         request.getSession().setAttribute("Nome", nome);
         request.getSession().setAttribute("Cognome", cognome);
-        request.getSession().setAttribute("Email", email);
+        request.getSession().setAttribute(EMAIL, email);
         request.getSession().setAttribute("Password", password);
         request.getSession().setAttribute("dataDiNascita", dataDiNascita);
 

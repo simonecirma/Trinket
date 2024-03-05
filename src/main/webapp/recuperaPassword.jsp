@@ -28,28 +28,28 @@
             <p id="heading">Recupera Password</p>
 
             <div class="field">
-                <input type="text" name ="nome" class="input-field" placeholder="Nome Utente">
+                <input type="text" name ="nome" class="input-field" placeholder="Nome Utente" required>
             </div>
 
             <div class="field">
-                <input type="text" name ="cognome" class="input-field" placeholder="Cognome">
+                <input type="text" name ="cognome" class="input-field" placeholder="Cognome" required>
             </div>
 
             <div class="field">
-                <input type="email" name ="email" class="input-field" placeholder="Email">
+                <input type="email" name ="email" class="input-field" placeholder="Email" required>
             </div>
 
             <div class="field">
-                <input type="password" name ="password" class="input-field" placeholder=" Nuova Password">
+                <input type="password" name ="password" class="input-field" placeholder=" Nuova Password" required>
             </div>
 
             <div class="field">
-                <input type="password" name ="password2" class="input-field" placeholder="Conferma Nuova Password">
+                <input type="password" name ="password2" class="input-field" placeholder="Conferma Nuova Password" required>
             </div>
 
             <div class="field">
                 <label>
-                Data Di Nascita: <input type="date" name ="dataDiNascita" class="input-field" placeholder="Data Di Nascita">
+                Data Di Nascita: <input type="date" name ="dataDiNascita" class="input-field" placeholder="Data Di Nascita" required>
                 </label>
             </div>
 
@@ -75,16 +75,8 @@
         var password = document.registrati.password.value;
         var password2 = document.registrati.password2.value;
         var passwordPattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*.-_])(?=.{8,})/;
-        var email = document.registrati.email.value;
-        var nome = document.registrati.nome.value;
-        var cognome = document.registrati.cognome.value;
-        var dataDiNascitaInput = document.registrati.dataDiNascita.value;
 
-        if (password === "") {
-            alert("La Password è obbligatoria! ");
-            document.registrati.password.focus();
-            return false;
-        } else if (!passwordPattern.test(password)) {
+         if (!passwordPattern.test(password)) {
             alert("La Password è errata! Deve contenere almeno 8 caratteri, una lettera maiuscola, una lettera minuscola, un numero e un carattere speciale!");
             document.registrati.password.focus();
             return false;
@@ -93,30 +85,6 @@
         if (password !== password2) {
             alert("Le Password sono diverse! ");
             document.registrati.password2.focus();
-            return false;
-        }
-
-        if (nome === "") {
-            alert("Il nome è obbligatorio! ");
-            document.registrati.nome.focus();
-            return false;
-        }
-
-        if (cognome === "") {
-            alert("Il cognome è obbligatorio! ");
-            document.registrati.cognome.focus();
-            return false;
-        }
-
-        if (dataDiNascitaInput === "") {
-            alert("La Data Di Nascita è obbligatoria! ");
-            document.registrati.dataDiNascita.focus();
-            return false;
-        }
-
-        if(email === ""){
-            alert("La email è obbligatoria! ");
-            document.registrati.email.focus();
             return false;
         }
 

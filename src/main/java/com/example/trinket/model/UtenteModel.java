@@ -68,8 +68,8 @@ public class UtenteModel {
         List<MetodoPagamentoBean> carte = new ArrayList<>();
         try(
             Connection con = ds.getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT p.NumeroCarta, m.Scadenza, m.Titolare FROM " +
-            "" +TABLE_NAME_PAGAMENTO+ " m," +TABLE_NAME_POSSIEDE+ " p  WHERE p.NumeroCarta = m.NumeroCarta " +
+            PreparedStatement ps = con.prepareStatement("SELECT p.NumeroCarta, m.Scadenza, m.Titolare FROM "
+            +TABLE_NAME_PAGAMENTO+ " m," +TABLE_NAME_POSSIEDE+ " p  WHERE p.NumeroCarta = m.NumeroCarta " +
             "AND m.Email = ?")) {
             ps.setString(1, email);
             try(ResultSet rs = ps.executeQuery()){
@@ -124,7 +124,6 @@ public class UtenteModel {
     }
 
     public void modificaInformazioni (String nome, String cognome, String email, String password, Date dataDiNascita, String email2){
-        List<OrdineBean> ordini = new ArrayList<>();
         try(
                 Connection con = ds.getConnection();
                 PreparedStatement ps = con.prepareStatement("UPDATE " +TABLE_NAME_UTENTE+ " SET Nome = ?, Cognome = ?," +
