@@ -72,8 +72,8 @@
                         </div>
 
                         <div class="field">
-                            <label>Data Di Nascita:</label>
-                            <input type="date" name ="dataDiNascita" class="input-field" placeholder="Data Di Nascita" value=<%= dataDiNascita%>>
+                            <label for="dataDiNascita">Data Di Nascita:</label>
+                            <input type="date" name ="dataDiNascita" id="dataDiNascita" class="input-field" placeholder="Data Di Nascita" value=<%= dataDiNascita%>>
                         </div>
 
                         <button type="submit" class="button3">Salva!</button>
