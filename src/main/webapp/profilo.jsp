@@ -82,7 +82,42 @@
             </div>
         </div>
         <div id="metodiPagamento" class="informazioniProfilo" style="display: none;">
-            MAAAMMT
+            <div class="card4">
+                <div class="card__front card__part">
+                    <div class="loghiCarta">
+                        <div class="Chip">
+                            <img src="Immagini/Chip.png" alt="Chip">
+                        </div>
+                        <div class="Nfc">
+                            <img src="Immagini/Nfc.png" alt="Nfc">
+                        </div>
+                        <div class="Mastercard">
+                            <img src="Immagini/Mastercard.png" alt="Mastercard">
+                        </div>
+                    </div>
+                    <div class="card_numer">
+                        <div>**** **** **** 6258</div>
+                    </div>
+                    <div class="card__space-75">
+                        <span class="card__label">Intestatario</span>
+                        <p class="card__info">John Doe</p>
+                    </div>
+                    <div class="card__space-25">
+                        <span class="card__label">Scadenza:</span>
+                        <p class="card__info">10/25</p>
+                    </div>
+                </div>
+
+                <div class="card__back card__part">
+                    <div class="card__black-line"></div>
+                    <div class="card__back-content">
+                        <div class="card__secret">
+                            <p class="card__secret--last">420</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
         <div id="indirizziSpedizione" class="informazioniProfilo" style="display: none;">
             PAAAAATT
