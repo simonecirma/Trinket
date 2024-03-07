@@ -44,84 +44,47 @@
             </table>
         </div>
     </div>
-    <div class= "card">
-        <div id="datiPersonali" class="informazioniProfilo">
-            <div class="card2">
-                <div class="card3">
-                    <form class="form" action="UtenteControl?action=ModificaInformazioni" method="post" name="modificaInformazioni" onsubmit="return validate()">
-                        <p id="heading">I Tuoi Dati</p>
+    <div id="datiPersonali" class= "card">
+        <div class="card2">
+            <div class="card3">
+                <form class="form" action="UtenteControl?action=ModificaInformazioni" method="post" name="modificaInformazioni" onsubmit="return validate()">
+                    <p id="heading">I Tuoi Dati</p>
 
-                        <div class="field">
-                            <input type="text" name ="nome" class="input-field" placeholder="Nome" value=<%= nome%>>
-                        </div>
+                    <div class="field">
+                        <input type="text" name ="nome" class="input-field" placeholder="Nome" value=<%= nome%>>
+                    </div>
 
-                        <div class="field">
-                            <input type="text" name ="cognome" class="input-field" placeholder="Cognome" value=<%= cognome%>>
-                        </div>
+                    <div class="field">
+                        <input type="text" name ="cognome" class="input-field" placeholder="Cognome" value=<%= cognome%>>
+                    </div>
 
-                        <div class="field">
-                            <input type="email" name ="email" class="input-field" placeholder="Email" value=<%= email%>>
-                        </div>
+                    <div class="field">
+                        <input type="email" name ="email" class="input-field" placeholder="Email" value=<%= email%>>
+                    </div>
 
-                        <div class="field">
-                            <input type="password" name ="password" class="input-field" placeholder="Password" value=<%= password%>>
-                        </div>
+                    <div class="field">
+                        <input type="password" name ="password" class="input-field" placeholder="Password" value=<%= password%>>
+                    </div>
 
-                        <div class="field">
-                            <input type="password" name ="password2" class="input-field" placeholder="Conferma Password" value=<%= password%>>
-                        </div>
+                    <div class="field">
+                        <input type="password" name ="password2" class="input-field" placeholder="Conferma Password" value=<%= password%>>
+                    </div>
 
-                        <div class="field">
-                            <label for="dataDiNascita">Data Di Nascita:</label>
-                            <input type="date" name ="dataDiNascita" id="dataDiNascita" class="input-field" placeholder="Data Di Nascita" value=<%= dataDiNascita%>>
-                        </div>
+                    <div class="field">
+                        <label for="dataDiNascita">Data Di Nascita:</label>
+                        <input type="date" name ="dataDiNascita" id="dataDiNascita" class="input-field" placeholder="Data Di Nascita" value=<%= dataDiNascita%>>
+                    </div>
 
-                        <button type="submit" class="button3">Salva!</button>
-                    </form>
-                </div>
+                    <button type="submit" class="button3">Salva!</button>
+                </form>
             </div>
         </div>
-        <div id="metodiPagamento" class="informazioniProfilo" style="display: none;">
-            <div class="card4">
-                <div class="card__front card__part">
-                    <div class="loghiCarta">
-                        <div class="Chip">
-                            <img src="Immagini/Chip.png" alt="Chip">
-                        </div>
-                        <div class="Nfc">
-                            <img src="Immagini/Nfc.png" alt="Nfc">
-                        </div>
-                        <div class="Mastercard">
-                            <img src="Immagini/Mastercard.png" alt="Mastercard">
-                        </div>
-                    </div>
-                    <div class="card_numer">
-                        <div>**** **** **** 6258</div>
-                    </div>
-                    <div class="card__space-75">
-                        <span class="card__label">Intestatario</span>
-                        <p class="card__info">John Doe</p>
-                    </div>
-                    <div class="card__space-25">
-                        <span class="card__label">Scadenza:</span>
-                        <p class="card__info">10/25</p>
-                    </div>
-                </div>
+    </div>
+    <div id="metodiPagamento" class="card" style="display: none;">
 
-                <div class="card__back card__part">
-                    <div class="card__black-line"></div>
-                    <div class="card__back-content">
-                        <div class="card__secret">
-                            <p class="card__secret--last">420</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div id="indirizziSpedizione" class="informazioniProfilo" style="display: none;">
-            PAAAAATT
-        </div>
+    </div>
+    <div id="indirizziSpedizione" class="card" style="display: none;">
+        PAAAAATT
     </div>
 
     <script>
@@ -139,7 +102,7 @@
         });
 
         function showSection(sectionId) {
-            var sections = document.getElementsByClassName('informazioniProfilo');
+            var sections = document.getElementsByClassName('card');
             for (var i = 0; i < sections.length; i++) {
                 sections[i].style.display = 'none';
             }
@@ -204,6 +167,84 @@
                 return false;
             }
         }
+
+        $(document).ready(function() {
+            // Effettua una richiesta AJAX per ottenere i dati dalla servlet
+            $.ajax({
+                url: 'UtenteControl?action=OttieniMetodiPagamento',
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    // Itera su ogni oggetto nella lista di prodotti
+                    $.each(response, function(index, carte) {
+                        // Costruisci il markup HTML per il prodotto
+                        var html = '<div class="card4">';
+                        html += '<div class="card__front card__part">';
+                        html += '<div class="loghiCarta">';
+                        html += '<div class="Chip">';
+                        html += '<img src="Immagini/Chip.png" alt="Chip">';
+                        html += '</div>';
+                        html += '<div class="Nfc">';
+                        html += '<img src="Immagini/Nfc.png" alt="Nfc">';
+                        html += '</div>';
+                        html += '<div class="Mastercard">';
+                        html += '<img src="Immagini/Mastercard.png" alt="Mastercard">';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div class="card_numer" id="card_numer">';
+                        html += numeroCarta(carte.numeroCarta);
+                        html += '</div>';
+                        html += '<div class="card__space-75">';
+                        html += '<span class="card__label"> Intestatario </span>';
+                        html += '<p class="card__info">' +carte.titolare+ '</p>';
+                        html += '</div>';
+                        html += '<div class="card__space-25">';
+                        html += '<span class="card__label"> Scadenza </span>';
+                        html += '<p class="card__info">' +carte.scadenza+ '</p>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '<div class="card__back card__part">';
+                        html += '<div class="card__black-line"> </div>';
+                        html += '<div class="card__back-content">';
+                        html += '<div class="card__secret">';
+                        html += '<p class="card__secret--last">' +carte.cvv+ '</p>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
+                        html += '</div>';
+
+                        // Aggiungi il markup HTML alla pagina
+                        $('#metodiPagamento').append(html);
+
+                        var numElementi = response.length;
+                        if (numElementi === 2) {
+                            $('.card4').removeClass().addClass('card2Elem');
+                        } else if (numElementi === 3) {
+                            $('.card4').removeClass().addClass('card3Elem');
+                        }else if(numElementi > 3){
+                            $('.card4').removeClass().addClass('cardMoltiElem');
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Gestisci eventuali errori di richiesta
+                    console.error('Errore durante la richiesta AJAX:', error);
+                }
+            });
+        });
+
+        function numeroCarta(stringa) {
+            // Divide la stringa in blocchi di 4 caratteri
+            var blocchi = stringa.match(/.{1,4}/g);
+
+            var html = '<div class="blocco">' +blocchi[0]+ '</div>';
+            html += '<div class="blocco">' +blocchi[1]+ '</div>';
+            html += '<div class="blocco">' +blocchi[2]+ '</div>';
+            html += '<div class="blocco">' +blocchi[3]+ '</div>';
+
+            return html;
+        }
+
     </script>
 </body>
 </html>

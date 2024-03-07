@@ -38,6 +38,7 @@ CREATE TABLE MetodoDiPagamento
     NumeroCarta char (16) NOT NULL,
     Scadenza date NOT NULL,
     Titolare varchar (50) NOT NULL,
+    Cvv int NOT NULL,
     PRIMARY KEY (NumeroCarta)
 );
 
@@ -136,18 +137,28 @@ INSERT INTO Inserisce (IDIndirizzo, Email)
 VALUES ('03', 'gp@gmail.com');
 
 SET @CartaDonato='1234567891234567';
+SET @CartaDonato2='7851698715384598';
+SET @CartaDonato3='2794398427965831';
 SET @CartaSimone='9876543210987654';
 SET @CartaGiuseppe='5974682304568792';
 
-INSERT INTO MetodoDiPagamento (NumeroCarta, Scadenza, Titolare)
-VALUES (@CartaDonato, '2029-05-01','Donato Folgieri');
-INSERT INTO MetodoDiPagamento (NumeroCarta, Scadenza, Titolare)
-VALUES (@CartaSimone, '2030-06-01','Simone Cirma');
-INSERT INTO MetodoDiPagamento (NumeroCarta, Scadenza, Titolare)
-VALUES (@CartaGiuseppe, '2028-01-01','Giuseppe Rossi');
+INSERT INTO MetodoDiPagamento (NumeroCarta, Scadenza, Titolare, Cvv)
+VALUES (@CartaDonato, '2029-05-01','Donato Folgieri', '123');
+INSERT INTO MetodoDiPagamento (NumeroCarta, Scadenza, Titolare, Cvv)
+VALUES (@CartaDonato2, '2031-01-31','Donato Folgieri', '759');
+INSERT INTO MetodoDiPagamento (NumeroCarta, Scadenza, Titolare, Cvv)
+VALUES (@CartaDonato3, '2031-01-31','Donato Folgieri', '759');
+INSERT INTO MetodoDiPagamento (NumeroCarta, Scadenza, Titolare, Cvv)
+VALUES (@CartaSimone, '2030-06-01','Simone Cirma', '456');
+INSERT INTO MetodoDiPagamento (NumeroCarta, Scadenza, Titolare, Cvv)
+VALUES (@CartaGiuseppe, '2028-01-01','Giuseppe Rossi', '789');
 
 INSERT INTO Possiede (NumeroCarta, Email)
 VALUES (@CartaDonato,'df@gmail.com');
+INSERT INTO Possiede (NumeroCarta, Email)
+VALUES (@CartaDonato2,'df@gmail.com');
+INSERT INTO Possiede (NumeroCarta, Email)
+VALUES (@CartaDonato3,'df@gmail.com');
 INSERT INTO Possiede (NumeroCarta, Email)
 VALUES (@CartaSimone,'sc@gmail.com');
 INSERT INTO Possiede (NumeroCarta, Email)

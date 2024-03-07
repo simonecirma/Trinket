@@ -133,17 +133,19 @@ public class AccessoControl extends HttpServlet {
 
     public void verificaEmail(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String email = request.getParameter(EMAIL);
-        boolean trovato = accessoModel.ricercaEmail(email);
-        response.setContentType("text/plain");
-        response.setCharacterEncoding("UTF-8");
-        if(trovato){
-            PrintWriter out = response.getWriter();
-            out.print("trovato");
-            out.flush();
-        }else{
-            PrintWriter out = response.getWriter();
-            out.print("non trovato");
-            out.flush();
+        if(!email.equals(request.getSession().getAttribute("Email"))) {
+            boolean trovato = accessoModel.ricercaEmail(email);
+            response.setContentType("text/plain");
+            response.setCharacterEncoding("UTF-8");
+            if (trovato) {
+                PrintWriter out = response.getWriter();
+                out.print("trovato");
+                out.flush();
+            } else {
+                PrintWriter out = response.getWriter();
+                out.print("non trovato");
+                out.flush();
+            }
         }
     }
 

@@ -45,6 +45,7 @@ html, body {
     float: right; /* Allinea il profilo a destra */
     transition: transform 0.3s; /* Aggiunge un effetto di transizione fluida */
     position: relative; /* Aggiungi questo per posizionare il menu a tendina rispetto a questo elemento */
+    z-index: 1000;
 }
 
 .profilo:hover{
@@ -147,20 +148,20 @@ html, body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     height: auto;
-    background-color: hsla(240, 100%, 50%, 0.5);
+    background-color: hsl(230, 60%, 54%);
     transition: background-color 0.5s ease-in-out; /* Applica la transizione solo al colore di sfondo */
     width: auto;
 }
 
 .menuTendina:hover {
-    background: hsla(300, 100%, 50%, 0.5)
+    background: hsl(300, 100%, 50%)
 }
 
 .menuTendina a {
     display: block;
     padding: 5px 0; /* Aggiungi spaziatura tra i link */
     text-decoration: none; /* Rimuovi il sottolineato predefinito */
-    color: #333; /* Imposta il colore del testo */
+    color: #000000; /* Imposta il colore del testo */
     white-space: nowrap; /* Impedisce al testo di andare a capo */
 }
 

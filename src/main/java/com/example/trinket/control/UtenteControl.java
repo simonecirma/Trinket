@@ -1,6 +1,7 @@
 package com.example.trinket.control;
 
 import com.example.trinket.model.UtenteModel;
+import com.example.trinket.model.bean.MetodoPagamentoBean;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,8 +10,13 @@ import javax.servlet.http.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+
+import com.google.gson.Gson;
 
 @WebServlet(name = "UtenteControl", value = "/UtenteControl")
 public class UtenteControl extends HttpServlet {
@@ -33,6 +39,8 @@ public class UtenteControl extends HttpServlet {
                     inserisciImmagine(request, response);
                 }else if (action.equalsIgnoreCase("ModificaInformazioni")) {
                     modificaInformazioni(request, response);
+                }else if(action.equalsIgnoreCase("OttieniMetodiPagamento")){
+                    metodiPagamento(request, response);
                 }
             }
         } catch (Exception e) {
@@ -92,5 +100,21 @@ public class UtenteControl extends HttpServlet {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/profilo.jsp");
         dispatcher.forward(request, response);
+    }
+
+    public void metodiPagamento( HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String email = (String) request.getSession().getAttribute(EMAIL);
+        List<MetodoPagamentoBean> carte;
+        carte = utenteModel.ricercaMetodoPagamento(email);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(carte);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        PrintWriter out = response.getWriter();
+        out.print(json);
+        out.flush();
     }
 }

@@ -6,11 +6,13 @@ public class MetodoPagamentoBean {
     String numeroCarta;
     Date scadenza;
     String titolare;
+    int cvv;
 
-    public MetodoPagamentoBean(String numeroCarta, Date scadenza, String titolare) {
+    public MetodoPagamentoBean(String numeroCarta, Date scadenza, String titolare, int cvv) {
         this.numeroCarta = numeroCarta;
         this.scadenza = scadenza;
         this.titolare = titolare;
+        this.cvv = cvv;
     }
 
     public MetodoPagamentoBean() {}
@@ -39,12 +41,21 @@ public class MetodoPagamentoBean {
         this.titolare = titolare;
     }
 
+    public int getCvv() {
+        return cvv;
+    }
+
+    public void setCvv(int cvv) {
+        this.cvv = cvv;
+    }
+
     @Override
     public String toString() {
         return "MetodoPagamentoBean{" +
                 "numeroCarta='" + numeroCarta + '\'' +
                 ", scadenza=" + scadenza +
                 ", titolare='" + titolare + '\'' +
+                ", cvv='" + cvv + '\'' +
                 '}';
     }
 }

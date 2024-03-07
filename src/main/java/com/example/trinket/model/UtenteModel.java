@@ -68,9 +68,9 @@ public class UtenteModel {
         List<MetodoPagamentoBean> carte = new ArrayList<>();
         try(
             Connection con = ds.getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT p.NumeroCarta, m.Scadenza, m.Titolare FROM "
+            PreparedStatement ps = con.prepareStatement("SELECT p.NumeroCarta, m.Scadenza, m.Titolare, m.Cvv FROM "
             +TABLE_NAME_PAGAMENTO+ " m," +TABLE_NAME_POSSIEDE+ " p  WHERE p.NumeroCarta = m.NumeroCarta " +
-            "AND m.Email = ?")) {
+            "AND p.Email = ?")) {
             ps.setString(1, email);
             try(ResultSet rs = ps.executeQuery()){
                 while (rs.next()) {
@@ -78,6 +78,7 @@ public class UtenteModel {
                     bean.setNumeroCarta(rs.getString("NumeroCarta"));
                     bean.setScadenza(rs.getDate("Scadenza"));
                     bean.setTitolare(rs.getString("Titolare"));
+                    bean.setCvv(rs.getInt("Cvv"));
                     carte.add(bean);
                 }
             }
