@@ -26,6 +26,7 @@ public class UtenteControl extends HttpServlet {
     private static final  String MESSAGGIO = "Si è verificato un errore: ";
     private static final  String ERRORE = "/error.jsp";
     private static final  String EMAIL = "Email";
+    private static final  String PROFILO = "/profilo.jsp";
 
 
     @Override
@@ -41,7 +42,7 @@ public class UtenteControl extends HttpServlet {
                 }else if(action.equalsIgnoreCase("OttieniMetodiPagamento")){
                     metodiPagamento(request, response);
                 }else if(action.equalsIgnoreCase("RimuoviMetodo")){
-                    rimuoviMetodo(request, response);
+                    rimuoviMetodo(request);
                 }else if(action.equalsIgnoreCase("AggiungiMetodo")){
                     aggiungiMetodo(request, response);
                 }
@@ -83,7 +84,7 @@ public class UtenteControl extends HttpServlet {
         }
         utenteModel.inserisciImmagine(immagine, email);
         request.getSession().setAttribute("Immagine", immagine);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/profilo.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(PROFILO);
         dispatcher.forward(request, response);
     }
 
@@ -101,7 +102,7 @@ public class UtenteControl extends HttpServlet {
         request.getSession().setAttribute("Password", password);
         request.getSession().setAttribute("dataDiNascita", dataDiNascita);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/profilo.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(PROFILO);
         dispatcher.forward(request, response);
     }
 
@@ -121,7 +122,7 @@ public class UtenteControl extends HttpServlet {
         out.flush();
     }
 
-    public void rimuoviMetodo(HttpServletRequest request, HttpServletResponse response){
+    public void rimuoviMetodo(HttpServletRequest request){
         String numeroCarta = request.getParameter("idCarta");
         utenteModel.rimuoviMetodoDiPagamento(numeroCarta);
     }
@@ -134,7 +135,7 @@ public class UtenteControl extends HttpServlet {
         String email = (String) request.getSession().getAttribute(EMAIL);
 
         utenteModel.aggiungiMetodoDiPagamento(numeroCarta, intestatario, dataScadenza, cvv, email);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/profilo.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(PROFILO);
         dispatcher.forward(request, response);
     }
 }
