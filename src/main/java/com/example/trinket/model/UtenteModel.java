@@ -88,6 +88,37 @@ public class UtenteModel {
         return carte;
     }
 
+    public void rimuoviMetodoDiPagamento (String numeroCarta){
+        try(
+            Connection con = ds.getConnection();
+            PreparedStatement ps = con.prepareStatement("DELETE FROM " +TABLE_NAME_PAGAMENTO+ " WHERE NumeroCarta=?")) {
+            ps.setString(1, numeroCarta);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+    }
+
+    public void aggiungiMetodoDiPagamento (String numeroCarta, String intestatario, Date dataDiScadenza, int cvv, String email){
+        try(
+                Connection con = ds.getConnection();
+                PreparedStatement ps = con.prepareStatement("INSERT INTO " + TABLE_NAME_PAGAMENTO + "(NumeroCarta, Scadenza, Titolare, Cvv) " +
+                "VALUES(?, ?, ?, ?)");
+                PreparedStatement ps2 = con.prepareStatement("INSERT INTO " + TABLE_NAME_POSSIEDE + "(NumeroCarta, Email) " +
+                "VALUES(?, ?)")) {
+            ps.setString(1, numeroCarta);
+            ps.setDate(2, dataDiScadenza);
+            ps.setString(3, intestatario);
+            ps.setInt(4, cvv);
+            ps2.setString(1, numeroCarta);
+            ps2.setString(2, email);
+            ps.executeUpdate();
+            ps2.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+    }
+
     public List<OrdineBean> ricercaOrdiniUtente (String email){
         List<OrdineBean> ordini = new ArrayList<>();
         try(

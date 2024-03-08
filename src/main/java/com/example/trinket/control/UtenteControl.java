@@ -40,6 +40,10 @@ public class UtenteControl extends HttpServlet {
                     modificaInformazioni(request, response);
                 }else if(action.equalsIgnoreCase("OttieniMetodiPagamento")){
                     metodiPagamento(request, response);
+                }else if(action.equalsIgnoreCase("RimuoviMetodo")){
+                    rimuoviMetodo(request, response);
+                }else if(action.equalsIgnoreCase("AggiungiMetodo")){
+                    aggiungiMetodo(request, response);
                 }
             }
         } catch (Exception e) {
@@ -115,5 +119,22 @@ public class UtenteControl extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.print(json);
         out.flush();
+    }
+
+    public void rimuoviMetodo(HttpServletRequest request, HttpServletResponse response){
+        String numeroCarta = request.getParameter("idCarta");
+        utenteModel.rimuoviMetodoDiPagamento(numeroCarta);
+    }
+
+    public void aggiungiMetodo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String numeroCarta = request.getParameter("numeroCarta");
+        String intestatario = request.getParameter("intestatario");
+        Date dataScadenza = Date.valueOf(request.getParameter("dataScadenza"));
+        int cvv = Integer.parseInt(request.getParameter("cvv"));
+        String email = (String) request.getSession().getAttribute(EMAIL);
+
+        utenteModel.aggiungiMetodoDiPagamento(numeroCarta, intestatario, dataScadenza, cvv, email);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/profilo.jsp");
+        dispatcher.forward(request, response);
     }
 }

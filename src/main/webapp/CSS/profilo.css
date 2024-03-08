@@ -1,3 +1,9 @@
+html, body {
+    width: 100%;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    overflow-y: auto ;
+}
+
 .container {
     overflow-y:auto;
     display: flex;
@@ -89,12 +95,6 @@
     margin-top: 5%;
 }
 
-html, body {
-    width: 100%;
-    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
-    overflow-y: auto ;
-}
-
 .infProfilo {
     width: 100%;
     position: relative;
@@ -136,7 +136,18 @@ html, body {
     box-shadow: inset 0 0 25px #ff0080;
 }
 
-
+.card{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centra orizzontalmente */
+    align-items: center;
+    align-content: center;
+    float: left;
+    width: 80%;
+    height: calc(100vh - 9vh);
+    position: relative;
+    z-index: 1;
+}
 
 .form {
     display: flex;
@@ -149,7 +160,7 @@ html, body {
     border-radius: 20px;
 }
 
-#heading {
+.heading {
     text-align: center;
     margin: 2em;
     color: rgb(255, 255, 255);
@@ -224,16 +235,45 @@ html, body {
     box-shadow: 0 0 30px 1px rgba(200, 80, 192, 0.5);
 }
 
-.card{
+.barraMetodi{
+    height: 5%;
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Centra orizzontalmente */
+    justify-content: center;
+    align-content: center;
     align-items: center;
-    float: left;
-    width: 80%;
-    height: calc(100vh - 9vh);
-    position: relative;
-    z-index: 1;
+    box-shadow: 1px 1px 3px rgb(200, 80, 192);
+}
+
+.aggiungiMetodo {
+    padding: 0.5em 1.1em;
+    border-radius: 5px;
+    margin-right: 0.5em;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    color: rgb(0, 0, 0);
+}
+
+.aggiungiMetodo:hover {
+    background-image: linear-gradient(43deg, #ffcc70 0%, #C850C0 46%, #4158d0 100%);
+    color: rgb(255, 255, 255);
+}
+
+.rimuoviMetodo {
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    color: rgb(0, 0, 0);
+}
+
+.rimuoviMetodo:hover {
+    background-image: linear-gradient(163deg, #a00000fa 0%, #d10050 100%);
+    color: rgb(0, 0, 0);
 }
 
 .card4{
@@ -334,14 +374,38 @@ html, body {
     -webkit-backface-visibility: hidden;
 }
 
-.card__back {
-    -webkit-transform: rotateY(-180deg);
+.rimuoviCarta{
+    position: relative;
+    z-index: 4;
+    background-color: rgb(157, 2, 2);
+    color: white;
+    border: none;
+    padding:  8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 70%;
+    margin-top: 3px;
+    margin-left: 45%;
+    display:none;
 }
 
-.card__black-line {
-    margin-top: 5px;
-    height: 20%;
-    background-color: #303030;
+.rimuoviCarta::before, .rimuoviCarta::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 1px;
+    height: 12px;
+    background-color: white;
+}
+
+.rimuoviCarta::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.rimuoviCarta::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 .loghiCarta{
@@ -432,6 +496,16 @@ html, body {
     top: 30%;
 }
 
+.card__back {
+    -webkit-transform: rotateY(-180deg);
+}
+
+.card__black-line {
+    margin-top: 5px;
+    height: 20%;
+    background-color: #303030;
+}
+
 .card__back-content {
     padding: 15px 15px 0;
 }
@@ -458,4 +532,3 @@ html, body {
     border-radius: 4px;
     background: repeating-linear-gradient(45deg, #ededed, #ededed 5px, #f9f9f9 5px, #f9f9f9 10px);
 }
-

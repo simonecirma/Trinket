@@ -48,7 +48,7 @@
         <div class="card2">
             <div class="card3">
                 <form class="form" action="UtenteControl?action=ModificaInformazioni" method="post" name="modificaInformazioni" onsubmit="return validate()">
-                    <p id="heading">I Tuoi Dati</p>
+                    <p class="heading">I Tuoi Dati</p>
 
                     <div class="field">
                         <input type="text" name ="nome" class="input-field" placeholder="Nome" value=<%= nome%>>
@@ -81,10 +81,43 @@
         </div>
     </div>
     <div id="metodiPagamento" class="card" style="display: none;">
+        <div class="barraMetodi">
+            <button type="button" class="aggiungiMetodo" onclick="showSection('inserimentoCarte')">Nuova Carta</button>
+            <button type="button" class="rimuoviMetodo">Elimina Carta</button>
+        </div>
+    </div>
+    <div id="inserimentoCarte" class="card" style="display: none;">
+        <div class="card2">
+            <div class="card3">
+                <form class="form" action="UtenteControl?action=AggiungiMetodo" method="post" name="inserimentoCarta" onsubmit="return validate2()">
+                    <p class="heading">Inserisci Metodo Di Pagamento</p>
 
+                    <div class="field">
+                        <input type="text" name ="intestatario" class="input-field" placeholder="Nome e Cognome Proprietario" required>
+                    </div>
+
+                    <div class="field">
+                        <input type="text" name ="numeroCarta" class="input-field" placeholder="Numero Carta" required>
+                    </div>
+
+                    <div class="field">
+                        <input type="date" name ="dataScadenza" class="input-field" placeholder="Data di Scadenza" required>
+                    </div>
+
+                    <div class="field">
+                        <input type="text" name ="cvv" class="input-field" placeholder="Cvv" required>
+                    </div>
+
+                    <button type="submit" class="button3">Salva!</button>
+                </form>
+            </div>
+        </div>
     </div>
     <div id="indirizziSpedizione" class="card" style="display: none;">
-        PAAAAATT
+        <div class="barraMetodi">
+            <button type="button" class="aggiungiMetodo">Nuovo Indirizzo</button>
+            <button type="button" class="rimuoviMetodo">Elimina Indirizzo</button>
+        </div>
     </div>
 
     <script>
@@ -106,7 +139,11 @@
             for (var i = 0; i < sections.length; i++) {
                 sections[i].style.display = 'none';
             }
-            document.getElementById(sectionId).style.display = 'block';
+            if(sectionId === "datiPersonali" || sectionId === "inserimentoCarte") {
+                document.getElementById(sectionId).style.display = 'flex';
+            }else{
+                document.getElementById(sectionId).style.display = 'block';
+            }
         }
 
         function validate() {
@@ -168,7 +205,38 @@
             }
         }
 
+        function validate2(){
+            var numeroCarta = document.inserimentoCarta.numeroCarta.value;
+            var cvv = document.inserimentoCarta.cvv.value;
+            var dataScadenzaInput = document.inserimentoCarta.dataScadenza.value;
+            var dataDiOggi = new Date();
+
+            if(numeroCarta.length !== 16) {
+                alert("Il numero della carta di credito deve contenere esattamente 16 numeri.");
+                document.inserimentoCarta.numeroCarta.focus();
+                return false;
+            }
+
+            if(cvv.length !== 3) {
+                alert("Il cvv della carta di credito deve contenere esattamente 3 numeri.");
+                document.inserimentoCarta.numeroCarta.focus();
+                return false;
+            }
+
+            var dataScadenza = new Date(dataScadenzaInput);
+
+            if(dataScadenza < dataDiOggi) {
+                alert("Inserisci una data valida");
+                document.modificaInformazioni.dataDiNascita.focus();
+                return false;
+            }
+        }
+
         $(document).ready(function() {
+            if(window.location.hash === "#metodiPagamento") {
+                $('#metodiPagamento').show();
+                $('#datiPersonali').hide();
+            }
             // Effettua una richiesta AJAX per ottenere i dati dalla servlet
             $.ajax({
                 url: 'UtenteControl?action=OttieniMetodiPagamento',
@@ -178,7 +246,8 @@
                     // Itera su ogni oggetto nella lista di prodotti
                     $.each(response, function(index, carte) {
                         // Costruisci il markup HTML per il prodotto
-                        var html = '<div class="card4">';
+                        var html = '<div class="card4" id="card_'+carte.numeroCarta+'" data-id="' +carte.numeroCarta+ '">';
+                        html += '<button type="button" class="rimuoviCarta" >X</button>';
                         html += '<div class="card__front card__part">';
                         html += '<div class="loghiCarta">';
                         html += '<div class="Chip">';
@@ -244,6 +313,45 @@
 
             return html;
         }
+
+        $(document).ready(function() {
+            // Funzione per rimuovere una carta
+            function rimuoviCarta(idCarta) {
+                // Effettua una richiesta AJAX per rimuovere la carta dal database
+                $.ajax({
+                    url: 'UtenteControl?action=RimuoviMetodo',
+                    type: 'POST',
+                    data: { idCarta: idCarta },
+                    success: function(response) {
+                        // Rimuovi il div card4 dalla pagina
+                        $('#carta_' + idCarta).remove();
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Errore durante la rimozione della carta:', error);
+                    }
+                });
+            }
+
+            // Aggiungi evento click ai bottoni di eliminazione
+            $(document).ready(function() {
+                $('.rimuoviMetodo').click(function() {
+                    var carte = document.getElementsByClassName('rimuoviCarta');
+                    for (var i = 0; i < carte.length; i++) {
+                        if(carte[i].style.display === 'none') {
+                            carte[i].style.display = 'block';
+                        }else{
+                            carte[i].style.display = 'none';
+                        }
+                    }
+                });
+
+                $(document).on('click', '.rimuoviCarta', function() {
+                    var idCarta = $(this).closest('[data-id]').data('id');
+                    rimuoviCarta(idCarta);
+                    location.reload();
+                });
+            });
+        });
 
     </script>
 </body>
