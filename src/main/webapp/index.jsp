@@ -13,7 +13,8 @@
 <%@ include file="navbar.jsp" %>
 
 <%
-  if(email != null){
+  if(email != null && session.getAttribute("notificationShown") == null){
+      session.setAttribute("notificationShown", true);
 %>
     <div id="loginAlert" class="login">
         Benvenuto <%= nome%>!

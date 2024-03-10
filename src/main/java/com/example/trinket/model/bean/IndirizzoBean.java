@@ -1,13 +1,17 @@
 package com.example.trinket.model.bean;
 
 public class IndirizzoBean {
+    int idIndirizzo;
+    String nome;
     String indirizzo;
     int numeroCivico;
     int cap;
     String citta;
     String provincia;
 
-    public IndirizzoBean(String indirizzo, int numeroCivico, int cap, String citta, String provincia) {
+    public IndirizzoBean(int idIndirizzo, String nome, String indirizzo, int numeroCivico, int cap, String citta, String provincia) {
+        this.idIndirizzo = idIndirizzo;
+        this.nome = nome;
         this.indirizzo = indirizzo;
         this.numeroCivico = numeroCivico;
         this.cap = cap;
@@ -16,6 +20,22 @@ public class IndirizzoBean {
     }
 
     public IndirizzoBean() {
+    }
+
+    public int getIdIndirizzo() {
+        return idIndirizzo;
+    }
+
+    public void setIdIndirizzo(int idIndirizzo) {
+        this.idIndirizzo = idIndirizzo;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getIndirizzo() {
@@ -61,6 +81,8 @@ public class IndirizzoBean {
     @Override
     public String toString() {
         return "IndirizzoBean{" +
+                "idIndirizzo='" + idIndirizzo + '\'' +
+                "nome='" + nome + '\'' +
                 "indirizzo='" + indirizzo + '\'' +
                 ", numeroCivico=" + numeroCivico +
                 ", cap=" + cap +

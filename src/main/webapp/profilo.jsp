@@ -115,8 +115,47 @@
     </div>
     <div id="indirizziSpedizione" class="card" style="display: none;">
         <div class="barraMetodi">
-            <button type="button" class="aggiungiMetodo">Nuovo Indirizzo</button>
-            <button type="button" class="rimuoviMetodo">Elimina Indirizzo</button>
+            <button type="button" class="aggiungiIndirizzo" onclick="showSection('inserimentoIndirizzi')">Nuovo Indirizzo</button>
+            <button type="button" class="rimuoviCarteIndirizzo">Elimina Indirizzo</button>
+        </div>
+    </div>
+    <div id="inserimentoIndirizzi" class="card" style="display: none;">
+        <div class="card2">
+            <div class="card3">
+                <form class="form" action="UtenteControl?action=AggiungiIndirizzo" method="post" name="inserimentoIndirizzo" onsubmit="return validate3()">
+                    <p class="heading">Inserisci Indirizzo Di Spedizione</p>
+
+                    <div class="field">
+                        <input type="text" name ="nome" class="input-field" placeholder="Nome Sul Citofono" required>
+                    </div>
+
+                    <div class="field">
+                        <input type="text" name ="indirizzo" class="input-field" placeholder="Indirizzo" required>
+                    </div>
+
+                    <div class="field">
+                        <input type="number" name ="numeroCivico" class="input-field" placeholder="Numero Civico" required>
+                    </div>
+
+                    <div class="field">
+                        <input type="number" name ="cap" class="input-field" placeholder="CAP" required>
+                    </div>
+
+                    <div class="field">
+                        <select class="menuIndirizzo" id="provincia" name="provincia" required>
+                            <option value="" selected>Scegli la Provincia</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <select class="menuIndirizzo" id="comune" name="comune"  required>
+                            <option value="" selected>Scegli il Comune</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="button3">Salva!</button>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -139,7 +178,7 @@
             for (var i = 0; i < sections.length; i++) {
                 sections[i].style.display = 'none';
             }
-            if(sectionId === "datiPersonali" || sectionId === "inserimentoCarte") {
+            if(sectionId === "datiPersonali" || sectionId === "inserimentoCarte" || sectionId === "inserimentoIndirizzi") {
                 document.getElementById(sectionId).style.display = 'flex';
             }else{
                 document.getElementById(sectionId).style.display = 'block';
@@ -219,7 +258,7 @@
 
             if(cvv.length !== 3) {
                 alert("Il cvv della carta di credito deve contenere esattamente 3 numeri.");
-                document.inserimentoCarta.numeroCarta.focus();
+                document.inserimentoCarta.cvv.focus();
                 return false;
             }
 
@@ -227,16 +266,35 @@
 
             if(dataScadenza < dataDiOggi) {
                 alert("Inserisci una data valida");
-                document.modificaInformazioni.dataDiNascita.focus();
+                document.inserimentoCarta.dataScadenza.focus();
+                return false;
+            }
+            document.getElementById("inserimentoCarta").reset();
+        }
+
+        function validate3(){
+            var numeroCivico = document.inserimentoIndirizzo.numeroCivico.value;
+            var cap = document.inserimentoIndirizzo.cap.value;
+
+            if(numeroCivico < 0) {
+                alert("Il numero civico non può essere negativo.");
+                document.inserimentoIndirizzo.numeroCivico.focus();
+                return false;
+            }
+
+            if(cap < 0) {
+                alert("Il CAP non può essere negativo.");
+                document.inserimentoIndirizzo.cap.focus();
+                return false;
+            }else if (cap.length !== 5){
+                alert("Il CAP deve avere 5 cifre.");
+                document.inserimentoIndirizzo.cap.focus();
                 return false;
             }
         }
 
-        $(document).ready(function() {
-            if(window.location.hash === "#metodiPagamento") {
-                $('#metodiPagamento').show();
-                $('#datiPersonali').hide();
-            }
+
+            $(document).ready(function() {
             // Effettua una richiesta AJAX per ottenere i dati dalla servlet
             $.ajax({
                 url: 'UtenteControl?action=OttieniMetodiPagamento',
@@ -322,9 +380,38 @@
                     url: 'UtenteControl?action=RimuoviMetodo',
                     type: 'POST',
                     data: { idCarta: idCarta },
-                    success: function(response) {
+                    success: function() {
                         // Rimuovi il div card4 dalla pagina
-                        $('#carta_' + idCarta).remove();
+                        $('#card_' + idCarta).remove();
+
+                        var numElementi = $('.card4').length;
+                        if(numElementi === 0){
+                            numElementi = $('.card2Elem').length;
+                        }
+                        if(numElementi === 0) {
+                            numElementi = $('.card3Elem').length;
+                        }
+                        if(numElementi === 0) {
+                            numElementi = $('.cardMoltiElem').length;
+                        }
+                        // Aggiorna le classi delle carte in base al numero di elementi rimanenti
+                        if (numElementi === 1) {
+                            $('.card2Elem').removeClass().addClass('card4');
+                            $('.card3Elem').removeClass().addClass('card4');
+                            $('.cardMoltiElem').removeClass().addClass('card4');
+                        } else if (numElementi === 2) {
+                            $('.card4').removeClass().addClass('card2Elem');
+                            $('.card3Elem').removeClass().addClass('card2Elem');
+                            $('.cardMoltiElem').removeClass().addClass('card2Elem');
+                        } else if (numElementi === 3) {
+                            $('.card4').removeClass().addClass('card3Elem');
+                            $('.card2Elem').removeClass().addClass('card3Elem');
+                            $('.cardMoltiElem').removeClass().addClass('card3Elem');
+                        } else if (numElementi > 3) {
+                            $('.card4').removeClass().addClass('cardMoltiElem');
+                            $('.card2Elem').removeClass().addClass('cardMoltiElem');
+                            $('.card3Elem').removeClass().addClass('cardMoltiElem');
+                        }
                     },
                     error: function(xhr, status, error) {
                         console.error('Errore durante la rimozione della carta:', error);
@@ -348,11 +435,138 @@
                 $(document).on('click', '.rimuoviCarta', function() {
                     var idCarta = $(this).closest('[data-id]').data('id');
                     rimuoviCarta(idCarta);
-                    location.reload();
+                });
+            });
+        });
+
+        $(document).ready(function() {
+            // Effettua una richiesta AJAX per ottenere i dati dalla servlet
+            $.ajax({
+                url: 'UtenteControl?action=OttieniIndirizziSpedizione',
+                type: 'GET',
+                dataType: 'json',
+                success: function(response) {
+                    // Itera su ogni oggetto nella lista di prodotti
+                    $.each(response, function(index, indirizzo) {
+                        // Costruisci il markup HTML per il prodotto
+                        var html2 = '<div class="card_indirizzi" id="card_'+indirizzo.idIndirizzo+'" data-id="' +indirizzo.idIndirizzo+ '">';
+                        html2 += '<button type="button" class="rimuoviIndirizzo" >X</button>';
+                        html2 += '<div class="card__front card__part">';
+                        html2 += '<div class="card_interna">';
+                        html2 += '<div class="immagineIndirizzo">';
+                        html2 += '<img src="Immagini/Indirizzo.png" alt="Casa">';
+                        html2 += '</div>';
+                        html2 += '<div class="scritte">';
+                        html2 += '<div class="nomeCitofono">' +indirizzo.nome+'</div>';
+                        html2 += '<div class="nomeIndirizzo">' +indirizzo.indirizzo+ '</div>';
+                        html2 += '</div>';
+                        html2 += '</div>';
+                        html2 += '</div>';
+                        html2 += '<div class="card__back card__part">';
+                        html2 += '<div class="info_indirizzo">';
+                        html2 += '<div class="sopra">';
+                        html2 += '<label class="field1bis">' +indirizzo.indirizzo+ '</label>';
+                        html2 += '<label class="field1">' +indirizzo.numeroCivico+ '</label>';
+                        html2 += '</div>';
+                        html2 += '<div class="centro">';
+                        html2 += '<label class="field2">' +indirizzo.cap+ '</label>';
+                        html2 += '</div>';
+                        html2 += '<div class="sotto">';
+                        html2 += '<label class="field3">' +indirizzo.provincia+ '</label>';
+                        html2 += '<label class="field3">' +indirizzo.citta+ '</label>';
+                        html2 += '</div>';
+                        html2 += '</div>';
+                        html2 += '</div>';
+                        html2 += '</div>';
+
+                        // Aggiungi il markup HTML alla pagina
+                        $('#indirizziSpedizione').append(html2);
+
+                        var numElementi = response.length;
+                        if (numElementi === 2) {
+                            $('.card_indirizzi').removeClass().addClass('card2Indirizzi');
+                        } else if (numElementi === 3) {
+                            $('.card_indirizzi').removeClass().addClass('card3Indirizzi');
+                        }else if(numElementi > 3){
+                            $('.card_indirizzi').removeClass().addClass('cardMoltiIndirizzi');
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    // Gestisci eventuali errori di richiesta
+                    console.error('Errore durante la richiesta AJAX:', error);
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            // Funzione per rimuovere una carta
+            function rimuoviIndirizzo(idIndirizzo) {
+                // Effettua una richiesta AJAX per rimuovere la carta dal database
+                $.ajax({
+                    url: 'UtenteControl?action=RimuoviIndirizzo',
+                    type: 'POST',
+                    data: { idIndirizzo: idIndirizzo },
+                    success: function() {
+                        // Rimuovi il div card4 dalla pagina
+                        $('#card_' + idIndirizzo).remove();
+
+                        var numElementi = $('.card_indirizzi').length;
+                        if(numElementi === 0){
+                            numElementi = $('.card2Indirizzi').length;
+                        }
+                        if(numElementi === 0) {
+                            numElementi = $('.card3Indirizzi').length;
+                        }
+                        if(numElementi === 0) {
+                            numElementi = $('.cardMoltiIndirizzi').length;
+                        }
+                        // Aggiorna le classi delle carte in base al numero di elementi rimanenti
+                        if (numElementi === 1) {
+                            $('.card2Indirizzi').removeClass().addClass('card_indirizzi');
+                            $('.card3Indirizzi').removeClass().addClass('card_indirizzi');
+                            $('.cardMoltiIndirizzi').removeClass().addClass('card_indirizzi');
+                        } else if (numElementi === 2) {
+                            $('.card_indirizzi').removeClass().addClass('card2Indirizzi');
+                            $('.card3Indirizzi').removeClass().addClass('card2Indirizzi');
+                            $('.cardMoltiIndirizzi').removeClass().addClass('card2Indirizzi');
+                        } else if (numElementi === 3) {
+                            $('.card_indirizzi').removeClass().addClass('card3Indirizzi');
+                            $('.card2Indirizzi').removeClass().addClass('card3Indirizzi');
+                            $('.cardMoltiIndirizzi').removeClass().addClass('card3Indirizzi');
+                        } else if (numElementi > 3) {
+                            $('.card_indirizzi').removeClass().addClass('cardMoltiIndirizzi');
+                            $('.card2Indirizzi').removeClass().addClass('cardMoltiIndirizzi');
+                            $('.card3Indirizzi').removeClass().addClass('cardMoltiIndirizzi');
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Errore durante la rimozione della carta:', error);
+                    }
+                });
+            }
+
+            // Aggiungi evento click ai bottoni di eliminazione
+            $(document).ready(function() {
+                $('.rimuoviCarteIndirizzo').click(function() {
+                    var carte = document.getElementsByClassName('rimuoviIndirizzo');
+                    for (var i = 0; i < carte.length; i++) {
+                        if(carte[i].style.display === 'none') {
+                            carte[i].style.display = 'block';
+                        }else{
+                            carte[i].style.display = 'none';
+                        }
+                    }
+                });
+
+                $(document).on('click', '.rimuoviIndirizzo', function() {
+                    var idIndirizzo = $(this).closest('[data-id]').data('id');
+                    rimuoviIndirizzo(idIndirizzo);
                 });
             });
         });
 
     </script>
+    <script src="js/caricaCitta.js"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.example.trinket.control;
 
 import com.example.trinket.model.UtenteModel;
+import com.example.trinket.model.bean.IndirizzoBean;
 import com.example.trinket.model.bean.MetodoPagamentoBean;
 
 import javax.servlet.RequestDispatcher;
@@ -42,9 +43,15 @@ public class UtenteControl extends HttpServlet {
                 }else if(action.equalsIgnoreCase("OttieniMetodiPagamento")){
                     metodiPagamento(request, response);
                 }else if(action.equalsIgnoreCase("RimuoviMetodo")){
-                    rimuoviMetodo(request);
+                    rimuoviMetodo(request, response);
                 }else if(action.equalsIgnoreCase("AggiungiMetodo")){
                     aggiungiMetodo(request, response);
+                }else if(action.equalsIgnoreCase("OttieniIndirizziSpedizione")){
+                    indirizziSpedizione(request, response);
+                }else if(action.equalsIgnoreCase("RimuoviIndirizzo")){
+                    rimuoviIndirizzo(request, response);
+                }else if(action.equalsIgnoreCase("AggiungiIndirizzo")){
+                    aggiungiIndirizzo(request, response);
                 }
             }
         } catch (Exception e) {
@@ -122,9 +129,11 @@ public class UtenteControl extends HttpServlet {
         out.flush();
     }
 
-    public void rimuoviMetodo(HttpServletRequest request){
+    public void rimuoviMetodo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String numeroCarta = request.getParameter("idCarta");
         utenteModel.rimuoviMetodoDiPagamento(numeroCarta);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(PROFILO);
+        dispatcher.forward(request, response);
     }
 
     public void aggiungiMetodo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -135,6 +144,44 @@ public class UtenteControl extends HttpServlet {
         String email = (String) request.getSession().getAttribute(EMAIL);
 
         utenteModel.aggiungiMetodoDiPagamento(numeroCarta, intestatario, dataScadenza, cvv, email);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(PROFILO);
+        dispatcher.forward(request, response);
+    }
+
+    public void indirizziSpedizione( HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String email = (String) request.getSession().getAttribute(EMAIL);
+        List<IndirizzoBean> indirizzo;
+        indirizzo = utenteModel.ricercaIndirizzi(email);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(indirizzo);
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        PrintWriter out = response.getWriter();
+        out.print(json);
+        out.flush();
+    }
+
+    public void rimuoviIndirizzo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int idIndirizzo = Integer.parseInt(request.getParameter("idIndirizzo"));
+        utenteModel.rimuoviIndirizzo(idIndirizzo);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(PROFILO);
+        dispatcher.forward(request, response);
+    }
+
+    public void aggiungiIndirizzo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String nomeCitofono = request.getParameter("nome");
+        String indirizzo = request.getParameter("indirizzo");
+        int numeroCivico = Integer.parseInt(request.getParameter("numeroCivico"));
+        int cap = Integer.parseInt(request.getParameter("cap"));
+        String provincia = request.getParameter("provincia");
+        String comune = request.getParameter("comune");
+        String email = (String) request.getSession().getAttribute(EMAIL);
+
+        utenteModel.aggiungiIndirizzo(nomeCitofono, indirizzo, numeroCivico, cap, provincia, comune);
+        utenteModel.inserisciInserisce(email);
         RequestDispatcher dispatcher = request.getRequestDispatcher(PROFILO);
         dispatcher.forward(request, response);
     }

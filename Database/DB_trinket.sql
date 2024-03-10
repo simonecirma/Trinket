@@ -17,6 +17,7 @@ CREATE TABLE Utente
 CREATE TABLE IndirizzoSpedizione
 (
     IDIndirizzo int NOT NULL AUTO_INCREMENT,
+    NomeCitofono varchar(100) NOT NULL,
     Indirizzo varchar (50) NOT NULL,
     NumeroCivico int NOT NULL,
     CAP int NOT NULL,
@@ -122,19 +123,23 @@ VALUES ('Simone','Cirma','sc@gmail.com','simone', '2001-05-27','',1);
 INSERT INTO Utente (Nome, Cognome, Email, Password, DataDiNascita, Immagine, FlagAmm)
 VALUES ('Giuseppe','Rossi','gp@gmail.com','giuseppe', '1965-03-06','',0);
 
-INSERT INTO IndirizzoSpedizione (Indirizzo, NumeroCivico, CAP, Città, Provincia)
-VALUES ('Via Barracco', '4', '81027', 'San Felice a Cancello', 'CE');
-INSERT INTO IndirizzoSpedizione (Indirizzo, NumeroCivico, CAP, Città, Provincia)
-VALUES ('Via Cupa', '68', '81028', 'Santa Maria A Vico', 'CE');
-INSERT INTO IndirizzoSpedizione (Indirizzo, NumeroCivico, CAP, Città, Provincia)
-VALUES ('Via Napoli','23', '81024', 'Maddaloni', 'CE');
+INSERT INTO IndirizzoSpedizione (NomeCitofono, Indirizzo, NumeroCivico, CAP, Città, Provincia)
+VALUES ('Donato Folgieri', 'Via Barracco', '4', '81027', 'San Felice a Cancello', 'CE');
+INSERT INTO IndirizzoSpedizione (NomeCitofono, Indirizzo, NumeroCivico, CAP, Città, Provincia)
+VALUES ('Antonella Folgieri', 'Via Napoli', '65', '81024', 'Maddaloni', 'CE');
+INSERT INTO IndirizzoSpedizione (NomeCitofono, Indirizzo, NumeroCivico, CAP, Città, Provincia)
+VALUES ('Simone Cirma', 'Via Cupa', '68', '81028', 'Santa Maria A Vico', 'CE');
+INSERT INTO IndirizzoSpedizione (NomeCitofono, Indirizzo, NumeroCivico, CAP, Città, Provincia)
+VALUES ('Giuseppe Rossi', 'Via Napoli','23', '81024', 'Maddaloni', 'CE');
 
 INSERT INTO Inserisce (IDIndirizzo, Email)
 VALUES ('01', 'df@gmail.com');
 INSERT INTO Inserisce (IDIndirizzo, Email)
-VALUES ('02', 'sc@gmail.com');
+VALUES ('02', 'df@gmail.com');
 INSERT INTO Inserisce (IDIndirizzo, Email)
-VALUES ('03', 'gp@gmail.com');
+VALUES ('03', 'sc@gmail.com');
+INSERT INTO Inserisce (IDIndirizzo, Email)
+VALUES ('04', 'gp@gmail.com');
 
 SET @CartaDonato='1234567891234567';
 SET @CartaDonato2='7851698715384598';

@@ -43,13 +43,15 @@ public class UtenteModel {
         List<IndirizzoBean> indirizzi = new ArrayList<>();
         try(
             Connection con = ds.getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT i.Indirizzo, i.NumeroCivico, i.CAP, i.Città," +
+            PreparedStatement ps = con.prepareStatement("SELECT i.IDIndirizzo, i.NomeCitofono, i.Indirizzo, i.NumeroCivico, i.CAP, i.Città," +
                     " i.Provincia FROM " +TABLE_NAME_INDIRIZZO+ " i, " +TABLE_NAME_INSERISCE+
                     " n WHERE n.Email = ? AND i.IDIndirizzo=n.IDIndirizzo")) {
             ps.setString(1, email);
             try(ResultSet rs = ps.executeQuery()){
                 while (rs.next()) {
                     IndirizzoBean bean = new IndirizzoBean();
+                    bean.setIdIndirizzo(rs.getInt("IDIndirizzo"));
+                    bean.setNome(rs.getString("NomeCitofono"));
                     bean.setIndirizzo(rs.getString("Indirizzo"));
                     bean.setNumeroCivico(rs.getInt("NumeroCivico"));
                     bean.setCap(rs.getInt("CAP"));
@@ -62,6 +64,65 @@ public class UtenteModel {
             logger.log(Level.WARNING, e.getMessage());
         }
         return indirizzi;
+    }
+
+    public void rimuoviIndirizzo(int idIndirizzo){
+        try(
+                Connection con = ds.getConnection();
+                PreparedStatement ps = con.prepareStatement("DELETE FROM " +TABLE_NAME_INDIRIZZO+ " WHERE IDIndirizzo=?")) {
+            ps.setInt(1, idIndirizzo);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+    }
+
+    public void aggiungiIndirizzo (String nome, String indirizzo, int numeroCivico, int cap, String provincia, String comune){
+        try(
+            Connection con = ds.getConnection();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO " + TABLE_NAME_INDIRIZZO + "(NomeCitofono, Indirizzo, NumeroCivico, CAP, Città, Provincia) " +
+            "VALUES(?, ?, ?, ?, ?, ?)")){
+            ps.setString(1, nome);
+            ps.setString(2, indirizzo);
+            ps.setInt(3, numeroCivico);
+            ps.setInt(4, cap);
+            ps.setString(5, comune);
+            ps.setString(6, provincia);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+    }
+
+    public int getLastID (){
+        int i;
+        try(
+            Connection con = ds.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT MAX(IDIndirizzo) AS Max FROM " +TABLE_NAME_INDIRIZZO)){
+            try(ResultSet rs = ps.executeQuery()){
+                rs.next();
+                i = rs.getInt("Max");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return i;
+    }
+
+    public void inserisciInserisce(String email){
+        int i = getLastID();
+        try(
+            Connection con = ds.getConnection();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO " + TABLE_NAME_INSERISCE + "(IDIndirizzo, Email) " +
+            "VALUES(?, ?)")){
+
+            ps.setInt(1, i);
+            ps.setString(2, email);
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<MetodoPagamentoBean> ricercaMetodoPagamento (String email){
