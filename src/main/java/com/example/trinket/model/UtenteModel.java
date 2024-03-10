@@ -22,6 +22,8 @@ public class UtenteModel {
     private static final String TABLE_NAME_POSSIEDE = "Possiede";
     private static final String TABLE_NAME_ORDINE = "Ordine";
     private static final String TABLE_NAME_UTENTE = "Utente";
+    private static final String INSERT_INTO = "INSERT INTO";
+
 
 
 
@@ -80,7 +82,7 @@ public class UtenteModel {
     public void aggiungiIndirizzo (String nome, String indirizzo, int numeroCivico, int cap, String provincia, String comune){
         try(
             Connection con = ds.getConnection();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO " + TABLE_NAME_INDIRIZZO + "(NomeCitofono, Indirizzo, NumeroCivico, CAP, Città, Provincia) " +
+            PreparedStatement ps = con.prepareStatement( INSERT_INTO + " " + TABLE_NAME_INDIRIZZO + "(NomeCitofono, Indirizzo, NumeroCivico, CAP, Città, Provincia) " +
             "VALUES(?, ?, ?, ?, ?, ?)")){
             ps.setString(1, nome);
             ps.setString(2, indirizzo);
@@ -95,7 +97,7 @@ public class UtenteModel {
     }
 
     public int getLastID (){
-        int i;
+        int i = 0;
         try(
             Connection con = ds.getConnection();
             PreparedStatement ps = con.prepareStatement("SELECT MAX(IDIndirizzo) AS Max FROM " +TABLE_NAME_INDIRIZZO)){
@@ -104,7 +106,7 @@ public class UtenteModel {
                 i = rs.getInt("Max");
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.WARNING, e.getMessage());
         }
         return i;
     }
@@ -113,7 +115,7 @@ public class UtenteModel {
         int i = getLastID();
         try(
             Connection con = ds.getConnection();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO " + TABLE_NAME_INSERISCE + "(IDIndirizzo, Email) " +
+            PreparedStatement ps = con.prepareStatement(INSERT_INTO + TABLE_NAME_INSERISCE + "(IDIndirizzo, Email) " +
             "VALUES(?, ?)")){
 
             ps.setInt(1, i);
@@ -121,7 +123,7 @@ public class UtenteModel {
             ps.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.WARNING, e.getMessage());
         }
     }
 
@@ -163,9 +165,9 @@ public class UtenteModel {
     public void aggiungiMetodoDiPagamento (String numeroCarta, String intestatario, Date dataDiScadenza, int cvv, String email){
         try(
                 Connection con = ds.getConnection();
-                PreparedStatement ps = con.prepareStatement("INSERT INTO " + TABLE_NAME_PAGAMENTO + "(NumeroCarta, Scadenza, Titolare, Cvv) " +
+                PreparedStatement ps = con.prepareStatement(INSERT_INTO + TABLE_NAME_PAGAMENTO + "(NumeroCarta, Scadenza, Titolare, Cvv) " +
                 "VALUES(?, ?, ?, ?)");
-                PreparedStatement ps2 = con.prepareStatement("INSERT INTO " + TABLE_NAME_POSSIEDE + "(NumeroCarta, Email) " +
+                PreparedStatement ps2 = con.prepareStatement(INSERT_INTO + TABLE_NAME_POSSIEDE + "(NumeroCarta, Email) " +
                 "VALUES(?, ?)")) {
             ps.setString(1, numeroCarta);
             ps.setDate(2, dataDiScadenza);
