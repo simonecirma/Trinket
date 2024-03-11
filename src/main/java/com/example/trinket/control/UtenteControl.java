@@ -16,6 +16,7 @@ import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
 
+import com.example.trinket.model.bean.OrdineBean;
 import com.google.gson.Gson;
 
 @WebServlet(name = "UtenteControl", value = "/UtenteControl")
@@ -185,4 +186,5 @@ public class UtenteControl extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher(PROFILO);
         dispatcher.forward(request, response);
     }
+
 }

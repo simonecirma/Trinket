@@ -1,7 +1,7 @@
 package com.example.trinket.model.bean;
 
 public class StatoOrdineBean {
-    String stato;
+    private String stato;
 
     public StatoOrdineBean(String stato) {
         this.stato = stato;

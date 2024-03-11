@@ -1,4 +1,8 @@
 <%@ page import="java.util.Date" %>
+<%@ page import="jdk.management.jfr.RecordingInfo" %>
+<%@ page import="com.example.trinket.model.bean.OrdineBean" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page errorPage="error.jsp" %>
 
@@ -76,7 +80,7 @@
                     <div class="menuTendina" id="menuTendina">
                         <!-- Contenuto del menu a tendina -->
                         <a href="profilo.jsp">Profilo</a>
-                        <a href="#">I Miei Ordini</a>
+                        <a href="OrdiniControl?action=OttieniOrdini">I Miei Ordini</a>
                         <a href="AccessoControl?action=Logout">Logout</a>
                     </div>
                 </div>

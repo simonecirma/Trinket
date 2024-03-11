@@ -1,8 +1,6 @@
 package com.example.trinket.model;
 
-import com.example.trinket.model.bean.IndirizzoBean;
-import com.example.trinket.model.bean.MetodoPagamentoBean;
-import com.example.trinket.model.bean.OrdineBean;
+import com.example.trinket.model.bean.*;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -20,9 +18,9 @@ public class UtenteModel {
     private static final String TABLE_NAME_INSERISCE = "Inserisce";
     private static final String TABLE_NAME_PAGAMENTO = "MetodoDiPagamento";
     private static final String TABLE_NAME_POSSIEDE = "Possiede";
-    private static final String TABLE_NAME_ORDINE = "Ordine";
     private static final String TABLE_NAME_UTENTE = "Utente";
-    private static final String INSERT_INTO = "INSERT INTO";
+
+    private static final String INSERT_INTO = "INSERT INTO ";
 
 
 
@@ -82,7 +80,7 @@ public class UtenteModel {
     public void aggiungiIndirizzo (String nome, String indirizzo, int numeroCivico, int cap, String provincia, String comune){
         try(
             Connection con = ds.getConnection();
-            PreparedStatement ps = con.prepareStatement( INSERT_INTO + " " + TABLE_NAME_INDIRIZZO + "(NomeCitofono, Indirizzo, NumeroCivico, CAP, Città, Provincia) " +
+            PreparedStatement ps = con.prepareStatement( INSERT_INTO  + TABLE_NAME_INDIRIZZO + "(NomeCitofono, Indirizzo, NumeroCivico, CAP, Città, Provincia) " +
             "VALUES(?, ?, ?, ?, ?, ?)")){
             ps.setString(1, nome);
             ps.setString(2, indirizzo);
@@ -180,29 +178,6 @@ public class UtenteModel {
         } catch (SQLException e) {
             logger.log(Level.WARNING, e.getMessage());
         }
-    }
-
-    public List<OrdineBean> ricercaOrdiniUtente (String email){
-        List<OrdineBean> ordini = new ArrayList<>();
-        try(
-            Connection con = ds.getConnection();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM " +TABLE_NAME_ORDINE+
-            " WHERE Email = ?")) {
-            ps.setString(1, email);
-            try(ResultSet rs = ps.executeQuery()){
-                while (rs.next()) {
-                    OrdineBean bean = new OrdineBean();
-                    bean.setDataAcquisto(rs.getDate("DataAcquisto"));
-                    bean.setFattura(rs.getString("Fattura"));
-                    bean.setPrezzoTotale(rs.getFloat("PrezzoTotale"));
-                    bean.setStatoOrdine(rs.getString("StatoOrdine"));
-                    ordini.add(bean);
-                }
-            }
-        } catch (SQLException e) {
-            logger.log(Level.WARNING, e.getMessage());
-        }
-        return ordini;
     }
 
     public void inserisciImmagine (String immagine, String email){

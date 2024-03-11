@@ -1,23 +1,34 @@
 package com.example.trinket.model.bean;
 
 import java.sql.Date;
+import java.util.List;
 
 public class OrdineBean {
-    Date dataAcquisto;
-    String fattura;
-    float prezzoTotale;
-    String statoOrdine;
-    String email;
+    private int idOrdine;
+    private Date dataAcquisto;
+    private String fattura;
+    private float prezzoTotale;
+    private String statoOrdine;
+    private List<PacchettoBean> pacchetti;
 
-    public OrdineBean(Date dataAcquisto, String fattura, float prezzoTotale, String statoOrdine, String email) {
+    public OrdineBean(int idOrdine, Date dataAcquisto, String fattura, float prezzoTotale, String statoOrdine, String email, List<PacchettoBean> pacchetti) {
+        this.idOrdine = idOrdine;
         this.dataAcquisto = dataAcquisto;
         this.fattura = fattura;
         this.prezzoTotale = prezzoTotale;
         this.statoOrdine = statoOrdine;
-        this.email = email;
+        this.pacchetti = pacchetti;
     }
 
     public OrdineBean() {}
+
+    public int getIdOrdine() {
+        return idOrdine;
+    }
+
+    public void setIdOrdine(int idOrdine) {
+        this.idOrdine = idOrdine;
+    }
 
     public Date getDataAcquisto() {
         return dataAcquisto;
@@ -51,22 +62,23 @@ public class OrdineBean {
         this.statoOrdine = statoOrdine;
     }
 
-    public String getEmail() {
-        return email;
+    public List<PacchettoBean> getPacchetti() {
+        return pacchetti;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPacchetti(List<PacchettoBean> pacchetti) {
+        this.pacchetti = pacchetti;
     }
 
     @Override
     public String toString() {
         return "OrdineBean{" +
+                "idOrdine=" + idOrdine +
                 "dataAcquisto=" + dataAcquisto +
                 ", fattura='" + fattura + '\'' +
                 ", prezzoTotale=" + prezzoTotale +
                 ", statoOrdine='" + statoOrdine + '\'' +
-                ", email='" + email + '\'' +
+                ", pacchetti='" + pacchetti + '\'' +
                 '}';
     }
 }

@@ -3,10 +3,10 @@ package com.example.trinket.model.bean;
 import java.sql.Date;
 
 public class MetodoPagamentoBean {
-    String numeroCarta;
-    Date scadenza;
-    String titolare;
-    int cvv;
+    private String numeroCarta;
+    private Date scadenza;
+    private String titolare;
+    private int cvv;
 
     public MetodoPagamentoBean(String numeroCarta, Date scadenza, String titolare, int cvv) {
         this.numeroCarta = numeroCarta;
