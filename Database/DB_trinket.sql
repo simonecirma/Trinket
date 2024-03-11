@@ -183,7 +183,7 @@ VALUES ('2022-01-01','200.00','In Elaborazione','df@gmail.com');
 INSERT INTO Ordine (DataAcquisto, PrezzoTotale, StatoOrdine, Email)
 VALUES ('2023-05-05','59.00','Consegnato','sc@gmail.com');
 INSERT INTO Ordine (DataAcquisto, PrezzoTotale, StatoOrdine, Email)
-VALUES ('2023-03-03','400.00','In Consegna','gp@gmail.com');
+VALUES ('2023-03-03','400.00','In Consegna','df@gmail.com');
 
 INSERT INTO Tipologia (TipoPacchetto)
 VALUES ('Terme e SPA');
