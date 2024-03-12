@@ -41,40 +41,39 @@
 
     <div class="card">
         <table class="ordini">
-            <div class="singolo_ordine">
-                <% if(ordini != null && !ordini.isEmpty()){
-                        for (OrdineBean bean : ordini){
-                %>
-                        <tr>
-                            <th><div class="idOrdine"><%= bean.getIdOrdine()%></div></th>
-                            <th><div class="dataAcquisto"><%= bean.getDataAcquisto()%></div></th>
-                            <th><div class="statoOrdine"><%= bean.getStatoOrdine()%></div></th>
-                        </tr>
-                            <% for(PacchettoBean bean2 : bean.getPacchetti()) { %>
-                                <tr>
-                                    <% for(ImmaginiBean bean3 : bean2.getImmagini()){%>
-                                            <th><div class="ImmagineCopertina">
-                                                <% if(bean3.isFlagCopertina()){ %>
-                                                        <img src="Immagini/Pacchetti/<%=bean3.getNome()%>">
-                                                <% } %>
-                                            </div></th>
-                                    <%
-                                        }
-                                    %>
-                                    <th><div class="Nome"><%= bean2.getNome()%></div></th>
-                                    <th><div class="Prezzo"><%= bean2.getPrezzo()%></div></th>
-                                    <th><div class="DescrizioneRidotta"><%= bean2.getDescrizioneRidotta()%></div></th>
-                                    <th><div class="Descrizione"><%= bean2.getDescrizione()%></div></th>
-                                    <th><div class="Tipo"><%= bean2.getTipo()%></div></th>
-                                    <th><div class="NumGiorni"><%= bean2.getNumGiorni()%></div></th>
-                                    <th><div class="NumPacchetti"><%= bean2.getNumPacchetti()%></div></th>
-                                </tr>
-                            <%
-                                }
+            <% if(ordini != null && !ordini.isEmpty()){
+                for (OrdineBean bean : ordini){
+            %>
+                    <tr class="singolo_ordine">
+                            <th class="top">
+                                <div class="idOrdine">Id Ordine: <%= bean.getIdOrdine()%></div>
+                                <div class="dataAcquisto">Data Acquisto: <%= bean.getDataAcquisto()%></div>
+                                <div class="statoOrdine"><%= bean.getStatoOrdine()%></div>
+                            </th>
+                    <% for(PacchettoBean bean2 : bean.getPacchetti()) { %>
+                        <th class="bottom">
+                        <% for(ImmaginiBean bean3 : bean2.getImmagini()){%>
+                            <% if(bean3.isFlagCopertina()){ %>
+                                <img class="ImmagineCopertina" src="Immagini/Pacchetti/<%=bean3.getNome()%>">
+                            <% } %>
+                        <%
                         }
+                        %>
+                            <div class="prova">
+                            <div class="Nome"><%= bean2.getNome()%></div>
+                            <div class="Prezzo"><%= bean2.getPrezzo()%></div>
+                            <div class="DescrizioneRidotta"><%= bean2.getDescrizioneRidotta()%></div>
+                            <div class="NumGiorni"><%= bean2.getNumGiorni()%></div>
+                            </div>
+                        </th>
+            <%
                     }
-                %>
-            </div>
+            %>
+                    </tr>
+            <%
+                }
+            }
+            %>
         </table>
     </div>
     </div>

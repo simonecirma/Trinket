@@ -152,12 +152,51 @@
 
 .singolo_ordine{
     width: 99%;
-    height: 30%;
+    height: auto;
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 1px 1px 3px rgb(200, 80, 192);
+    display: flex;
+    flex-direction: column;
+    margin-top: 5px;
 }
 
-.ImmagineCopertina img{
-    height: 100%;
-    width: 100%;
+.singolo_ordine .top {
+    display: flex;
+    flex-direction: row;
+    align-items: center; /* Disponi i div in orizzontale */
 }
+
+.idOrdine{
+    margin-right: 10px; /* Spazio tra i div */
+}
+
+.dataAcquisto{
+    margin-right: auto; /* Spazio tra i div */
+
+}
+
+.statoOrdine{
+    margin-right: 10px; /* Spazio tra i div */
+
+}
+
+.singolo_ordine .bottom {
+    display: flex;
+    align-items: center; /* Disponi i div in orizzontale */
+    height: 150px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.ImmagineCopertina{
+    height: 99%;
+    width: 20% ;
+}
+
+.prova{
+    width: 80%;
+    height: 99%;
+}
+
+
+
+
