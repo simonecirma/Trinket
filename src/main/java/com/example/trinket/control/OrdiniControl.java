@@ -59,20 +59,28 @@ public class OrdiniControl extends HttpServlet {
         String email = (String) request.getSession().getAttribute(EMAIL);
         List<OrdineBean> ordini;
         ordini = ordiniModel.ricercaOrdiniUtente(email);
+        System.out.println("Ordini: "+ordini);
         for(OrdineBean bean : ordini){
             int id = bean.getIdOrdine();
             List<CompostoBean> composto;
             List<PacchettoBean> pacchettiOrdine = new ArrayList<>();
+            List<Integer> quantitaPacchettiOrdine = new ArrayList<>();
             composto = ordiniModel.dettagliOrdine(id);
+            System.out.println("Compost da: " +composto);
             for(CompostoBean bean2 : composto){
                 String codice = bean2.getCodSeriale();
                 PacchettoBean bean3;
                 bean3 = ordiniModel.getPacchettoById(codice);
                 pacchettiOrdine.add(bean3);
+                int i = bean2.getQuantita();
+                quantitaPacchettiOrdine.add(i);
             }
+            System.out.println(quantitaPacchettiOrdine);
             bean.setPacchetti(pacchettiOrdine);
+            bean.setQuantitaPacchetto(quantitaPacchettiOrdine);
         }
         request.setAttribute("Ordini", ordini);
+        System.out.println("Lista Finale: " +ordini);
         RequestDispatcher dispatcher = request.getRequestDispatcher("ordini.jsp");
         dispatcher.forward(request, response);
     }

@@ -153,8 +153,8 @@
 .singolo_ordine{
     width: 99%;
     height: auto;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 1px 1px 3px rgb(200, 80, 192);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 2px 2px 4px rgb(200, 80, 192);
     display: flex;
     flex-direction: column;
     margin-top: 5px;
@@ -171,8 +171,12 @@
 }
 
 .dataAcquisto{
-    margin-right: auto; /* Spazio tra i div */
+    margin-right: 10px; /* Spazio tra i div */
 
+}
+
+.Prezzo_totale{
+    margin-right: auto; /* Spazio tra i div */
 }
 
 .statoOrdine{
@@ -185,6 +189,7 @@
     align-items: center; /* Disponi i div in orizzontale */
     height: 150px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    margin-top: 5px;
 }
 
 .ImmagineCopertina{
@@ -192,11 +197,44 @@
     width: 20% ;
 }
 
-.prova{
+.info_pacchetto{
     width: 80%;
     height: 99%;
 }
 
+.Nome{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    padding-left: 1%;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+
+.DescrizioneRidotta{
+    width: 70%;
+    height: 70%;
+    float: left;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.Quantita{
+    width: 15%;
+    height: 34%;
+    float: right;
+    border: 1px solid black;
+}
+
+.Prezzo{
+    width: 15%;
+    height: 34%;
+    float: right;
+    border: 1px solid black;
+}
 
 
 

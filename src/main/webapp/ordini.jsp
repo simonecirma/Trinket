@@ -43,31 +43,38 @@
         <table class="ordini">
             <% if(ordini != null && !ordini.isEmpty()){
                 for (OrdineBean bean : ordini){
+                    int i=0;
             %>
                     <tr class="singolo_ordine">
                             <th class="top">
-                                <div class="idOrdine">Id Ordine: <%= bean.getIdOrdine()%></div>
-                                <div class="dataAcquisto">Data Acquisto: <%= bean.getDataAcquisto()%></div>
+                                <div class="idOrdine"><label style ="font-weight: normal;">Id Ordine: </label><%= bean.getIdOrdine()%></div>
+                                <div class="dataAcquisto"><label style ="font-weight: normal;">Data Acquisto: </label><%= bean.getDataAcquisto()%></div>
+                                <div class="Prezzo_totale"><label style ="font-weight: normal;">Prezzo: </label> <%= bean.getPrezzoTotale()%></div>
                                 <div class="statoOrdine"><%= bean.getStatoOrdine()%></div>
                             </th>
-                    <% for(PacchettoBean bean2 : bean.getPacchetti()) { %>
-                        <th class="bottom">
-                        <% for(ImmaginiBean bean3 : bean2.getImmagini()){%>
-                            <% if(bean3.isFlagCopertina()){ %>
-                                <img class="ImmagineCopertina" src="Immagini/Pacchetti/<%=bean3.getNome()%>">
-                            <% } %>
-                        <%
-                        }
-                        %>
-                            <div class="prova">
-                            <div class="Nome"><%= bean2.getNome()%></div>
-                            <div class="Prezzo"><%= bean2.getPrezzo()%></div>
-                            <div class="DescrizioneRidotta"><%= bean2.getDescrizioneRidotta()%></div>
-                            <div class="NumGiorni"><%= bean2.getNumGiorni()%></div>
-                            </div>
-                        </th>
+                    <% for(PacchettoBean bean2 : bean.getPacchetti()) {
+                            int quantita = bean.getQuantitaPacchetto().get(i);
+                            i++;
+                    %>
+                            <th class="bottom">
+                            <% for(ImmaginiBean bean3 : bean2.getImmagini()){%>
+                                <% if(bean3.isFlagCopertina()){ %>
+                                    <img class="ImmagineCopertina" src="Immagini/Pacchetti/<%=bean3.getNome()%>">
+                                <% } %>
+                            <%
+                            }
+                            %>
+                                <div class="info_pacchetto">
+                                    <div class="Nome"><%= bean2.getNome()%></div>
+                                    <div class="DescrizioneRidotta"><%= bean2.getDescrizioneRidotta()%></div>
+                                    <div class="Quantita">Quantità: <%= quantita%></div>
+                                    <div class="Prezzo">Prezzo: <%= bean2.getPrezzo()%></div>
+                                    <div class="generaFattura"> <button class="bottone"></button></div>
+                                </div>
+                            </th>
             <%
                     }
+                    i=0;
             %>
                     </tr>
             <%

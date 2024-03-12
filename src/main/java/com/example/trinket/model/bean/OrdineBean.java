@@ -10,14 +10,16 @@ public class OrdineBean {
     private float prezzoTotale;
     private String statoOrdine;
     private List<PacchettoBean> pacchetti;
+    private List<Integer> quantitaPacchetto;
 
-    public OrdineBean(int idOrdine, Date dataAcquisto, String fattura, float prezzoTotale, String statoOrdine, String email, List<PacchettoBean> pacchetti) {
+    public OrdineBean(int idOrdine, Date dataAcquisto, String fattura, float prezzoTotale, String statoOrdine, String email, List<PacchettoBean> pacchetti, List<Integer> quantitaPacchetto) {
         this.idOrdine = idOrdine;
         this.dataAcquisto = dataAcquisto;
         this.fattura = fattura;
         this.prezzoTotale = prezzoTotale;
         this.statoOrdine = statoOrdine;
         this.pacchetti = pacchetti;
+        this.quantitaPacchetto = quantitaPacchetto;
     }
 
     public OrdineBean() {}
@@ -70,6 +72,14 @@ public class OrdineBean {
         this.pacchetti = pacchetti;
     }
 
+    public List<Integer> getQuantitaPacchetto() {
+        return quantitaPacchetto;
+    }
+
+    public void setQuantitaPacchetto(List<Integer> quantitaPacchetto) {
+        this.quantitaPacchetto = quantitaPacchetto;
+    }
+
     @Override
     public String toString() {
         return "OrdineBean{" +
@@ -79,6 +89,7 @@ public class OrdineBean {
                 ", prezzoTotale=" + prezzoTotale +
                 ", statoOrdine='" + statoOrdine + '\'' +
                 ", pacchetti='" + pacchetti + '\'' +
+                ", QuantitaPacchetti='" + quantitaPacchetto + '\'' +
                 '}';
     }
 }
