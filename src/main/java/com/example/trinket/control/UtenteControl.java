@@ -16,7 +16,6 @@ import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
 
-import com.example.trinket.model.bean.OrdineBean;
 import com.google.gson.Gson;
 
 @WebServlet(name = "UtenteControl", value = "/UtenteControl")

@@ -13,7 +13,6 @@
 </head>
 <body>
     <%@ include file="navbar.jsp" %>
-    <div class="a">
     <div class="sezione_filtri">
         <p class="heading">Applica Filtri</p>
         <div class="filtri">
@@ -40,18 +39,19 @@
     </div>
 
     <div class="card">
-        <table class="ordini">
+        <table class="ordini" >
+            <caption style="display: none;">Storico Ordini</caption>
             <% if(ordini != null && !ordini.isEmpty()){
                 for (OrdineBean bean : ordini){
                     int i=0;
             %>
                     <tr class="singolo_ordine">
-                            <th class="top">
-                                <div class="idOrdine"><label style ="font-weight: normal;">Id Ordine: </label><%= bean.getIdOrdine()%></div>
-                                <div class="dataAcquisto"><label style ="font-weight: normal;">Data Acquisto: </label><%= bean.getDataAcquisto()%></div>
-                                <div class="Prezzo_totale"><label style ="font-weight: normal;">Prezzo: </label> <%= bean.getPrezzoTotale()%></div>
-                                <div class="statoOrdine"><%= bean.getStatoOrdine()%></div>
-                            </th>
+                        <th class="top">
+                            <div class="idOrdine"><p style ="font-weight: normal;">Id Ordine: </p><%= bean.getIdOrdine()%></div>
+                            <div class="dataAcquisto"><p style ="font-weight: normal;">Data Acquisto: </p><%= bean.getDataAcquisto()%></div>
+                            <div class="Prezzo_totale"><p style ="font-weight: normal;">Prezzo: </p> <%= bean.getPrezzoTotale()%></div>
+                            <div class="statoOrdine"><%= bean.getStatoOrdine()%></div>
+                        </th>
                     <% for(PacchettoBean bean2 : bean.getPacchetti()) {
                             int quantita = bean.getQuantitaPacchetto().get(i);
                             i++;
@@ -59,30 +59,34 @@
                             <th class="bottom">
                             <% for(ImmaginiBean bean3 : bean2.getImmagini()){%>
                                 <% if(bean3.isFlagCopertina()){ %>
-                                    <img class="ImmagineCopertina" src="Immagini/Pacchetti/<%=bean3.getNome()%>">
+                                    <img class="ImmagineCopertina" src="Immagini/Pacchetti/<%=bean3.getNome()%>" alt="Copertina">
                                 <% } %>
                             <%
                             }
                             %>
-                                <div class="info_pacchetto">
-                                    <div class="Nome"><%= bean2.getNome()%></div>
-                                    <div class="DescrizioneRidotta"><%= bean2.getDescrizioneRidotta()%></div>
-                                    <div class="Quantita">Quantità: <%= quantita%></div>
-                                    <div class="Prezzo">Prezzo: <%= bean2.getPrezzo()%></div>
-                                    <div class="generaFattura"> <button class="bottone"></button></div>
-                                </div>
-                            </th>
-            <%
+                            <div class="info_pacchetto">
+                                <div class="Nome"><%= bean2.getNome()%></div>
+                                <div class="DescrizioneRidotta"><%= bean2.getDescrizioneRidotta()%></div>
+                                <div class="Quantita"><p style ="font-weight: normal;">Quantità: </p><%= quantita%></div>
+                                <div class="Prezzo"><p style ="font-weight: normal;">Prezzo: </p><%= bean2.getPrezzo()%></div>
+                <%
                     }
-                    i=0;
-            %>
+                %>
+                                <div class="b">
+                                    <button class="Btn">
+                                        <svg class="svgIcon" viewBox="0 0 384 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path></svg>
+                                        <span class="icon2"></span>
+                                        <span class="tooltip">Download</span>
+                                    </button>
+                                </div>
+                            </div>
+                            </th>
                     </tr>
             <%
                 }
             }
             %>
         </table>
-    </div>
     </div>
     <script>
     // Seleziona l'elemento dello slider e l'elemento dove visualizzare il valore

@@ -25,6 +25,7 @@ public class OrdiniModel {
     private static final String TABLE_NAME_COMPOSTO = "Composto";
     private static final String TABLE_NAME_PACCHETTO = "Pacchetto";
     private static final String TABLE_NAME_IMMAGINI = "Immagini";
+    private static final String SELECT_FROM = "SELECT * FROM ";
 
 
 
@@ -45,7 +46,7 @@ public class OrdiniModel {
         List<OrdineBean> ordini = new ArrayList<>();
         try (
                 Connection con = ds.getConnection();
-                PreparedStatement ps = con.prepareStatement("SELECT * FROM " + TABLE_NAME_ORDINE +
+                PreparedStatement ps = con.prepareStatement(SELECT_FROM + TABLE_NAME_ORDINE +
                         " WHERE Email = ?")) {
             ps.setString(1, email);
             try (ResultSet rs = ps.executeQuery()) {
@@ -69,7 +70,7 @@ public class OrdiniModel {
         List<CompostoBean> dettagli = new ArrayList<>();
         try (
                 Connection con = ds.getConnection();
-                PreparedStatement ps = con.prepareStatement("SELECT * FROM " + TABLE_NAME_COMPOSTO +
+                PreparedStatement ps = con.prepareStatement(SELECT_FROM + TABLE_NAME_COMPOSTO +
                         " WHERE IdOrdine = ?")) {
             ps.setInt(1, idOrdine);
             try (ResultSet rs = ps.executeQuery()) {
@@ -81,7 +82,7 @@ public class OrdiniModel {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.WARNING, e.getMessage());
         }
         return dettagli;
     }
@@ -90,7 +91,7 @@ public class OrdiniModel {
         PacchettoBean bean = new PacchettoBean();
         try (
                 Connection con = ds.getConnection();
-                PreparedStatement ps = con.prepareStatement("SELECT * FROM " + TABLE_NAME_PACCHETTO +
+                PreparedStatement ps = con.prepareStatement(SELECT_FROM + TABLE_NAME_PACCHETTO +
                         " WHERE CodSeriale = ?")) {
             ps.setString(1, codSeriale);
             try (ResultSet rs = ps.executeQuery()) {
@@ -107,7 +108,7 @@ public class OrdiniModel {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.WARNING, e.getMessage());
         }
         return bean;
     }
@@ -116,7 +117,7 @@ public class OrdiniModel {
         List<ImmaginiBean> immagini = new ArrayList<>();
         try (
                 Connection con = ds.getConnection();
-                PreparedStatement ps = con.prepareStatement("SELECT * FROM " + TABLE_NAME_IMMAGINI +
+                PreparedStatement ps = con.prepareStatement(SELECT_FROM + TABLE_NAME_IMMAGINI +
                         " WHERE Codice = ?")) {
             ps.setString(1, codice);
             try (ResultSet rs = ps.executeQuery()) {
@@ -128,7 +129,7 @@ public class OrdiniModel {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.WARNING, e.getMessage());
         }
         return immagini;
     }

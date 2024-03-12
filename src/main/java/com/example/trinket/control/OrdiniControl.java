@@ -2,7 +2,6 @@ package com.example.trinket.control;
 
 import com.example.trinket.model.OrdiniModel;
 import com.example.trinket.model.bean.CompostoBean;
-import com.example.trinket.model.bean.ImmaginiBean;
 import com.example.trinket.model.bean.OrdineBean;
 import com.example.trinket.model.bean.PacchettoBean;
 
@@ -30,7 +29,7 @@ public class OrdiniControl extends HttpServlet {
 
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         String action = request.getParameter("action");
 
         try {
@@ -51,7 +50,7 @@ public class OrdiniControl extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response){
         doGet(request, response);
     }
 
@@ -59,14 +58,12 @@ public class OrdiniControl extends HttpServlet {
         String email = (String) request.getSession().getAttribute(EMAIL);
         List<OrdineBean> ordini;
         ordini = ordiniModel.ricercaOrdiniUtente(email);
-        System.out.println("Ordini: "+ordini);
         for(OrdineBean bean : ordini){
             int id = bean.getIdOrdine();
             List<CompostoBean> composto;
             List<PacchettoBean> pacchettiOrdine = new ArrayList<>();
             List<Integer> quantitaPacchettiOrdine = new ArrayList<>();
             composto = ordiniModel.dettagliOrdine(id);
-            System.out.println("Compost da: " +composto);
             for(CompostoBean bean2 : composto){
                 String codice = bean2.getCodSeriale();
                 PacchettoBean bean3;
@@ -75,12 +72,10 @@ public class OrdiniControl extends HttpServlet {
                 int i = bean2.getQuantita();
                 quantitaPacchettiOrdine.add(i);
             }
-            System.out.println(quantitaPacchettiOrdine);
             bean.setPacchetti(pacchettiOrdine);
             bean.setQuantitaPacchetto(quantitaPacchettiOrdine);
         }
         request.setAttribute("Ordini", ordini);
-        System.out.println("Lista Finale: " +ordini);
         RequestDispatcher dispatcher = request.getRequestDispatcher("ordini.jsp");
         dispatcher.forward(request, response);
     }
