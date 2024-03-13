@@ -13,6 +13,9 @@ html, body {
     display: flex; /* Utilizzo di flexbox per il layout */
     align-items: center; /* Allineamento verticale */
     height: 4vh;
+    position: fixed;
+    width: 99%;
+    z-index: 1000;
 }
 
 /* Stili per il logo */

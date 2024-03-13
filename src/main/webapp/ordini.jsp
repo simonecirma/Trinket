@@ -47,9 +47,9 @@
             %>
                     <tr class="singolo_ordine">
                         <th class="top">
-                            <div class="idOrdine"><p style ="font-weight: normal;">Id Ordine: </p><%= bean.getIdOrdine()%></div>
-                            <div class="dataAcquisto"><p style ="font-weight: normal;">Data Acquisto: </p><%= bean.getDataAcquisto()%></div>
-                            <div class="Prezzo_totale"><p style ="font-weight: normal;">Prezzo: </p> <%= bean.getPrezzoTotale()%></div>
+                            <div class="idOrdine"><label style ="font-weight: normal;">Id Ordine: </label><%= bean.getIdOrdine()%></div>
+                            <div class="dataAcquisto"><label style ="font-weight: normal;">Data Acquisto: </label><%= bean.getDataAcquisto()%></div>
+                            <div class="Prezzo_totale"><label style ="font-weight: normal;">Prezzo: </label> <%= bean.getPrezzoTotale()%></div>
                             <div class="statoOrdine"><%= bean.getStatoOrdine()%></div>
                         </th>
                     <% for(PacchettoBean bean2 : bean.getPacchetti()) {
@@ -67,8 +67,8 @@
                             <div class="info_pacchetto">
                                 <div class="Nome"><%= bean2.getNome()%></div>
                                 <div class="DescrizioneRidotta"><%= bean2.getDescrizioneRidotta()%></div>
-                                <div class="Quantita"><p style ="font-weight: normal;">Quantità: </p><%= quantita%></div>
-                                <div class="Prezzo"><p style ="font-weight: normal;">Prezzo: </p><%= bean2.getPrezzo()%></div>
+                                <div class="Quantita"><label style ="font-weight: normal;">Quantità: </label><%= quantita%></div>
+                                <div class="Prezzo"><label style ="font-weight: normal;">Prezzo: </label><%= bean2.getPrezzo()%></div>
                 <%
                     }
                 %>
