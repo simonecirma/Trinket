@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -132,5 +133,57 @@ public class OrdiniModel {
             logger.log(Level.WARNING, e.getMessage());
         }
         return immagini;
+    }
+
+    public List<OrdineBean> ordiniPerData (String email, Date dataInizio, Date dataFine){
+        List<OrdineBean> ordini = new ArrayList<>();
+        try (
+             Connection con = ds.getConnection();
+             PreparedStatement ps = con.prepareStatement(SELECT_FROM + TABLE_NAME_ORDINE +
+             " WHERE Email = ? AND DataAcquisto >= ? AND DataAcquisto <= ?")) {
+            ps.setString(1, email);
+            ps.setDate(2, (java.sql.Date) dataInizio);
+            ps.setDate(3, (java.sql.Date) dataFine);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    OrdineBean bean = new OrdineBean();
+                    bean.setIdOrdine(rs.getInt("IdOrdine"));
+                    bean.setDataAcquisto(rs.getDate("DataAcquisto"));
+                    bean.setFattura(rs.getString("Fattura"));
+                    bean.setPrezzoTotale(rs.getFloat("PrezzoTotale"));
+                    bean.setStatoOrdine(rs.getString("StatoOrdine"));
+                    ordini.add(bean);
+                }
+            }
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+        return ordini;
+    }
+
+    public List<OrdineBean> ordiniPerPrezzo (String email, float minimo, float massimo){
+        List<OrdineBean> ordini = new ArrayList<>();
+        try (
+                Connection con = ds.getConnection();
+                PreparedStatement ps = con.prepareStatement(SELECT_FROM + TABLE_NAME_ORDINE +
+                        " WHERE Email = ? AND PrezzoTotale >= ? AND PrezzoTotale <= ?")) {
+            ps.setString(1, email);
+            ps.setFloat(2, minimo);
+            ps.setFloat(3, massimo);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    OrdineBean bean = new OrdineBean();
+                    bean.setIdOrdine(rs.getInt("IdOrdine"));
+                    bean.setDataAcquisto(rs.getDate("DataAcquisto"));
+                    bean.setFattura(rs.getString("Fattura"));
+                    bean.setPrezzoTotale(rs.getFloat("PrezzoTotale"));
+                    bean.setStatoOrdine(rs.getString("StatoOrdine"));
+                    ordini.add(bean);
+                }
+            }
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+        return ordini;
     }
 }

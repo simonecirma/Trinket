@@ -80,6 +80,7 @@ public class AccessoControl extends HttpServlet {
                 session.setAttribute("Immagine", admin.getImmagine());
                 session.setAttribute("FlagAmm", admin.isFlagAmm());
 
+                request.setAttribute("result", "1");
                 RequestDispatcher dispatcher = request.getRequestDispatcher(INDEX);
                 dispatcher.forward(request, response);
             }else {

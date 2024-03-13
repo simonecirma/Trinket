@@ -10,151 +10,153 @@
 </head>
 <body>
     <%@ include file="navbar.jsp" %>
-    <div class="container">
-        <div class="intestazioneProfilo">
-            <div class="fotoProfilo">
-                <form method="post" action="UtenteControl?action=ImmagineProfilo" enctype="multipart/form-data">
-                    <% if(immagine.isEmpty()){ %>
-                        <img src="Immagini/ImgUtente/iconaProfilo2.jpg" class="iconaProfilo" alt="Foto Profilo">
-                        <input type="file" id="uploadInput" style="display: none;" name="immagineProfilo">
-                        <button id="uploadLabel" class="uploadLabel" type="button" onclick="document.getElementById('uploadInput').click()">Scegli Immagine</button>
-                    <% }else{ %>
-                        <img src="Immagini/ImgUtente/<%=immagine%>" class="iconaProfilo" alt="Foto Profilo">
-                        <input type="file" id="uploadInput" style="display: none;" name="immagineProfilo">
-                        <button id="uploadLabel" class="uploadLabel" type="button" onclick="document.getElementById('uploadInput').click()">Cambia Immagine</button>
-                    <% } %>
-                    <button id="submitButton" class="uploadLabel" type="submit" style="display: none;">Salva</button>
-                </form>
+    <div class="tutto">
+        <div class="container">
+            <div class="intestazioneProfilo">
+                <div class="fotoProfilo">
+                    <form method="post" action="UtenteControl?action=ImmagineProfilo" enctype="multipart/form-data">
+                        <% if(immagine.isEmpty()){ %>
+                            <img src="Immagini/ImgUtente/iconaProfilo2.jpg" class="iconaProfilo" alt="Foto Profilo">
+                            <input type="file" id="uploadInput" style="display: none;" name="immagineProfilo">
+                            <button id="uploadLabel" class="uploadLabel" type="button" onclick="document.getElementById('uploadInput').click()">Scegli Immagine</button>
+                        <% }else{ %>
+                            <img src="Immagini/ImgUtente/<%=immagine%>" class="iconaProfilo" alt="Foto Profilo">
+                            <input type="file" id="uploadInput" style="display: none;" name="immagineProfilo">
+                            <button id="uploadLabel" class="uploadLabel" type="button" onclick="document.getElementById('uploadInput').click()">Cambia Immagine</button>
+                        <% } %>
+                        <button id="submitButton" class="uploadLabel" type="submit" style="display: none;">Salva</button>
+                    </form>
+                </div>
+                <div class="nomeUtente"> <%=nome%> <%= cognome%> </div>
             </div>
-            <div class="nomeUtente"> <%=nome%> <%= cognome%> </div>
-        </div>
 
-        <div class="menu">
-            <table>
-                <caption style="display: none;">Informazioni Profilo</caption>
-                <tr onclick="showSection('datiPersonali')">
-                    <th><button class="infProfilo">Dati personali</button></th>
-                </tr>
-                <tr onclick="showSection('metodiPagamento')">
-                    <th><button class="infProfilo">Metodi di pagamento</button></th>
-                </tr>
-                <tr onclick="showSection('indirizziSpedizione')">
-                    <th><button class="infProfilo">Indirizzi di spedizione</button></th>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <div id="datiPersonali" class= "card">
-        <div class="card2">
-            <div class="card3">
-                <form class="form" action="UtenteControl?action=ModificaInformazioni" method="post" name="modificaInformazioni" onsubmit="return validate()">
-                    <p class="heading">I Tuoi Dati</p>
-
-                    <div class="field">
-                        <input type="text" name ="nome" class="input-field" placeholder="Nome" value=<%= nome%>>
-                    </div>
-
-                    <div class="field">
-                        <input type="text" name ="cognome" class="input-field" placeholder="Cognome" value=<%= cognome%>>
-                    </div>
-
-                    <div class="field">
-                        <input type="email" name ="email" class="input-field" placeholder="Email" value=<%= email%>>
-                    </div>
-
-                    <div class="field">
-                        <input type="password" name ="password" class="input-field" placeholder="Password" value=<%= password%>>
-                    </div>
-
-                    <div class="field">
-                        <input type="password" name ="password2" class="input-field" placeholder="Conferma Password" value=<%= password%>>
-                    </div>
-
-                    <div class="field">
-                        <label for="dataDiNascita">Data Di Nascita:</label>
-                        <input type="date" name ="dataDiNascita" id="dataDiNascita" class="input-field" placeholder="Data Di Nascita" value=<%= dataDiNascita%>>
-                    </div>
-
-                    <button type="submit" class="button3">Salva!</button>
-                </form>
+            <div class="menu">
+                <table>
+                    <caption style="display: none;">Informazioni Profilo</caption>
+                    <tr onclick="showSection('datiPersonali')">
+                        <th><button class="infProfilo">Dati personali</button></th>
+                    </tr>
+                    <tr onclick="showSection('metodiPagamento')">
+                        <th><button class="infProfilo">Metodi di pagamento</button></th>
+                    </tr>
+                    <tr onclick="showSection('indirizziSpedizione')">
+                        <th><button class="infProfilo">Indirizzi di spedizione</button></th>
+                    </tr>
+                </table>
             </div>
         </div>
-    </div>
-    <div id="metodiPagamento" class="card" style="display: none;">
-        <div class="barraMetodi">
-            <button type="button" class="aggiungiMetodo" onclick="showSection('inserimentoCarte')">Nuova Carta</button>
-            <button type="button" class="rimuoviMetodo">Elimina Carta</button>
-        </div>
-    </div>
-    <div id="inserimentoCarte" class="card" style="display: none;">
-        <div class="card2">
-            <div class="card3">
-                <form class="form" action="UtenteControl?action=AggiungiMetodo" method="post" name="inserimentoCarta" onsubmit="return validate2()">
-                    <p class="heading">Inserisci Metodo Di Pagamento</p>
+        <div id="datiPersonali" class= "card">
+            <div class="card2">
+                <div class="card3">
+                    <form class="form" action="UtenteControl?action=ModificaInformazioni" method="post" name="modificaInformazioni" onsubmit="return validate()">
+                        <p class="heading">I Tuoi Dati</p>
 
-                    <div class="field">
-                        <input type="text" name ="intestatario" class="input-field" placeholder="Nome e Cognome Proprietario" required>
-                    </div>
+                        <div class="field">
+                            <input type="text" name ="nome" class="input-field" placeholder="Nome" value=<%= nome%>>
+                        </div>
 
-                    <div class="field">
-                        <input type="text" name ="numeroCarta" class="input-field" placeholder="Numero Carta" required>
-                    </div>
+                        <div class="field">
+                            <input type="text" name ="cognome" class="input-field" placeholder="Cognome" value=<%= cognome%>>
+                        </div>
 
-                    <div class="field">
-                        <input type="date" name ="dataScadenza" class="input-field" placeholder="Data di Scadenza" required>
-                    </div>
+                        <div class="field">
+                            <input type="email" name ="email" class="input-field" placeholder="Email" value=<%= email%>>
+                        </div>
 
-                    <div class="field">
-                        <input type="text" name ="cvv" class="input-field" placeholder="Cvv" required>
-                    </div>
+                        <div class="field">
+                            <input type="password" name ="password" class="input-field" placeholder="Password" value=<%= password%>>
+                        </div>
 
-                    <button type="submit" class="button3">Salva!</button>
-                </form>
+                        <div class="field">
+                            <input type="password" name ="password2" class="input-field" placeholder="Conferma Password" value=<%= password%>>
+                        </div>
+
+                        <div class="field">
+                            <label for="dataDiNascita">Data Di Nascita:</label>
+                            <input type="date" name ="dataDiNascita" id="dataDiNascita" class="input-field" placeholder="Data Di Nascita" value=<%= dataDiNascita%>>
+                        </div>
+
+                        <button type="submit" class="button3">Salva!</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    <div id="indirizziSpedizione" class="card" style="display: none;">
-        <div class="barraMetodi">
-            <button type="button" class="aggiungiIndirizzo" onclick="showSection('inserimentoIndirizzi')">Nuovo Indirizzo</button>
-            <button type="button" class="rimuoviCarteIndirizzo">Elimina Indirizzo</button>
+        <div id="metodiPagamento" class="card" style="display: none;">
+            <div class="barraMetodi">
+                <button type="button" class="aggiungiMetodo" onclick="showSection('inserimentoCarte')">Nuova Carta</button>
+                <button type="button" class="rimuoviMetodo">Elimina Carta</button>
+            </div>
         </div>
-    </div>
-    <div id="inserimentoIndirizzi" class="card" style="display: none;">
-        <div class="card2">
-            <div class="card3">
-                <form class="form" action="UtenteControl?action=AggiungiIndirizzo" method="post" name="inserimentoIndirizzo" onsubmit="return validate3()">
-                    <p class="heading">Inserisci Indirizzo Di Spedizione</p>
+        <div id="inserimentoCarte" class="card" style="display: none;">
+            <div class="card2">
+                <div class="card3">
+                    <form class="form" action="UtenteControl?action=AggiungiMetodo" method="post" name="inserimentoCarta" onsubmit="return validate2()">
+                        <p class="heading">Inserisci Metodo Di Pagamento</p>
 
-                    <div class="field">
-                        <input type="text" name ="nome" class="input-field" placeholder="Nome Sul Citofono" required>
-                    </div>
+                        <div class="field">
+                            <input type="text" name ="intestatario" class="input-field" placeholder="Nome e Cognome Proprietario" required>
+                        </div>
 
-                    <div class="field">
-                        <input type="text" name ="indirizzo" class="input-field" placeholder="Indirizzo" required>
-                    </div>
+                        <div class="field">
+                            <input type="text" name ="numeroCarta" class="input-field" placeholder="Numero Carta" required>
+                        </div>
 
-                    <div class="field">
-                        <input type="number" name ="numeroCivico" class="input-field" placeholder="Numero Civico" required>
-                    </div>
+                        <div class="field">
+                            <input type="date" name ="dataScadenza" class="input-field" placeholder="Data di Scadenza" required>
+                        </div>
 
-                    <div class="field">
-                        <input type="number" name ="cap" class="input-field" placeholder="CAP" required>
-                    </div>
+                        <div class="field">
+                            <input type="text" name ="cvv" class="input-field" placeholder="Cvv" required>
+                        </div>
 
-                    <div class="field">
-                        <select class="menuIndirizzo" id="provincia" name="provincia" required>
-                            <option value="" selected>Scegli la Provincia</option>
-                        </select>
-                    </div>
+                        <button type="submit" class="button3">Salva!</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="indirizziSpedizione" class="card" style="display: none;">
+            <div class="barraMetodi">
+                <button type="button" class="aggiungiIndirizzo" onclick="showSection('inserimentoIndirizzi')">Nuovo Indirizzo</button>
+                <button type="button" class="rimuoviCarteIndirizzo">Elimina Indirizzo</button>
+            </div>
+        </div>
+        <div id="inserimentoIndirizzi" class="card" style="display: none;">
+            <div class="card2">
+                <div class="card3">
+                    <form class="form" action="UtenteControl?action=AggiungiIndirizzo" method="post" name="inserimentoIndirizzo" onsubmit="return validate3()">
+                        <p class="heading">Inserisci Indirizzo Di Spedizione</p>
 
-                    <div class="field">
-                        <select class="menuIndirizzo" id="comune" name="comune"  required>
-                            <option value="" selected>Scegli il Comune</option>
-                        </select>
-                    </div>
+                        <div class="field">
+                            <input type="text" name ="nome" class="input-field" placeholder="Nome Sul Citofono" required>
+                        </div>
 
-                    <button type="submit" class="button3">Salva!</button>
-                </form>
+                        <div class="field">
+                            <input type="text" name ="indirizzo" class="input-field" placeholder="Indirizzo" required>
+                        </div>
+
+                        <div class="field">
+                            <input type="number" name ="numeroCivico" class="input-field" placeholder="Numero Civico" required>
+                        </div>
+
+                        <div class="field">
+                            <input type="number" name ="cap" class="input-field" placeholder="CAP" required>
+                        </div>
+
+                        <div class="field">
+                            <select class="menuIndirizzo" id="provincia" name="provincia" required>
+                                <option value="" selected>Scegli la Provincia</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <select class="menuIndirizzo" id="comune" name="comune"  required>
+                                <option value="" selected>Scegli il Comune</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="button3">Salva!</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

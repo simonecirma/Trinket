@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet(name = "OrdiniControl", value = "/OrdiniControl")
@@ -36,6 +37,8 @@ public class OrdiniControl extends HttpServlet {
             if (action != null) {
                 if(action.equalsIgnoreCase("OttieniOrdini")){
                     ottieniOrdini(request, response);
+                }else if(action.equalsIgnoreCase("filtriOrdini")){
+                    filtriOrdini(request, response);
                 }
             }
         }catch (Exception e) {
@@ -79,4 +82,49 @@ public class OrdiniControl extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("ordini.jsp");
         dispatcher.forward(request, response);
     }
+
+    public void filtriOrdini(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String email = (String) request.getSession().getAttribute(EMAIL);
+        List<OrdineBean> ordini;
+        ordini = ordiniModel.ricercaOrdiniUtente(email);
+        Date dataInizio = java.sql.Date.valueOf(request.getParameter("dataInizio"));
+        Date dataFine = java.sql.Date.valueOf(request.getParameter("dataFine"));
+        System.out.println(dataInizio);
+        System.out.println(dataFine);
+        if(dataInizio != null && dataFine != null){
+            System.out.println("CIAOOOO");
+            ordini = ordiniModel.ordiniPerData(email, dataInizio, dataFine);
+        }
+        String prezzoMinimo = request.getParameter("prezzoMinimo");
+        String prezzoMassimo = request.getParameter("prezzoMassimo");
+        System.out.println(prezzoMinimo);
+        System.out.println(prezzoMassimo);
+        if(prezzoMinimo != null && prezzoMassimo != null){
+            System.out.println("CIAOOOO 2");
+            float minimo = Float.parseFloat(prezzoMinimo);
+            float massimo = Float.parseFloat(prezzoMassimo);
+            ordini = ordiniModel.ordiniPerPrezzo(email, minimo, massimo);
+        }
+        for(OrdineBean bean : ordini){
+            int id = bean.getIdOrdine();
+            List<CompostoBean> composto;
+            List<PacchettoBean> pacchettiOrdine = new ArrayList<>();
+            List<Integer> quantitaPacchettiOrdine = new ArrayList<>();
+            composto = ordiniModel.dettagliOrdine(id);
+            for(CompostoBean bean2 : composto){
+                String codice = bean2.getCodSeriale();
+                PacchettoBean bean3;
+                bean3 = ordiniModel.getPacchettoById(codice);
+                pacchettiOrdine.add(bean3);
+                int i = bean2.getQuantita();
+                quantitaPacchettiOrdine.add(i);
+            }
+            bean.setPacchetti(pacchettiOrdine);
+            bean.setQuantitaPacchetto(quantitaPacchettiOrdine);
+        }
+        request.setAttribute("Ordini", ordini);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ordini.jsp");
+        dispatcher.forward(request, response);
+    }
+
 }

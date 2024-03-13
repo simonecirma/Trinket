@@ -10,6 +10,7 @@
     border-radius: 5px;
     opacity: 0;
     transition: opacity 0.3s ease;
+    z-index: 1001;
 }
 
 .logout.show {
@@ -28,6 +29,7 @@
     border-radius: 5px;
     opacity: 0;
     transition: opacity 0.3s ease;
+    z-index: 1001;
 }
 
 .login.show {
