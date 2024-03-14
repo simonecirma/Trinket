@@ -19,7 +19,7 @@
         <div class="sezione_filtri">
             <p class="heading">Applica Filtri</p>
             <div class="filtri">
-                <form action="UtenteControl?action=filtriOrdini" method="post" name="filtriOrdini" onsubmit="return validate3()">
+                <form action="OrdiniControl?action=filtriOrdini" method="post" name="filtriOrdini" onsubmit="return validate3()">
                     <fieldset>
                         <legend>Data: </legend>
                         <div class="filtro_data">
@@ -48,7 +48,10 @@
                         </div>
                     </fieldset>
 
-                    <button type="submit" class="button1">Applica!</button>
+                    <div class="bottoni">
+                        <button type="submit" class="button1">Applica!</button>
+                        <button type="submit" class="button1" onclick="'OrdiniControl?action=OttieniOrdini'">Ripristina Filtri</button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -74,13 +77,15 @@
                                 <th class="bottom">
                                 <% for(ImmaginiBean bean3 : bean2.getImmagini()){%>
                                     <% if(bean3.isFlagCopertina()){ %>
-                                        <img class="ImmagineCopertina" src="Immagini/Pacchetti/<%=bean3.getNome()%>" alt="Copertina">
+                                        <a href="PacchettoControl?action=DettagliPacchetto&id=<%=bean2.getCodSeriale()%>" class="link_immagine">
+                                            <img class="ImmagineCopertina" src="Immagini/Pacchetti/<%=bean3.getNome()%>" alt="Copertina">
+                                        </a>
                                     <% } %>
                                 <%
                                 }
                                 %>
                                 <div class="info_pacchetto">
-                                    <div class="Nome"><%= bean2.getNome()%></div>
+                                    <div class="Nome"><a href="PacchettoControl?action=DettagliPacchetto&id=<%=bean2.getCodSeriale()%>"><%= bean2.getNome()%></a></div>
                                     <div class="DescrizioneRidotta"><%= bean2.getDescrizioneRidotta()%></div>
                                     <div class="Quantita"><label style ="font-weight: normal;">Quantità: </label><%= quantita%></div>
                                     <div class="Prezzo"><label style ="font-weight: normal;">Prezzo: </label><%= bean2.getPrezzo()%></div>

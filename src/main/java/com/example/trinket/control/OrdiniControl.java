@@ -87,20 +87,16 @@ public class OrdiniControl extends HttpServlet {
         String email = (String) request.getSession().getAttribute(EMAIL);
         List<OrdineBean> ordini;
         ordini = ordiniModel.ricercaOrdiniUtente(email);
-        Date dataInizio = java.sql.Date.valueOf(request.getParameter("dataInizio"));
-        Date dataFine = java.sql.Date.valueOf(request.getParameter("dataFine"));
-        System.out.println(dataInizio);
-        System.out.println(dataFine);
-        if(dataInizio != null && dataFine != null){
-            System.out.println("CIAOOOO");
+        String data1 = request.getParameter("dataInizio");
+        String data2 = request.getParameter("dataFine");
+        if(!data1.isEmpty() && !data2.isEmpty()) {
+            Date dataInizio = java.sql.Date.valueOf(data1);
+            Date dataFine = java.sql.Date.valueOf(data2);
             ordini = ordiniModel.ordiniPerData(email, dataInizio, dataFine);
         }
         String prezzoMinimo = request.getParameter("prezzoMinimo");
         String prezzoMassimo = request.getParameter("prezzoMassimo");
-        System.out.println(prezzoMinimo);
-        System.out.println(prezzoMassimo);
-        if(prezzoMinimo != null && prezzoMassimo != null){
-            System.out.println("CIAOOOO 2");
+        if(!prezzoMinimo.isEmpty() && !prezzoMassimo.isEmpty()){
             float minimo = Float.parseFloat(prezzoMinimo);
             float massimo = Float.parseFloat(prezzoMassimo);
             ordini = ordiniModel.ordiniPerPrezzo(email, minimo, massimo);
