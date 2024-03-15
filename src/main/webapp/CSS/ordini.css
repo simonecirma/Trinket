@@ -4,6 +4,7 @@
     position: relative;
     top: 8.5vh;
     overflow-y: auto;
+    background-color: rgba(255, 204, 112, 0.7);
 }
 
 .sezione_filtri{
@@ -157,6 +158,7 @@ fieldset{
     display: flex;
     flex-direction: column;
     margin-top: 5px;
+    background-color: white;
 }
 
 .singolo_ordine .top {
@@ -254,8 +256,9 @@ fieldset{
     height: 50px;
     border: none;
     border-radius: 50%;
-    background-color: rgb(27, 27, 27);
-    display: flex;
+    transition: .4s ease-in-out;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    color: rgb(0, 0, 0);    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -266,15 +269,15 @@ fieldset{
 }
 
 .svgIcon {
-    fill: rgb(214, 178, 255);
+    fill: rgba(0, 0, 0, 1);
 }
 
 .icon2 {
     width: 18px;
     height: 5px;
-    border-bottom: 2px solid rgb(182, 143, 255);
-    border-left: 2px solid rgb(182, 143, 255);
-    border-right: 2px solid rgb(182, 143, 255);
+    border-bottom: 2px solid rgba(0, 0, 0, 1);
+    border-left: 2px solid rgba(0, 0, 0, 1);
+    border-right: 2px solid rgba(0, 0, 0, 1);
 }
 
 .tooltip {
@@ -312,14 +315,15 @@ fieldset{
 }
 
 .Btn:hover {
-    background-color: rgb(150, 94, 255);
+    background-image: linear-gradient(43deg, #ffcc70 0%, #C850C0 46%, #4158d0 100%);
+    color: rgb(255, 255, 255);
     transition-duration: .3s;
 }
 
 .Btn:hover .icon2 {
-    border-bottom: 2px solid rgb(235, 235, 235);
-    border-left: 2px solid rgb(235, 235, 235);
-    border-right: 2px solid rgb(235, 235, 235);
+    border-bottom: 2px solid rgb(255, 255, 255);
+    border-left: 2px solid rgb(255, 255, 255);
+    border-right: 2px solid rgb(255, 255, 255);
 }
 
 .Btn:hover .svgIcon {

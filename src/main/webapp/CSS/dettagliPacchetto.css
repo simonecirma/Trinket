@@ -1,0 +1,225 @@
+.tutto{
+    width: 100%;
+    height: calc(100vh - 8.5vh);
+    position: relative;
+    top: 8.5vh;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 204, 112, 0.7);
+}
+
+.slider-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    width: 50%;
+    height: 60%;
+    box-sizing: border-box;
+}
+
+.slider {
+    display: flex;
+    aspect-ratio: 16 / 9;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    border-radius: 0.5rem;
+    overflow-x: hidden;
+    width: 80%;
+    box-shadow: 0 0 15px rgb(200, 80, 192);
+    margin-top: 10px;
+}
+
+.slider img {
+    flex: 1 0 100%;
+    scroll-snap-align: start;
+    object-fit: cover;
+}
+
+.slider-nav {
+    display: flex;
+    column-gap: 1rem;
+    margin-top: 10px;
+    z-index: 1;
+}
+
+.slider-nav-btn {
+    width: 1rem;
+    height: 1rem;
+    font-size: 0.5rem;
+    border: none;
+    border-radius: 50%;
+    transition: .4s ease-in-out;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    color: rgb(0, 0, 0);
+    margin: 0 0.5rem;
+    cursor: pointer;
+}
+
+.slider-nav-btn:hover {
+    background-image: linear-gradient(43deg, #ffcc70 0%, #C850C0 46%, #4158d0 100%);
+    color: rgb(255, 255, 255);
+}
+
+.destra{
+    width: 50%;
+    height: 100%;
+    float: right;
+    display: flex;
+    flex-direction: column;
+}
+
+.Informazioni-pacchetto{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card{
+    width: 80%;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 15px rgb(200, 80, 192);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-color: white;
+}
+
+.Nome{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.testo-nome{
+    text-align: center;
+    text-align-last: center;
+    font-weight: bolder;
+    font-size: 22px;
+}
+
+.Informazioni-pacchetto2{
+    width: 100%;
+    height: 30%;
+}
+
+.Tipo{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    float: left;
+}
+
+.testo-tipo{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.esperienza{
+    font-weight: lighter;
+    font-size: 16px;
+}
+
+.Prezzo{
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.testo-prezzo{
+    font-weight: bold;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+.first-button {
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    color: rgb(0, 0, 0);
+    border: none;
+    min-height: 100%;
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition-duration: 0.6s;
+}
+
+.main-section {
+    display: flex;
+    flex-direction: column;
+    height: 25%;
+    width: 30%;
+    overflow: hidden;
+    align-items: flex-start;
+}
+
+.main-section:hover .second-button , .main-section:hover .first-button {
+    transform: translateY(-100%);
+}
+
+.second-button {
+    background-image: linear-gradient(43deg, #ffcc70 0%, #C850C0 46%, #4158d0 100%);
+    color: rgb(255, 255, 255);
+    border: none;
+    min-height: 100%;
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition-duration: 0.6s;
+}
+
+.descrizione-pacchetto{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.descrizione-ridotta{
+    display: flex;
+    flex-direction: column;
+    height: 40%;
+    width: 100%;
+}
+
+.titolo{
+    font-weight: bolder;
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 5%;
+}
+
+.testo_descrizione_piccola{
+    font-weight: lighter;
+    font-size: 14px;
+}
+
+#mostra-altro {
+    cursor: pointer;
+    color: #c850c0;
+    text-decoration: underline;
+    user-select: none; /* Disabilita la selezione del testo */
+    width: 20%;
+    margin-top: 2px;
+}
+
+#mostra-altro:hover {
+    color: #c850c0;
+}

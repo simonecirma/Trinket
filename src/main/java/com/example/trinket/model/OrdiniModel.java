@@ -97,6 +97,7 @@ public class OrdiniModel {
             ps.setString(1, codSeriale);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
+                    bean.setCodSeriale(rs.getString("CodSeriale"));
                     bean.setNome(rs.getString("Nome"));
                     bean.setPrezzo(rs.getFloat("Prezzo"));
                     bean.setDescrizioneRidotta(rs.getString("DescrizioneRidotta"));

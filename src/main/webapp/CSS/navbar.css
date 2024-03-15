@@ -27,7 +27,6 @@ html, body {
 .logo img {
     height: 100%; /* Altezza dell'immagine del logo */
     width: auto; /* Larghezza automatica per mantenere le proporzioni */
-    transform: scale(1.5);
     margin-left: 10px;
 }
 
