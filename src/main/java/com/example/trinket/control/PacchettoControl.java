@@ -17,7 +17,6 @@ public class PacchettoControl extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    private final PacchettoModel pacchettoModel = new PacchettoModel();
     private final OrdiniModel ordiniModel = new OrdiniModel();
 
 
@@ -26,7 +25,7 @@ public class PacchettoControl extends HttpServlet {
     private static final  String ERRORE = "/error.jsp";
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         String action = request.getParameter("action");
 
         try {
@@ -47,13 +46,13 @@ public class PacchettoControl extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) {
         doGet(request, response);
     }
 
     public void dettagliPacchetto(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String codice = request.getParameter("id");
-        PacchettoBean pacchetto = new PacchettoBean();
+        PacchettoBean pacchetto;
         pacchetto = ordiniModel.getPacchettoById(codice);
         request.setAttribute("pacchetto", pacchetto);
         RequestDispatcher dispatcher = request.getRequestDispatcher("dettagliPacchetto.jsp");

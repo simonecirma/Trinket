@@ -27,6 +27,13 @@ public class OrdiniModel {
     private static final String TABLE_NAME_PACCHETTO = "Pacchetto";
     private static final String TABLE_NAME_IMMAGINI = "Immagini";
     private static final String SELECT_FROM = "SELECT * FROM ";
+    private static final String ID_ORDINE = "IdOrdine";
+    private static final String DATA_ACQUISTO = "DataAcquisto";
+    private static final String FATTURA = "Fattura";
+    private static final String PREZZO_TOTALE = "PrezzoTotale";
+    private static final String STATO_ORDINE = "StatoOrdine";
+
+
 
 
 
@@ -53,11 +60,11 @@ public class OrdiniModel {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     OrdineBean bean = new OrdineBean();
-                    bean.setIdOrdine(rs.getInt("IdOrdine"));
-                    bean.setDataAcquisto(rs.getDate("DataAcquisto"));
-                    bean.setFattura(rs.getString("Fattura"));
-                    bean.setPrezzoTotale(rs.getFloat("PrezzoTotale"));
-                    bean.setStatoOrdine(rs.getString("StatoOrdine"));
+                    bean.setIdOrdine(rs.getInt(ID_ORDINE));
+                    bean.setDataAcquisto(rs.getDate(DATA_ACQUISTO));
+                    bean.setFattura(rs.getString(FATTURA));
+                    bean.setPrezzoTotale(rs.getFloat(PREZZO_TOTALE));
+                    bean.setStatoOrdine(rs.getString(STATO_ORDINE));
                     ordini.add(bean);
                 }
             }
@@ -148,11 +155,11 @@ public class OrdiniModel {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     OrdineBean bean = new OrdineBean();
-                    bean.setIdOrdine(rs.getInt("IdOrdine"));
-                    bean.setDataAcquisto(rs.getDate("DataAcquisto"));
-                    bean.setFattura(rs.getString("Fattura"));
-                    bean.setPrezzoTotale(rs.getFloat("PrezzoTotale"));
-                    bean.setStatoOrdine(rs.getString("StatoOrdine"));
+                    bean.setIdOrdine(rs.getInt(ID_ORDINE));
+                    bean.setDataAcquisto(rs.getDate(DATA_ACQUISTO));
+                    bean.setFattura(rs.getString(FATTURA));
+                    bean.setPrezzoTotale(rs.getFloat(PREZZO_TOTALE));
+                    bean.setStatoOrdine(rs.getString(STATO_ORDINE));
                     ordini.add(bean);
                 }
             }
@@ -174,11 +181,11 @@ public class OrdiniModel {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     OrdineBean bean = new OrdineBean();
-                    bean.setIdOrdine(rs.getInt("IdOrdine"));
-                    bean.setDataAcquisto(rs.getDate("DataAcquisto"));
-                    bean.setFattura(rs.getString("Fattura"));
-                    bean.setPrezzoTotale(rs.getFloat("PrezzoTotale"));
-                    bean.setStatoOrdine(rs.getString("StatoOrdine"));
+                    bean.setIdOrdine(rs.getInt(ID_ORDINE));
+                    bean.setDataAcquisto(rs.getDate(DATA_ACQUISTO));
+                    bean.setFattura(rs.getString(FATTURA));
+                    bean.setPrezzoTotale(rs.getFloat(PREZZO_TOTALE));
+                    bean.setStatoOrdine(rs.getString(STATO_ORDINE));
                     ordini.add(bean);
                 }
             }
