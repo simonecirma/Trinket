@@ -72,20 +72,20 @@
     <div class="suggerrimenti">
         <label class="domanda">Hai bisogno di un regalo?</label>
         <div class="per-chi">
-            <div class="scelte">Per coppia:<img src="Immagini/Index/Coppia.jpg"></div>
-            <div class="scelte">Per lui:<img src="Immagini/Index/Lui.jpg"></div>
-            <div class="scelte">Per lei:<img src="Immagini/Index/Lei.jpg"></div>
-            <div class="scelte">Per famiglia:<img src="Immagini/Index/Famiglia.jpg"></div>
+            <div class="scelte">Per coppia:<img src="Immagini/Index/Coppia.jpg" alt="Errore immagine"></div>
+            <div class="scelte">Per lui:<img src="Immagini/Index/Lui.jpg" alt="Errore immagine"></div>
+            <div class="scelte">Per lei:<img src="Immagini/Index/Lei.jpg" alt="Errore immagine"></div>
+            <div class="scelte">Per famiglia:<img src="Immagini/Index/Famiglia.jpg" alt="Errore immagine"></div>
         </div>
         <label class="domanda">Cerchi Ispirazione?</label>
         <div class="per-cosa">
-            <div class="tipo">Terme E Spa:<img src="Immagini/Index/Terme_E_Spa.jpg"></div>
-            <div class="tipo">Weekend Romantico:<img src="Immagini/Index/Romantico.jpg"></div>
-            <div class="tipo">Agriturismi e B&B:<img src="Immagini/Index/Agriturismi_E_B&B.jpg"></div>
-            <div class="tipo">Soggiorno Classico:<img src="Immagini/Index/Classico.jpg"></div>
-            <div class="tipo">Soggiorno Insolito:<img src="Immagini/Index/Insolito.jpg"></div>
-            <div class="tipo">Corso di Cucina:<img src="Immagini/Index/Cucina.jpg"></div>
-            <div class="tipo">Esperienze Gastronomiche:<img src="Immagini/Index/Gourmet.jpg"></div>
+            <div class="tipo">Terme E Spa:<img src="Immagini/Index/Terme_E_Spa.jpg" alt="Errore immagine"></div>
+            <div class="tipo">Weekend Romantico:<img src="Immagini/Index/Romantico.jpg" alt="Errore immagine"></div>
+            <div class="tipo">Agriturismi e B&B:<img src="Immagini/Index/Agriturismi_E_B&B.jpg" alt="Errore immagine"></div>
+            <div class="tipo">Soggiorno Classico:<img src="Immagini/Index/Classico.jpg" alt="Errore immagine"></div>
+            <div class="tipo">Soggiorno Insolito:<img src="Immagini/Index/Insolito.jpg" alt="Errore immagine"></div>
+            <div class="tipo">Corso di Cucina:<img src="Immagini/Index/Cucina.jpg" alt="Errore immagine"></div>
+            <div class="tipo">Esperienze Gastronomiche:<img src="Immagini/Index/Gourmet.jpg" alt="Errore immagine"></div>
         </div>
     </div>
 </div>
@@ -143,7 +143,7 @@
 
   showSlide(slideIndex);
 </script>
-</script>
+
 </body>
 </html>
 

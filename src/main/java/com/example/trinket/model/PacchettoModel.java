@@ -24,6 +24,15 @@ public class PacchettoModel {
     private static final String TABLE_NAME_PACCHETTO = "Pacchetto";
     private static final String SELECT_FROM = "SELECT * FROM ";
     private static final String TABLE_NAME_IMMAGINI = "Immagini";
+    private static final String CODSERIALE = "CodSeriale";
+    private static final String PREZZO = "Prezzo";
+    private static final String DESCRIZIONE_RIDOTTA = "DescrizioneRidotta";
+    private static final String DESCRIZIONE = "Descrizione";
+    private static final String NUM_GIORNI = "NumGiorni";
+    private static final String NUM_PACCHETTI = "NumPacchetti";
+    private static final String FLAG_DISPONIBILITA = "FlagDisponibilità";
+
+
 
 
     private static DataSource ds;
@@ -47,20 +56,20 @@ public class PacchettoModel {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     PacchettoBean bean = new PacchettoBean();
-                    bean.setCodSeriale(rs.getString("CodSeriale"));
+                    bean.setCodSeriale(rs.getString(CODSERIALE));
                     bean.setNome(rs.getString("Nome"));
-                    bean.setPrezzo(rs.getFloat("Prezzo"));
-                    bean.setDescrizioneRidotta(rs.getString("DescrizioneRidotta"));
-                    bean.setDescrizione(rs.getString("Descrizione"));
+                    bean.setPrezzo(rs.getFloat(PREZZO));
+                    bean.setDescrizioneRidotta(rs.getString(DESCRIZIONE_RIDOTTA));
+                    bean.setDescrizione(rs.getString(DESCRIZIONE));
                     bean.setTipo(rs.getString("Tipo"));
-                    bean.setNumGiorni(rs.getInt("NumGiorni"));
-                    bean.setNumPacchetti(rs.getInt("NumPacchetti"));
-                    bean.setFlagDisponibilita(rs.getBoolean("FlagDisponibilità"));
+                    bean.setNumGiorni(rs.getInt(NUM_GIORNI));
+                    bean.setNumPacchetti(rs.getInt(NUM_PACCHETTI));
+                    bean.setFlagDisponibilita(rs.getBoolean(FLAG_DISPONIBILITA));
                     pacchetti.add(bean);
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.WARNING, e.getMessage());
         }
         return pacchetti;
     }
@@ -74,20 +83,20 @@ public class PacchettoModel {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     PacchettoBean bean = new PacchettoBean();
-                    bean.setCodSeriale(rs.getString("CodSeriale"));
+                    bean.setCodSeriale(rs.getString(CODSERIALE));
                     bean.setNome(rs.getString("Nome"));
-                    bean.setPrezzo(rs.getFloat("Prezzo"));
-                    bean.setDescrizioneRidotta(rs.getString("DescrizioneRidotta"));
-                    bean.setDescrizione(rs.getString("Descrizione"));
+                    bean.setPrezzo(rs.getFloat(PREZZO));
+                    bean.setDescrizioneRidotta(rs.getString(DESCRIZIONE_RIDOTTA));
+                    bean.setDescrizione(rs.getString(DESCRIZIONE));
                     bean.setTipo(rs.getString("Tipo"));
-                    bean.setNumGiorni(rs.getInt("NumGiorni"));
-                    bean.setNumPacchetti(rs.getInt("NumPacchetti"));
-                    bean.setFlagDisponibilita(rs.getBoolean("FlagDisponibilità"));
+                    bean.setNumGiorni(rs.getInt(NUM_GIORNI));
+                    bean.setNumPacchetti(rs.getInt(NUM_PACCHETTI));
+                    bean.setFlagDisponibilita(rs.getBoolean(FLAG_DISPONIBILITA));
                     pacchetti.add(bean);
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.WARNING, e.getMessage());
         }
         return pacchetti;
     }
@@ -101,15 +110,15 @@ public class PacchettoModel {
             ps.setString(1, codSeriale);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    bean.setCodSeriale(rs.getString("CodSeriale"));
+                    bean.setCodSeriale(rs.getString(CODSERIALE));
                     bean.setNome(rs.getString("Nome"));
-                    bean.setPrezzo(rs.getFloat("Prezzo"));
-                    bean.setDescrizioneRidotta(rs.getString("DescrizioneRidotta"));
-                    bean.setDescrizione(rs.getString("Descrizione"));
+                    bean.setPrezzo(rs.getFloat(PREZZO));
+                    bean.setDescrizioneRidotta(rs.getString(DESCRIZIONE_RIDOTTA));
+                    bean.setDescrizione(rs.getString(DESCRIZIONE));
                     bean.setTipo(rs.getString("Tipo"));
-                    bean.setNumGiorni(rs.getInt("NumGiorni"));
-                    bean.setNumPacchetti(rs.getInt("NumPacchetti"));
-                    bean.setFlagDisponibilita(rs.getBoolean("FlagDisponibilità"));
+                    bean.setNumGiorni(rs.getInt(NUM_GIORNI));
+                    bean.setNumPacchetti(rs.getInt(NUM_PACCHETTI));
+                    bean.setFlagDisponibilita(rs.getBoolean(FLAG_DISPONIBILITA));
                     bean.setImmagini(immaginiPerPacchetto(codSeriale));
                 }
             }
@@ -154,20 +163,20 @@ public class PacchettoModel {
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         PacchettoBean bean = new PacchettoBean();
-                        bean.setCodSeriale(rs.getString("CodSeriale"));
+                        bean.setCodSeriale(rs.getString(CODSERIALE));
                         bean.setNome(rs.getString("Nome"));
-                        bean.setPrezzo(rs.getFloat("Prezzo"));
-                        bean.setDescrizioneRidotta(rs.getString("DescrizioneRidotta"));
-                        bean.setDescrizione(rs.getString("Descrizione"));
+                        bean.setPrezzo(rs.getFloat(PREZZO));
+                        bean.setDescrizioneRidotta(rs.getString(DESCRIZIONE_RIDOTTA));
+                        bean.setDescrizione(rs.getString(DESCRIZIONE));
                         bean.setTipo(rs.getString("Tipo"));
-                        bean.setNumGiorni(rs.getInt("NumGiorni"));
-                        bean.setNumPacchetti(rs.getInt("NumPacchetti"));
-                        bean.setFlagDisponibilita(rs.getBoolean("FlagDisponibilità"));
+                        bean.setNumGiorni(rs.getInt(NUM_GIORNI));
+                        bean.setNumPacchetti(rs.getInt(NUM_PACCHETTI));
+                        bean.setFlagDisponibilita(rs.getBoolean(FLAG_DISPONIBILITA));
                         pacchetti.add(bean);
                     }
                 }
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                logger.log(Level.WARNING, e.getMessage());
             }
         } else {
             try (
@@ -177,20 +186,20 @@ public class PacchettoModel {
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         PacchettoBean bean = new PacchettoBean();
-                        bean.setCodSeriale(rs.getString("CodSeriale"));
+                        bean.setCodSeriale(rs.getString(CODSERIALE));
                         bean.setNome(rs.getString("Nome"));
-                        bean.setPrezzo(rs.getFloat("Prezzo"));
-                        bean.setDescrizioneRidotta(rs.getString("DescrizioneRidotta"));
-                        bean.setDescrizione(rs.getString("Descrizione"));
+                        bean.setPrezzo(rs.getFloat(PREZZO));
+                        bean.setDescrizioneRidotta(rs.getString(DESCRIZIONE_RIDOTTA));
+                        bean.setDescrizione(rs.getString(DESCRIZIONE));
                         bean.setTipo(rs.getString("Tipo"));
-                        bean.setNumGiorni(rs.getInt("NumGiorni"));
-                        bean.setNumPacchetti(rs.getInt("NumPacchetti"));
-                        bean.setFlagDisponibilita(rs.getBoolean("FlagDisponibilità"));
+                        bean.setNumGiorni(rs.getInt(NUM_GIORNI));
+                        bean.setNumPacchetti(rs.getInt(NUM_PACCHETTI));
+                        bean.setFlagDisponibilita(rs.getBoolean(FLAG_DISPONIBILITA));
                         pacchetti.add(bean);
                     }
                 }
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                logger.log(Level.WARNING, e.getMessage());
             }
         }
         return pacchetti;
@@ -207,15 +216,15 @@ public class PacchettoModel {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     PacchettoBean bean = new PacchettoBean();
-                    bean.setCodSeriale(rs.getString("CodSeriale"));
+                    bean.setCodSeriale(rs.getString(CODSERIALE));
                     bean.setNome(rs.getString("Nome"));
-                    bean.setPrezzo(rs.getFloat("Prezzo"));
-                    bean.setDescrizioneRidotta(rs.getString("DescrizioneRidotta"));
-                    bean.setDescrizione(rs.getString("Descrizione"));
+                    bean.setPrezzo(rs.getFloat(PREZZO));
+                    bean.setDescrizioneRidotta(rs.getString(DESCRIZIONE_RIDOTTA));
+                    bean.setDescrizione(rs.getString(DESCRIZIONE));
                     bean.setTipo(rs.getString("Tipo"));
-                    bean.setNumGiorni(rs.getInt("NumGiorni"));
-                    bean.setNumPacchetti(rs.getInt("NumPacchetti"));
-                    bean.setFlagDisponibilita(rs.getBoolean("FlagDisponibilità"));
+                    bean.setNumGiorni(rs.getInt(NUM_GIORNI));
+                    bean.setNumPacchetti(rs.getInt(NUM_PACCHETTI));
+                    bean.setFlagDisponibilita(rs.getBoolean(FLAG_DISPONIBILITA));
                     pacchetti2.add(bean);
                 }
             }
@@ -227,7 +236,7 @@ public class PacchettoModel {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.WARNING, e.getMessage());
         }
         return pacchetti3;
     }
@@ -251,20 +260,20 @@ public class PacchettoModel {
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         PacchettoBean bean = new PacchettoBean();
-                        bean.setCodSeriale(rs.getString("CodSeriale"));
+                        bean.setCodSeriale(rs.getString(CODSERIALE));
                         bean.setNome(rs.getString("Nome"));
-                        bean.setPrezzo(rs.getFloat("Prezzo"));
-                        bean.setDescrizioneRidotta(rs.getString("DescrizioneRidotta"));
-                        bean.setDescrizione(rs.getString("Descrizione"));
+                        bean.setPrezzo(rs.getFloat(PREZZO));
+                        bean.setDescrizioneRidotta(rs.getString(DESCRIZIONE_RIDOTTA));
+                        bean.setDescrizione(rs.getString(DESCRIZIONE));
                         bean.setTipo(rs.getString("Tipo"));
-                        bean.setNumGiorni(rs.getInt("NumGiorni"));
-                        bean.setNumPacchetti(rs.getInt("NumPacchetti"));
-                        bean.setFlagDisponibilita(rs.getBoolean("FlagDisponibilità"));
+                        bean.setNumGiorni(rs.getInt(NUM_GIORNI));
+                        bean.setNumPacchetti(rs.getInt(NUM_PACCHETTI));
+                        bean.setFlagDisponibilita(rs.getBoolean(FLAG_DISPONIBILITA));
                         pacchetti2.add(bean);
                     }
                 }
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                logger.log(Level.WARNING, e.getMessage());
             }
         } else if (tipo.length == 5){
             try (
@@ -279,20 +288,20 @@ public class PacchettoModel {
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         PacchettoBean bean = new PacchettoBean();
-                        bean.setCodSeriale(rs.getString("CodSeriale"));
+                        bean.setCodSeriale(rs.getString(CODSERIALE));
                         bean.setNome(rs.getString("Nome"));
-                        bean.setPrezzo(rs.getFloat("Prezzo"));
-                        bean.setDescrizioneRidotta(rs.getString("DescrizioneRidotta"));
-                        bean.setDescrizione(rs.getString("Descrizione"));
+                        bean.setPrezzo(rs.getFloat(PREZZO));
+                        bean.setDescrizioneRidotta(rs.getString(DESCRIZIONE_RIDOTTA));
+                        bean.setDescrizione(rs.getString(DESCRIZIONE));
                         bean.setTipo(rs.getString("Tipo"));
-                        bean.setNumGiorni(rs.getInt("NumGiorni"));
-                        bean.setNumPacchetti(rs.getInt("NumPacchetti"));
-                        bean.setFlagDisponibilita(rs.getBoolean("FlagDisponibilità"));
+                        bean.setNumGiorni(rs.getInt(NUM_GIORNI));
+                        bean.setNumPacchetti(rs.getInt(NUM_PACCHETTI));
+                        bean.setFlagDisponibilita(rs.getBoolean(FLAG_DISPONIBILITA));
                         pacchetti2.add(bean);
                     }
                 }
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                logger.log(Level.WARNING, e.getMessage());
             }
         }else if (tipo.length == 4){
             try (
@@ -306,20 +315,20 @@ public class PacchettoModel {
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         PacchettoBean bean = new PacchettoBean();
-                        bean.setCodSeriale(rs.getString("CodSeriale"));
+                        bean.setCodSeriale(rs.getString(CODSERIALE));
                         bean.setNome(rs.getString("Nome"));
-                        bean.setPrezzo(rs.getFloat("Prezzo"));
-                        bean.setDescrizioneRidotta(rs.getString("DescrizioneRidotta"));
-                        bean.setDescrizione(rs.getString("Descrizione"));
+                        bean.setPrezzo(rs.getFloat(PREZZO));
+                        bean.setDescrizioneRidotta(rs.getString(DESCRIZIONE_RIDOTTA));
+                        bean.setDescrizione(rs.getString(DESCRIZIONE));
                         bean.setTipo(rs.getString("Tipo"));
-                        bean.setNumGiorni(rs.getInt("NumGiorni"));
-                        bean.setNumPacchetti(rs.getInt("NumPacchetti"));
-                        bean.setFlagDisponibilita(rs.getBoolean("FlagDisponibilità"));
+                        bean.setNumGiorni(rs.getInt(NUM_GIORNI));
+                        bean.setNumPacchetti(rs.getInt(NUM_PACCHETTI));
+                        bean.setFlagDisponibilita(rs.getBoolean(FLAG_DISPONIBILITA));
                         pacchetti2.add(bean);
                     }
                 }
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                logger.log(Level.WARNING, e.getMessage());
             }
         }else if (tipo.length == 3){
             try (
@@ -332,20 +341,20 @@ public class PacchettoModel {
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         PacchettoBean bean = new PacchettoBean();
-                        bean.setCodSeriale(rs.getString("CodSeriale"));
+                        bean.setCodSeriale(rs.getString(CODSERIALE));
                         bean.setNome(rs.getString("Nome"));
-                        bean.setPrezzo(rs.getFloat("Prezzo"));
-                        bean.setDescrizioneRidotta(rs.getString("DescrizioneRidotta"));
-                        bean.setDescrizione(rs.getString("Descrizione"));
+                        bean.setPrezzo(rs.getFloat(PREZZO));
+                        bean.setDescrizioneRidotta(rs.getString(DESCRIZIONE_RIDOTTA));
+                        bean.setDescrizione(rs.getString(DESCRIZIONE));
                         bean.setTipo(rs.getString("Tipo"));
-                        bean.setNumGiorni(rs.getInt("NumGiorni"));
-                        bean.setNumPacchetti(rs.getInt("NumPacchetti"));
-                        bean.setFlagDisponibilita(rs.getBoolean("FlagDisponibilità"));
+                        bean.setNumGiorni(rs.getInt(NUM_GIORNI));
+                        bean.setNumPacchetti(rs.getInt(NUM_PACCHETTI));
+                        bean.setFlagDisponibilita(rs.getBoolean(FLAG_DISPONIBILITA));
                         pacchetti2.add(bean);
                     }
                 }
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                logger.log(Level.WARNING, e.getMessage());
             }
         }else if (tipo.length == 2){
             try (
@@ -357,20 +366,20 @@ public class PacchettoModel {
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         PacchettoBean bean = new PacchettoBean();
-                        bean.setCodSeriale(rs.getString("CodSeriale"));
+                        bean.setCodSeriale(rs.getString(CODSERIALE));
                         bean.setNome(rs.getString("Nome"));
-                        bean.setPrezzo(rs.getFloat("Prezzo"));
-                        bean.setDescrizioneRidotta(rs.getString("DescrizioneRidotta"));
-                        bean.setDescrizione(rs.getString("Descrizione"));
+                        bean.setPrezzo(rs.getFloat(PREZZO));
+                        bean.setDescrizioneRidotta(rs.getString(DESCRIZIONE_RIDOTTA));
+                        bean.setDescrizione(rs.getString(DESCRIZIONE));
                         bean.setTipo(rs.getString("Tipo"));
-                        bean.setNumGiorni(rs.getInt("NumGiorni"));
-                        bean.setNumPacchetti(rs.getInt("NumPacchetti"));
-                        bean.setFlagDisponibilita(rs.getBoolean("FlagDisponibilità"));
+                        bean.setNumGiorni(rs.getInt(NUM_GIORNI));
+                        bean.setNumPacchetti(rs.getInt(NUM_PACCHETTI));
+                        bean.setFlagDisponibilita(rs.getBoolean(FLAG_DISPONIBILITA));
                         pacchetti2.add(bean);
                     }
                 }
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                logger.log(Level.WARNING, e.getMessage());
             }
         }else{
             try (
@@ -381,20 +390,20 @@ public class PacchettoModel {
                 try (ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         PacchettoBean bean = new PacchettoBean();
-                        bean.setCodSeriale(rs.getString("CodSeriale"));
+                        bean.setCodSeriale(rs.getString(CODSERIALE));
                         bean.setNome(rs.getString("Nome"));
-                        bean.setPrezzo(rs.getFloat("Prezzo"));
-                        bean.setDescrizioneRidotta(rs.getString("DescrizioneRidotta"));
-                        bean.setDescrizione(rs.getString("Descrizione"));
+                        bean.setPrezzo(rs.getFloat(PREZZO));
+                        bean.setDescrizioneRidotta(rs.getString(DESCRIZIONE_RIDOTTA));
+                        bean.setDescrizione(rs.getString(DESCRIZIONE));
                         bean.setTipo(rs.getString("Tipo"));
-                        bean.setNumGiorni(rs.getInt("NumGiorni"));
-                        bean.setNumPacchetti(rs.getInt("NumPacchetti"));
-                        bean.setFlagDisponibilita(rs.getBoolean("FlagDisponibilità"));
+                        bean.setNumGiorni(rs.getInt(NUM_GIORNI));
+                        bean.setNumPacchetti(rs.getInt(NUM_PACCHETTI));
+                        bean.setFlagDisponibilita(rs.getBoolean(FLAG_DISPONIBILITA));
                         pacchetti2.add(bean);
                     }
                 }
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                logger.log(Level.WARNING, e.getMessage());
             }
         }
 

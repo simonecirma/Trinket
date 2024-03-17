@@ -1,9 +1,7 @@
 package com.example.trinket.model;
 
 import com.example.trinket.model.bean.CompostoBean;
-import com.example.trinket.model.bean.ImmaginiBean;
 import com.example.trinket.model.bean.OrdineBean;
-import com.example.trinket.model.bean.PacchettoBean;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;

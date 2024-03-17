@@ -1,6 +1,5 @@
 package com.example.trinket.control;
 
-import com.example.trinket.model.OrdiniModel;
 import com.example.trinket.model.PacchettoModel;
 import com.example.trinket.model.bean.ImmaginiBean;
 import com.example.trinket.model.bean.PacchettoBean;
@@ -12,8 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @WebServlet(name = "PacchettoControl", value = "/PacchettoControl")

@@ -105,7 +105,7 @@
                             </span>
                         </div>
                         <div class="persone">
-                            <img src="Immagini/NumPersone.jpg">
+                            <img src="Immagini/NumPersone.jpg" alt="Errore">
                             <span>Per 2 Persone</span>
                         </div>
                     </div>
