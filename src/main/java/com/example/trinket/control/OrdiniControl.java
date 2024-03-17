@@ -1,6 +1,7 @@
 package com.example.trinket.control;
 
 import com.example.trinket.model.OrdiniModel;
+import com.example.trinket.model.PacchettoModel;
 import com.example.trinket.model.bean.CompostoBean;
 import com.example.trinket.model.bean.OrdineBean;
 import com.example.trinket.model.bean.PacchettoBean;
@@ -21,6 +22,8 @@ public class OrdiniControl extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private final OrdiniModel ordiniModel = new OrdiniModel();
+    private final PacchettoModel pacchettoModel = new PacchettoModel();
+
 
     private static final  String ERROR_MESSAGE = "errorMessage";
     private static final  String MESSAGGIO = "Si è verificato un errore: ";
@@ -70,7 +73,7 @@ public class OrdiniControl extends HttpServlet {
             for(CompostoBean bean2 : composto){
                 String codice = bean2.getCodSeriale();
                 PacchettoBean bean3;
-                bean3 = ordiniModel.getPacchettoById(codice);
+                bean3 = pacchettoModel.getPacchettoById(codice);
                 pacchettiOrdine.add(bean3);
                 int i = bean2.getQuantita();
                 quantitaPacchettiOrdine.add(i);
@@ -99,7 +102,7 @@ public class OrdiniControl extends HttpServlet {
         if(!prezzoMinimo.isEmpty() && !prezzoMassimo.isEmpty()){
             float minimo = Float.parseFloat(prezzoMinimo);
             float massimo = Float.parseFloat(prezzoMassimo);
-            ordini = ordiniModel.ordiniPerPrezzo(email, minimo, massimo);
+            ordini = ordiniModel.ordiniPerPrezzo(ordini, email, minimo, massimo);
         }
         for(OrdineBean bean : ordini){
             int id = bean.getIdOrdine();
@@ -110,7 +113,7 @@ public class OrdiniControl extends HttpServlet {
             for(CompostoBean bean2 : composto){
                 String codice = bean2.getCodSeriale();
                 PacchettoBean bean3;
-                bean3 = ordiniModel.getPacchettoById(codice);
+                bean3 = pacchettoModel.getPacchettoById(codice);
                 pacchettiOrdine.add(bean3);
                 int i = bean2.getQuantita();
                 quantitaPacchettiOrdine.add(i);

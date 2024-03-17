@@ -43,7 +43,7 @@
                 <img src="Immagini/Sfondi/Viaggio.jpg" alt="Errore Immagini">
             </div>
         </div>
-        <button class="animated-button">
+        <button class="animated-button" type="button" onclick="location.href='PacchettoControl?action=OttieniPacchetti'">
             <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
                 <path
                         d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"
@@ -58,7 +58,36 @@
             </svg>
         </button>
     </div>
-    <div class="slogan">Esperienze uniche, viaggi indimenticabili: solo con Easy Travel.</div>
+    <div class="entry">
+        <div class="slogan"><p class="slogan-testo">Esperienze uniche, viaggi indimenticabili: solo con Easy Travel.</p></div>
+        <div class="proposte">
+            <div class="proposte_testo">
+                <span class="freccia">&#8595;</span>
+                <p class="slogan-testo">Le nostre proposte! </p>
+            </div>
+            <img src="Immagini/Pacchetto.png" alt="Errore Immagine">
+        </div>
+    </div>
+
+    <div class="suggerrimenti">
+        <label class="domanda">Hai bisogno di un regalo?</label>
+        <div class="per-chi">
+            <div class="scelte">Per coppia:<img src="Immagini/Index/Coppia.jpg"></div>
+            <div class="scelte">Per lui:<img src="Immagini/Index/Lui.jpg"></div>
+            <div class="scelte">Per lei:<img src="Immagini/Index/Lei.jpg"></div>
+            <div class="scelte">Per famiglia:<img src="Immagini/Index/Famiglia.jpg"></div>
+        </div>
+        <label class="domanda">Cerchi Ispirazione?</label>
+        <div class="per-cosa">
+            <div class="tipo">Terme E Spa:<img src="Immagini/Index/Terme_E_Spa.jpg"></div>
+            <div class="tipo">Weekend Romantico:<img src="Immagini/Index/Romantico.jpg"></div>
+            <div class="tipo">Agriturismi e B&B:<img src="Immagini/Index/Agriturismi_E_B&B.jpg"></div>
+            <div class="tipo">Soggiorno Classico:<img src="Immagini/Index/Classico.jpg"></div>
+            <div class="tipo">Soggiorno Insolito:<img src="Immagini/Index/Insolito.jpg"></div>
+            <div class="tipo">Corso di Cucina:<img src="Immagini/Index/Cucina.jpg"></div>
+            <div class="tipo">Esperienze Gastronomiche:<img src="Immagini/Index/Gourmet.jpg"></div>
+        </div>
+    </div>
 </div>
 
 
