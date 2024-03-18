@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,11 +24,11 @@ public class UtenteControl extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final UtenteModel utenteModel = new UtenteModel();
 
-    private static final  String ERROR_MESSAGE = "errorMessage";
-    private static final  String MESSAGGIO = "Si è verificato un errore: ";
-    private static final  String ERRORE = "/error.jsp";
-    private static final  String EMAIL = "Email";
-    private static final  String PROFILO = "/profilo.jsp";
+    private static final String ERROR_MESSAGE = "errorMessage";
+    private static final String MESSAGGIO = "Si è verificato un errore: ";
+    private static final String ERRORE = "/error.jsp";
+    private static final String EMAIL = "Email";
+    private static final String PROFILO = "/profilo.jsp";
 
 
     @Override
@@ -38,20 +39,22 @@ public class UtenteControl extends HttpServlet {
             if (action != null) {
                 if (action.equalsIgnoreCase("ImmagineProfilo")) {
                     inserisciImmagine(request, response);
-                }else if (action.equalsIgnoreCase("ModificaInformazioni")) {
+                } else if (action.equalsIgnoreCase("ModificaInformazioni")) {
                     modificaInformazioni(request, response);
-                }else if(action.equalsIgnoreCase("OttieniMetodiPagamento")){
+                } else if (action.equalsIgnoreCase("OttieniMetodiPagamento")) {
                     metodiPagamento(request, response);
-                }else if(action.equalsIgnoreCase("RimuoviMetodo")){
+                } else if (action.equalsIgnoreCase("RimuoviMetodo")) {
                     rimuoviMetodo(request, response);
-                }else if(action.equalsIgnoreCase("AggiungiMetodo")){
+                } else if (action.equalsIgnoreCase("AggiungiMetodo")) {
                     aggiungiMetodo(request, response);
-                }else if(action.equalsIgnoreCase("OttieniIndirizziSpedizione")){
+                } else if (action.equalsIgnoreCase("OttieniIndirizziSpedizione")) {
                     indirizziSpedizione(request, response);
-                }else if(action.equalsIgnoreCase("RimuoviIndirizzo")){
+                } else if (action.equalsIgnoreCase("RimuoviIndirizzo")) {
                     rimuoviIndirizzo(request, response);
-                }else if(action.equalsIgnoreCase("AggiungiIndirizzo")){
+                } else if (action.equalsIgnoreCase("AggiungiIndirizzo")) {
                     aggiungiIndirizzo(request, response);
+                } else if (action.equalsIgnoreCase("Carrello")) {
+                    carrello(request, response);
                 }
             }
         } catch (Exception e) {
@@ -75,16 +78,15 @@ public class UtenteControl extends HttpServlet {
         String email = (String) request.getSession().getAttribute(EMAIL);
         String immagine = String.valueOf(UUID.randomUUID());
         String directory = "Immagini/ImgUtente/";
-        String path = request.getServletContext().getRealPath("/") +directory;
+        String path = request.getServletContext().getRealPath("/") + directory;
         String path2 = path + immagine;
-        try(FileOutputStream fos = new FileOutputStream(path2);
-            InputStream is = file.getInputStream()){
+        try (FileOutputStream fos = new FileOutputStream(path2);
+             InputStream is = file.getInputStream()) {
             byte[] data = new byte[is.available()];
-            if(is.read(data) > 0)
-            {
+            if (is.read(data) > 0) {
                 fos.write(data);
             }
-        }catch(IOException e){
+        } catch (IOException e) {
             request.setAttribute(ERROR_MESSAGE, MESSAGGIO + e.getMessage());
             RequestDispatcher dispatcher = request.getRequestDispatcher(ERRORE);
             dispatcher.forward(request, response);
@@ -113,7 +115,7 @@ public class UtenteControl extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    public void metodiPagamento( HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void metodiPagamento(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String email = (String) request.getSession().getAttribute(EMAIL);
         List<MetodoPagamentoBean> carte;
         carte = utenteModel.ricercaMetodoPagamento(email);
@@ -148,7 +150,7 @@ public class UtenteControl extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    public void indirizziSpedizione( HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void indirizziSpedizione(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String email = (String) request.getSession().getAttribute(EMAIL);
         List<IndirizzoBean> indirizzo;
         indirizzo = utenteModel.ricercaIndirizzi(email);
@@ -186,4 +188,15 @@ public class UtenteControl extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    public void carrello(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String email = (String) request.getSession().getAttribute(EMAIL);
+        List<IndirizzoBean> indirizzi = new ArrayList<>();
+        List<MetodoPagamentoBean> metodi = new ArrayList<>();
+        indirizzi = utenteModel.ricercaIndirizzi(email);
+        metodi = utenteModel.ricercaMetodoPagamento(email);
+        request.setAttribute("indirizzi", indirizzi);
+        request.setAttribute("metodi", metodi);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("carrello.jsp");
+        dispatcher.forward(request, response);
+    }
 }

@@ -144,6 +144,42 @@
     font-weight: bold;
     font-size: 18px;
     margin-right: 10px;
+    height: 50%;
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.quantita{
+    display: flex;
+    flex-direction: row;
+    height: 40%;
+    width: 80%;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 18px;
+}
+
+.input_quantita{
+    width: 20%;
+    height: 90%;
+    box-sizing: border-box;
+    font-size: 18px;
+}
+
+.main-section {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 50%;
+    overflow: hidden;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.main-section:hover .second-button , .main-section:hover .first-button {
+    transform: translateY(-100%);
 }
 
 .first-button {
@@ -156,19 +192,6 @@
     align-items: center;
     justify-content: center;
     transition-duration: 0.6s;
-}
-
-.main-section {
-    display: flex;
-    flex-direction: column;
-    height: 25%;
-    width: 30%;
-    overflow: hidden;
-    align-items: flex-start;
-}
-
-.main-section:hover .second-button , .main-section:hover .first-button {
-    transform: translateY(-100%);
 }
 
 .second-button {

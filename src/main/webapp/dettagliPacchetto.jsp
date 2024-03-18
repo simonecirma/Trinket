@@ -38,10 +38,17 @@
                 </div>
                 <div class="Prezzo">
                     <span class="testo-prezzo"><span class="esperienza">Prezzo: </span><%=pacchetto.getPrezzo()%>€</span>
-                    <div class="main-section">
-                        <button class="first-button"> Pronto ad Iniziare? </button>
-                        <button class="second-button"> <svg viewBox="0 0 24 24" width="20" height="20" stroke="#ffd300" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg> Aggiungi al carrello!</button>
-                    </div>
+                    <form class="quantita" method="post" action="OrdiniControl?action=AggiungiAlCarrello">
+                        <label for="input_quantita">Quantità: </label>
+                        <input type="number" name="quantita" class="input_quantita" id="input_quantita">
+                        <div class="main-section">
+                            <button class="first-button"> Pronto ad Iniziare? </button>
+                            <button class="second-button" type="submit">
+                                <svg viewBox="0 0 24 24" width="20" height="20" stroke="#ffd300" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                Aggiungi al carrello!
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

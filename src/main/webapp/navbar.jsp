@@ -60,7 +60,7 @@
         </div>
 
         <div class="carrello">
-            <a href="carrello.jsp">
+            <a href="UtenteControl?action=Carrello">
                 <img src="Immagini/Carrello.png" alt="Carrello">
             </a>
         </div>

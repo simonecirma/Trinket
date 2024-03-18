@@ -31,7 +31,6 @@ public class OrdiniControl extends HttpServlet {
     private static final  String EMAIL = "Email";
 
 
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
         String action = request.getParameter("action");
@@ -125,5 +124,4 @@ public class OrdiniControl extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("ordini.jsp");
         dispatcher.forward(request, response);
     }
-
 }

@@ -45,3 +45,95 @@
 .avviso a{
     color: darkblue;
 }
+
+.metodo_pagamento{
+    height: 40%;
+    width: 95%;
+    box-sizing: border-box;
+    display: flex;
+    padding-left: 10px;
+    align-items: center;
+    box-shadow: 2px 5px 10px rgb(200, 80, 192);
+}
+
+.indirizzo_spedizione{
+    height: 40%;
+    width: 95%;
+    box-sizing: border-box;
+    display: flex;
+    padding-left: 10px;
+    align-items: center;
+    box-shadow: 2px 5px 10px rgb(200, 80, 192);
+}
+
+.prezzo{
+    height: 20%;
+    width: 100%;
+}
+
+.paymentOptions {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    border-radius: 5px;
+    width: 50%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.carte{
+    height: 90%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.singola_carta{
+    width: 33%;
+    height: 30%;
+    font-size: 20px;
+    box-shadow: rgba(0, 0, 0, 0.17) 0 -23px 25px 0 inset,
+    rgba(0, 0, 0, 0.15) 0 -36px 30px 0 inset,
+    rgba(0, 0, 0, 0.1) 0 -79px 40px 0 inset,
+    rgba(0, 0, 0, 0.06) 0 2px 1px,
+    rgba(0, 0, 0, 0.09) 0 4px 2px,
+    rgba(0, 0, 0, 0.09) 0 8px 4px,
+    rgba(0, 0, 0, 0.09) 0 16px 8px,
+    rgba(0, 0, 0, 0.09) 0 32px 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottone{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.conferma {
+    padding: 0.5em 1.1em;
+    border-radius: 5px;
+    margin-right: 0.5em;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    color: rgb(0, 0, 0);
+}
+
+.conferma:hover {
+    background-image: linear-gradient(43deg, #ffcc70 0%, #C850C0 46%, #4158d0 100%);
+    color: rgb(255, 255, 255);
+}
+
+.dati{
+    font-size: 24px;
+}
