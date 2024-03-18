@@ -72,20 +72,64 @@
     <div class="suggerrimenti">
         <label class="domanda">Hai bisogno di un regalo?</label>
         <div class="per-chi">
-            <div class="scelte">Per coppia:<img src="Immagini/Index/Coppia.jpg" alt="Errore immagine"></div>
-            <div class="scelte">Per lui:<img src="Immagini/Index/Lui.jpg" alt="Errore immagine"></div>
-            <div class="scelte">Per lei:<img src="Immagini/Index/Lei.jpg" alt="Errore immagine"></div>
-            <div class="scelte">Per famiglia:<img src="Immagini/Index/Famiglia.jpg" alt="Errore immagine"></div>
+            <div class="scelte">Per coppia:
+                <a href="PacchettoControl?action=OttieniPacchetti">
+                    <img src="Immagini/Index/Coppia.jpg" alt="Errore immagine">
+                </a>
+            </div>
+            <div class="scelte">Per lui:
+                <a href="PacchettoControl?action=OttieniPacchetti">
+                    <img src="Immagini/Index/Lui.jpg" alt="Errore immagine">
+                </a>
+            </div>
+            <div class="scelte">Per lei:
+                <a href="PacchettoControl?action=OttieniPacchetti">
+                    <img src="Immagini/Index/Lei.jpg" alt="Errore immagine">
+                </a>
+            </div>
+            <div class="scelte">Per famiglia:
+                <a href="PacchettoControl?action=OttieniPacchetti">
+                    <img src="Immagini/Index/Famiglia.jpg" alt="Errore immagine">
+                </a>
+            </div>
         </div>
         <label class="domanda">Cerchi Ispirazione?</label>
         <div class="per-cosa">
-            <div class="tipo">Terme E Spa:<img src="Immagini/Index/Terme_E_Spa.jpg" alt="Errore immagine"></div>
-            <div class="tipo">Weekend Romantico:<img src="Immagini/Index/Romantico.jpg" alt="Errore immagine"></div>
-            <div class="tipo">Agriturismi e B&B:<img src="Immagini/Index/Agriturismi_E_B&B.jpg" alt="Errore immagine"></div>
-            <div class="tipo">Soggiorno Classico:<img src="Immagini/Index/Classico.jpg" alt="Errore immagine"></div>
-            <div class="tipo">Soggiorno Insolito:<img src="Immagini/Index/Insolito.jpg" alt="Errore immagine"></div>
-            <div class="tipo">Corso di Cucina:<img src="Immagini/Index/Cucina.jpg" alt="Errore immagine"></div>
-            <div class="tipo">Esperienze Gastronomiche:<img src="Immagini/Index/Gourmet.jpg" alt="Errore immagine"></div>
+            <div class="tipo">Terme E Spa:
+                <a href="PacchettoControl?action=FiltriIndex&tipo=Terme E Spa">
+                    <img src="Immagini/Index/Terme_E_Spa.jpg" alt="Errore immagine">
+                </a>
+            </div>
+            <div class="tipo">Weekend Romantico:
+                <a href="PacchettoControl?action=FiltriIndex&tipo=Weekend Romantico">
+                    <img src="Immagini/Index/Romantico.jpg" alt="Errore immagine">
+                </a>
+            </div>
+            <div class="tipo">Agriturismi e B&B:
+                <a href="PacchettoControl?action=FiltriIndex&tipo=Agriturismi e BeB">
+                    <img src="Immagini/Index/Agriturismi_E_B&B.jpg" alt="Errore immagine">
+                </a>
+            </div>
+            <div class="tipo">Soggiorno Classico:
+                <a href="PacchettoControl?action=FiltriIndex&tipo=Soggiorno Classico">
+                    <img src="Immagini/Index/Classico.jpg" alt="Errore immagine">
+                </a>
+            </div>
+            <div class="tipo">Soggiorno Insolito:
+                <a href="PacchettoControl?action=FiltriIndex&tipo=Soggiorno Insolito">
+                    <img src="Immagini/Index/Insolito.jpg" alt="Errore immagine">
+                </a>
+            </div>
+            <div class="tipo">Corso di Cucina:
+                <a href="PacchettoControl?action=FiltriIndex&tipo=Corso di Cucina">
+                    <img src="Immagini/Index/Cucina.jpg" alt="Errore immagine">
+                </a>
+            </div>
+            <div class="tipo">Esperienze Gastronomiche:
+                <a href="PacchettoControl?action=FiltriIndex&tipo=Esperienze Gastronomiche">
+                    <img src="Immagini/Index/Gourmet.jpg" alt="Errore immagine">
+                </a>
+            </div>
         </div>
     </div>
 </div>

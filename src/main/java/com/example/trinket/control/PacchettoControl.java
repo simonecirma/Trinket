@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "PacchettoControl", value = "/PacchettoControl")
@@ -35,9 +36,10 @@ public class PacchettoControl extends HttpServlet {
                     dettagliPacchetto(request, response);
                 } else if (action.equalsIgnoreCase("OttieniPacchetti")) {
                     ottieniPacchetti(request, response);
-                }
-                if (action.equalsIgnoreCase("FiltriPacchetti")) {
+                }else if (action.equalsIgnoreCase("FiltriPacchetti")) {
                     filtriPacchetti(request, response);
+                }else if (action.equalsIgnoreCase("FiltriIndex")) {
+                    filtriIndex(request, response);
                 }
             }
         } catch (Exception e) {
@@ -109,6 +111,22 @@ public class PacchettoControl extends HttpServlet {
             immagini = pacchettoModel.immaginiPerPacchetto(bean.getCodSeriale());
             bean.setImmagini(immagini);
         }
+        request.setAttribute("pacchetti", pacchetti);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("catalogo.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    public void filtriIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String tipo = request.getParameter("tipo");
+        List<PacchettoBean> pacchetti = new ArrayList<>();
+        pacchetti = pacchettoModel.filtroTipoIndex(tipo);
+
+        for (PacchettoBean bean : pacchetti) {
+            List<ImmaginiBean> immagini;
+            immagini = pacchettoModel.immaginiPerPacchetto(bean.getCodSeriale());
+            bean.setImmagini(immagini);
+        }
+
         request.setAttribute("pacchetti", pacchetti);
         RequestDispatcher dispatcher = request.getRequestDispatcher("catalogo.jsp");
         dispatcher.forward(request, response);

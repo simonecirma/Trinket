@@ -50,25 +50,25 @@
                         <legend>Tipologia: </legend>
                         <div class="filtro_tipologia">
                             <input type="checkbox" id="option4" name="option_tipo" value="Terme e SPA">
-                            <label for="option1">Terme e SPA</label><br>
+                            <label for="option4">Terme e SPA</label><br>
 
                             <input type="checkbox" id="option5" name="option_tipo" value="Weekend Romantico">
-                            <label for="option2">Weekend Romantico</label><br>
+                            <label for="option5">Weekend Romantico</label><br>
 
-                            <input type="checkbox" id="option6" name="option_tipo" value="Agriturismi e B&B">
-                            <label for="option3">Agriturismi e B&B</label><br>
+                            <input type="checkbox" id="option6" name="option_tipo" value="Agriturismi e BeB">
+                            <label for="option6">Agriturismi e B&B</label><br>
 
                             <input type="checkbox" id="option7" name="option_tipo" value="Soggiorno Classico">
-                            <label for="option3">Soggiorno Classico</label><br>
+                            <label for="option7">Soggiorno Classico</label><br>
 
                             <input type="checkbox" id="option8" name="option_tipo" value="Soggiorno Insolito">
-                            <label for="option3">Soggiorno Insolito</label><br>
+                            <label for="option8">Soggiorno Insolito</label><br>
 
                             <input type="checkbox" id="option9" name="option_tipo" value="Corso di Cucina">
-                            <label for="option3">Corso di Cucina</label><br>
+                            <label for="option9">Corso di Cucina</label><br>
 
                             <input type="checkbox" id="option10" name="option_tipo" value="Esperienze Gastronomiche">
-                            <label for="option3">Esperienze Gastronomiche</label><br>
+                            <label for="option10">Esperienze Gastronomiche</label><br>
                         </div>
                     </fieldset>
 
