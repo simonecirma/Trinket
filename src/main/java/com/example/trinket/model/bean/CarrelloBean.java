@@ -1,5 +1,6 @@
 package com.example.trinket.model.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CarrelloBean {
@@ -12,6 +13,8 @@ public class CarrelloBean {
     }
 
     public CarrelloBean() {
+        pacchetti = new ArrayList<>();
+        quantita = new ArrayList<>();
     }
 
     public List<PacchettoBean> getPacchetti() {

@@ -1,5 +1,6 @@
 <%@ page import="com.example.trinket.model.bean.MetodoPagamentoBean" %>
 <%@ page import="com.example.trinket.model.bean.IndirizzoBean" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page errorPage="error.jsp" %>
 

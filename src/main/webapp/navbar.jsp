@@ -1,7 +1,5 @@
 <%@ page import="java.util.Date" %>
-<%@ page import="com.example.trinket.model.bean.PacchettoBean" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.List" %>
+<%@ page import="com.example.trinket.model.bean.CarrelloBean" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page errorPage="error.jsp" %>
 
@@ -14,12 +12,11 @@
     String password = "";
     String immagine = "";
     String result = "";
-    List<PacchettoBean> carrello = new ArrayList<>();
+    CarrelloBean carrello = null;
 %>
 
 <%
     synchronized (session) {
-        session = request.getSession();
         flagAmm = (Boolean) session.getAttribute("FlagAmm");
         immagine = (String) session.getAttribute("Immagine");
         cognome = (String) session.getAttribute("Cognome");
@@ -27,6 +24,7 @@
         password = (String) session.getAttribute("Password");
         email = (String) session.getAttribute("Email");
         dataDiNascita = (Date) session.getAttribute("DataDiNascita");
+        carrello = (CarrelloBean) session.getAttribute("carrello");
     }
 
     result = (String) request.getAttribute("result");

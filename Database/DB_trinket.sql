@@ -22,7 +22,7 @@ CREATE TABLE IndirizzoSpedizione
     NumeroCivico int NOT NULL,
     CAP int NOT NULL,
     Città varchar (100) NOT NULL,
-    Provincia varchar (20) NOT NULL,
+    Provincia varchar (50) NOT NULL,
     PRIMARY KEY (IDIndirizzo)
 );
 
@@ -152,7 +152,7 @@ VALUES (@CartaDonato, '2029-05-01','Donato Folgieri', '123');
 INSERT INTO MetodoDiPagamento (NumeroCarta, Scadenza, Titolare, Cvv)
 VALUES (@CartaDonato2, '2031-01-31','Donato Folgieri', '759');
 INSERT INTO MetodoDiPagamento (NumeroCarta, Scadenza, Titolare, Cvv)
-VALUES (@CartaDonato3, '2031-01-31','Donato Folgieri', '759');
+VALUES (@CartaDonato3, '2031-02-28','Donato Folgieri', '149');
 INSERT INTO MetodoDiPagamento (NumeroCarta, Scadenza, Titolare, Cvv)
 VALUES (@CartaSimone, '2030-06-01','Simone Cirma', '456');
 INSERT INTO MetodoDiPagamento (NumeroCarta, Scadenza, Titolare, Cvv)
