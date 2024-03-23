@@ -2,7 +2,9 @@ package com.example.trinket.control;
 
 import com.example.trinket.model.OrdiniModel;
 import com.example.trinket.model.PacchettoModel;
+import com.example.trinket.model.UtenteModel;
 import com.example.trinket.model.bean.*;
+import com.google.gson.Gson;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +25,7 @@ public class OrdiniControl extends HttpServlet {
 
     private final OrdiniModel ordiniModel = new OrdiniModel();
     private final PacchettoModel pacchettoModel = new PacchettoModel();
+    private final UtenteModel utenteModel = new UtenteModel();
 
 
     private static final String ERROR_MESSAGE = "errorMessage";
@@ -42,6 +46,10 @@ public class OrdiniControl extends HttpServlet {
                     filtriOrdini(request, response);
                 } else if (action.equalsIgnoreCase("AggiungiAlCarrello")) {
                     aggiungiAlCarrello(request, response);
+                } else if (action.equalsIgnoreCase("RimuoviDalCarrello")) {
+                    rimuoviDalCarrello(request, response);
+                } else if (action.equalsIgnoreCase("AggiornaQuantita")) {
+                    aggiornaQuantita(request, response);
                 }
             }
         } catch (Exception e) {
@@ -133,7 +141,7 @@ public class OrdiniControl extends HttpServlet {
         HttpSession session = request.getSession();
 
         CarrelloBean carrello = (CarrelloBean) session.getAttribute("carrello");
-        if(carrello == null){
+        if (carrello == null) {
             carrello = new CarrelloBean();
             session.setAttribute("carrello", carrello);
         }
@@ -141,8 +149,24 @@ public class OrdiniControl extends HttpServlet {
         List<PacchettoBean> pacchetti = carrello.getPacchetti();
         List<Integer> quantita = carrello.getQuantita();
 
-        pacchetti.add(pacchettoModel.getPacchettoById(id));
-        quantita.add(i);
+        boolean flag = false;
+        int counter = 0;
+        for(PacchettoBean bean : pacchetti){
+            if(bean.getCodSeriale().equals(id)){
+                flag = true;
+                break;
+            }
+            counter++;
+        }
+
+        if(flag){
+            int prima = quantita.get(counter);
+            prima += i;
+            quantita.set(counter, prima);
+        }else {
+            pacchetti.add(pacchettoModel.getPacchettoById(id));
+            quantita.add(i);
+        }
 
         carrello.setPacchetti(pacchetti);
         carrello.setQuantita(quantita);
@@ -160,5 +184,62 @@ public class OrdiniControl extends HttpServlet {
         request.setAttribute("pacchetti", pacchetti2);
         RequestDispatcher dispatcher = request.getRequestDispatcher("catalogo.jsp");
         dispatcher.forward(request, response);
+    }
+
+    public void rimuoviDalCarrello(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        String codice = request.getParameter("id");
+
+        CarrelloBean carrello = (CarrelloBean) session.getAttribute("carrello");
+        List<PacchettoBean> pacchetti = carrello.getPacchetti();
+        List<Integer> quantita = carrello.getQuantita();
+
+        int i = 0;
+
+        for (i = 0; i < pacchetti.size(); i++) {
+            PacchettoBean bean = pacchetti.get(i);
+            if (bean.getCodSeriale().equals(codice)) {
+                pacchetti.remove(i);
+                quantita.remove(i);
+            }
+        }
+
+        carrello.setQuantita(quantita);
+        carrello.setPacchetti(pacchetti);
+
+        session.setAttribute("carrello", carrello);
+
+        String email = (String) request.getSession().getAttribute(EMAIL);
+        if (email != null) {
+            List<IndirizzoBean> indirizzi;
+            List<MetodoPagamentoBean> metodi;
+            indirizzi = utenteModel.ricercaIndirizzi(email);
+            metodi = utenteModel.ricercaMetodoPagamento(email);
+            request.setAttribute("indirizzi", indirizzi);
+            request.setAttribute("metodi", metodi);
+        }
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("carrello.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    public void aggiornaQuantita(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int index = Integer.parseInt(request.getParameter("index"));
+        int nuovaQuantita = Integer.parseInt(request.getParameter("quantita"));
+
+        HttpSession session = request.getSession();
+        CarrelloBean carrello = (CarrelloBean) session.getAttribute("carrello");
+        List<Integer> quantita = carrello.getQuantita();
+        quantita.set(index, nuovaQuantita);
+        session.setAttribute("carrello", carrello);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(nuovaQuantita);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        PrintWriter out = response.getWriter();
+        out.print(json);
+        out.flush();
     }
 }

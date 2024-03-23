@@ -40,7 +40,7 @@
                     <span class="testo-prezzo"><span class="esperienza">Prezzo: </span><%=pacchetto.getPrezzo()%>€</span>
                     <form class="quantita" method="post" action="OrdiniControl?action=AggiungiAlCarrello&id=<%=pacchetto.getCodSeriale()%>">
                         <label for="input_quantita">Quantità: </label>
-                        <input type="number" name="quantita" class="input_quantita" id="input_quantita" required>
+                        <input type="number" name="quantita" class="input_quantita" id="input_quantita" max="<%=pacchetto.getNumPacchetti()%>" min="1" required>
                         <div class="main-section">
                             <button class="first-button"> Pronto ad Iniziare? </button>
                             <button class="second-button" type="submit">
@@ -113,6 +113,17 @@
         }
     });
 
+    document.getElementById("input_quantita").oninput = function() {
+        var input = this;
+        var max = parseInt(input.max);
+        var value = parseInt(input.value);
+
+        if (value > max) {
+            input.setCustomValidity("Abbiamo solo <%=pacchetto.getNumPacchetti()%> pacchetti disponibili");
+        } else {
+            input.setCustomValidity("");
+        }
+    };
 </script>
 </body>
 </html>

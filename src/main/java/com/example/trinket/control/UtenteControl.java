@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -190,8 +189,8 @@ public class UtenteControl extends HttpServlet {
 
     public void carrello(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = (String) request.getSession().getAttribute(EMAIL);
-        List<IndirizzoBean> indirizzi = new ArrayList<>();
-        List<MetodoPagamentoBean> metodi = new ArrayList<>();
+        List<IndirizzoBean> indirizzi;
+        List<MetodoPagamentoBean> metodi;
         indirizzi = utenteModel.ricercaIndirizzi(email);
         metodi = utenteModel.ricercaMetodoPagamento(email);
         request.setAttribute("indirizzi", indirizzi);
