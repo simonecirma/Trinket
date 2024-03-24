@@ -194,7 +194,7 @@ public class OrdiniControl extends HttpServlet {
         List<PacchettoBean> pacchetti = carrello.getPacchetti();
         List<Integer> quantita = carrello.getQuantita();
 
-        int i = 0;
+        int i;
 
         for (i = 0; i < pacchetti.size(); i++) {
             PacchettoBean bean = pacchetti.get(i);
@@ -223,7 +223,7 @@ public class OrdiniControl extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    public void aggiornaQuantita(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void aggiornaQuantita(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int index = Integer.parseInt(request.getParameter("index"));
         int nuovaQuantita = Integer.parseInt(request.getParameter("quantita"));
 

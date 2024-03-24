@@ -40,7 +40,23 @@
                     <span class="testo-prezzo"><span class="esperienza">Prezzo: </span><%=pacchetto.getPrezzo()%>€</span>
                     <form class="quantita" method="post" action="OrdiniControl?action=AggiungiAlCarrello&id=<%=pacchetto.getCodSeriale()%>">
                         <label for="input_quantita">Quantità: </label>
-                        <input type="number" name="quantita" class="input_quantita" id="input_quantita" max="<%=pacchetto.getNumPacchetti()%>" min="1" required>
+                        <%  int quantitaCarrello = 0;
+                            if((carrello != null) && !carrello.getPacchetti().isEmpty()) {
+                                boolean flag = false;
+                                int counter = 0;
+                                for (PacchettoBean bean : carrello.getPacchetti()) {
+                                    if (bean.getCodSeriale().equals(pacchetto.getCodSeriale())) {
+                                        flag = true;
+                                        break;
+                                    }
+                                    counter++;
+                                }
+                                if (flag) {
+                                    quantitaCarrello = carrello.getQuantita().get(counter);
+                                }
+                            }
+                        %>
+                        <input type="number" name="quantita" class="input_quantita" id="input_quantita" max="<%=pacchetto.getNumPacchetti() - quantitaCarrello%>" min="1" required>
                         <div class="main-section">
                             <button class="first-button"> Pronto ad Iniziare? </button>
                             <button class="second-button" type="submit">
