@@ -52,6 +52,8 @@ public class OrdiniControl extends HttpServlet {
                     aggiornaQuantita(request, response);
                 } else if (action.equalsIgnoreCase("OrdiniPerUtenteAdmin")) {
                     ordiniPerUtenteAdmin(request, response);
+                } else if (action.equalsIgnoreCase("Checkout")) {
+                    checkout(request, response);
                 }
             }
         } catch (Exception e) {
@@ -268,6 +270,30 @@ public class OrdiniControl extends HttpServlet {
         }
         request.setAttribute("Ordini", ordini);
         RequestDispatcher dispatcher = request.getRequestDispatcher("ordini.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    public void checkout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        CarrelloBean bean = (CarrelloBean) request.getSession().getAttribute("carrello");
+        List<PacchettoBean> pacchetti = bean.getPacchetti();
+        List<Integer> quantita = bean.getQuantita();
+        pacchetti.clear();
+        quantita.clear();
+        bean.setPacchetti(pacchetti);
+        bean.setQuantita(quantita);
+        request.getSession().setAttribute("carrello", bean);
+
+        String email = (String) request.getSession().getAttribute(EMAIL);
+        List<IndirizzoBean> indirizzi;
+        List<MetodoPagamentoBean> metodi;
+
+        indirizzi = utenteModel.ricercaIndirizzi(email);
+        metodi = utenteModel.ricercaMetodoPagamento(email);
+
+        request.setAttribute("indirizzi", indirizzi);
+        request.setAttribute("metodi", metodi);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("carrello.jsp");
         dispatcher.forward(request, response);
     }
 }
