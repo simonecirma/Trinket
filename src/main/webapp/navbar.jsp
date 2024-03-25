@@ -4,7 +4,7 @@
 <%@ page errorPage="error.jsp" %>
 
 <%!
-    Boolean flagAmm;
+    Boolean flagAmm = false;
     String email = null;
     String nome = "";
     String cognome = "";
@@ -56,12 +56,13 @@
                 <input type="text" name="text" class="barraRicerca" placeholder="Cerca">
             </label>
         </div>
-
-        <div class="carrello">
-            <a href="UtenteControl?action=Carrello">
-                <img src="Immagini/Carrello.png" alt="Carrello">
-            </a>
-        </div>
+        <%if(flagAmm == null || !flagAmm){%>
+            <div class="carrello">
+                <a href="UtenteControl?action=Carrello">
+                    <img src="Immagini/Carrello.png" alt="Carrello">
+                </a>
+            </div>
+        <%}%>
         <%
             if(email == null){
         %>
@@ -76,10 +77,15 @@
                 <div class="profilo">
                     <img src="Immagini/Profilo.png" alt="Profilo" id="profilo">
                     <div class="menuTendina" id="menuTendina">
+                        <%if(!flagAmm){%>
                         <!-- Contenuto del menu a tendina -->
-                        <a href="profilo.jsp">Profilo</a>
-                        <a href="OrdiniControl?action=OttieniOrdini">I Miei Ordini</a>
-                        <a href="AccessoControl?action=Logout">Logout</a>
+                            <a href="profilo.jsp">Profilo</a>
+                            <a href="OrdiniControl?action=OttieniOrdini">I Miei Ordini</a>
+                            <a href="AccessoControl?action=Logout">Logout</a>
+                        <%}else{%>
+                            <a href="profilo.jsp">Profilo</a>
+                            <a href="AccessoControl?action=Logout">Logout</a>
+                        <%}%>
                     </div>
                 </div>
         <%

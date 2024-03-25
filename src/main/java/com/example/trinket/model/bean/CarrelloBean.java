@@ -1,9 +1,10 @@
 package com.example.trinket.model.bean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarrelloBean {
+public class CarrelloBean implements Serializable {
     private List<PacchettoBean> pacchetti;
     private List<Integer> quantita;
 

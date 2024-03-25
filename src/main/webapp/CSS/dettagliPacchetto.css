@@ -246,3 +246,125 @@
 #mostra-altro:hover {
     color: #c850c0;
 }
+
+.Prezzo2{
+    height: 40%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.form{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.campi{
+    height: 100%;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.field {
+    display: flex;
+    align-items: center;
+    border-radius: 25px;
+    padding: 0.6em;
+    border: none;
+    outline: none;
+    color: #000000;
+    background-color: rgb(255, 204, 112);
+    box-shadow: inset 2px 5px 10px rgb(200, 80, 192);
+    width: 100%;
+    height: 30%;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+.field label{
+    margin-right: 1em;
+}
+
+.input-field {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: rgb(0, 0, 0);
+    width: 100%;
+}
+
+.input-field::selection {
+    background-color: #6464d5;
+}
+
+.button3 {
+    margin-left: 5px;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    color: rgb(0, 0, 0);
+    width: 20%;
+    height: 30%;
+}
+
+.button3:hover {
+    background-image: linear-gradient(43deg, #ffcc70 0%, #C850C0 46%, #4158d0 100%);
+    color: rgb(255, 255, 255);
+}
+
+.button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgb(20, 20, 20);
+    border: none;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.164);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    position: relative;
+    gap: 2px;
+    float: right;
+}
+
+.svgIcon {
+    width: 12px;
+    transition-duration: 0.3s;
+}
+
+.svgIcon path {
+    fill: white;
+}
+
+.button:hover {
+    transition-duration: 0.3s;
+    background-color: rgb(255, 69, 69);
+    align-items: center;
+    gap: 0;
+}
+
+.bin-top {
+    transform-origin: bottom right;
+}
+.button:hover .bin-top {
+    transition-duration: 0.5s;
+    transform: rotate(160deg);
+}

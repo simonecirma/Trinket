@@ -4,13 +4,16 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page errorPage="error.jsp" %>
 
-<% List<PacchettoBean> pacchetti = (List<PacchettoBean>) request.getAttribute("pacchetti");%>
+<% List<PacchettoBean> pacchetti = (List<PacchettoBean>) request.getAttribute("pacchetti");
+   List<String> tipi = (List<String>) request.getAttribute("tipi");
+   List<Integer> durata = (List<Integer>) request.getAttribute("durata");%>
 
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <title>Easy Travel</title>
     <link href="CSS/catalogo.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha384-UG8ao2jwOWB7/oDdObZc6ItJmwUkR/PfMyt9Qs5AwX7PsnYn1CRKCTWyncPTWvaS" crossorigin="anonymous"></script>
 </head>
 <body>
 <%@ include file="navbar.jsp" %>
@@ -80,6 +83,75 @@
             </div>
         </div>
         <div class="pacchetti">
+            <%if(flagAmm != null && flagAmm){%>
+            <div class="barraMetodi">
+                <button type="button" class="aggiungiPacchetto" onclick="showSection('inserimentoPacchetti')">Aggiungi Pacchetto</button>
+            </div>
+            <div id="inserimentoPacchetti" class="card" style="display: none;">
+                <div class="card2">
+                    <div class="card3">
+                        <form class="form" action="AdminControl?action=AggiungiPacchetto" method="post" name="inserimentoPacchetto" enctype="multipart/form-data">
+                            <p class="heading_form">Inserisci Nuovo Pacchetto</p>
+
+                            <div class="field_form">
+                                <input type="text" name ="codSeriale" class="input-field_form" placeholder="Codice Seriale Univoco" required>
+                            </div>
+
+                            <div class="field_form">
+                                <input type="text" name ="Nome" class="input-field_form" placeholder="Nome Pacchetto" required>
+                            </div>
+
+                            <div class="field_form">
+                                <input type="number" name ="Prezzo" class="input-field_form" placeholder="Prezzo" min="1" step="0.01" required>
+                            </div>
+
+                            <div class="field_form">
+                                <input type="text" name ="Descrizione" class="input-field_form" placeholder="Descrizione" required>
+                            </div>
+
+                            <div class="field_form">
+                                <input type="text" name ="DescrizioneRidotta" class="input-field_form" placeholder="Descrizione Ridotta" required>
+                            </div>
+
+                            <div class="field_form">
+                                <select class="menuPacchetto" id="Tipo" name="Tipo" required>
+                                    <option value="" selected>Scegli la Tipologia</option>
+                                    <%for(String temp : tipi){%>
+                                    <option value="<%=temp%>"><%=temp%></option>
+                                    <%}%>
+                                </select>
+                            </div>
+
+                            <div class="field_form">
+                                <select class="menuPacchetto" id="Durata" name="Durata" required>
+                                    <option value="" selected>Scegli la Durata</option>
+                                    <%for(int i : durata){%>
+                                    <option value="<%=i%>"><%=i%></option>
+                                    <%}%>
+                                </select>
+                            </div>
+
+                            <div class="field_form">
+                                <label for="immagini">Carica copertina:</label>
+                                <input type="file" class="input-field_form" id="copertina" name="Copertina">
+                            </div>
+
+                            <div class="field_form">
+                                <label for="immagini">Carica immagini:</label>
+                                <input type="file" class="input-field_form" id="immagini" name="Immagini" multiple>
+                            </div>
+
+                            <div class="field_form">
+                                <input type="number" name ="NumPacchetti" class="input-field_form" placeholder="Quanti Pacchetti vuoi inserire" min="1" required>
+                            </div>
+
+                            <button type="submit" class="button3">Salva!</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <%}%>
+            <div class="card" id="catalogo">
             <% if(!pacchetti.isEmpty()){
                 for(PacchettoBean bean : pacchetti){%>
                 <button class="singolo_pacchetto" onclick="location.href='PacchettoControl?action=DettagliPacchetto&id=<%=bean.getCodSeriale()%>'">
@@ -119,6 +191,7 @@
                 <span>Nessun Elemento Trovato! </span>
             </div>
             <%}%>
+            </div>
         </div>
     </div>
 
@@ -135,6 +208,19 @@
         }
 
         return true;
+    }
+
+    function showSection(sectionId) {
+        var sections = document.getElementsByClassName('card');
+        if(document.getElementById(sectionId).style.display !== 'flex') {
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].style.display = 'none';
+            }
+            document.getElementById(sectionId).style.display = 'flex';
+        }else{
+            document.getElementById(sectionId).style.display = 'none';
+            document.getElementById("catalogo").style.display = 'flex';
+        }
     }
 </script>
 

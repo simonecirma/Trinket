@@ -121,19 +121,55 @@ fieldset{
 }
 
 .pacchetti{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
     float: right;
     width: 80%;
-    height: 100%;
-    position: relative;
+    height: 90%;
     z-index: 1;
+}
+
+.barraMetodi{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 1px 1px 2px rgb(200, 80, 192) ;
+}
+
+.aggiungiPacchetto {
+    padding: 0.5em 1.1em;
+    border-radius: 5px;
+    margin-right: 0.5em;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    color: rgb(0, 0, 0);
+}
+
+.aggiungiPacchetto:hover {
+    background-image: linear-gradient(43deg, #ffcc70 0%, #C850C0 46%, #4158d0 100%);
+    color: rgb(255, 255, 255);
+}
+
+.rimuoviPacchetto {
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    color: rgb(0, 0, 0);
+}
+
+.rimuoviPacchetto:hover {
+    background-image: linear-gradient(163deg, #a00000fa 0%, #d10050 100%);
+    color: rgb(0, 0, 0);
 }
 
 .singolo_pacchetto{
     width: 20%;
-    height: 40%;
+    height: 250px;
     margin-top: 5px;
     margin-right: 5px;
     margin-left: 5px;
@@ -163,7 +199,7 @@ fieldset{
 }
 
 .nome{
-    height: 15%;
+    height: 20%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -211,7 +247,7 @@ fieldset{
 }
 
 .prezzo{
-    height: 25%;
+    height: 20%;
     width: 100%;
     font-weight: bold;
     font-size: 14px;
@@ -229,3 +265,122 @@ fieldset{
     font-size: 20px;
     font-weight: bold;
 }
+
+.card{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Centra orizzontalmente */
+    align-items: center;
+    float: right;
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 1;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 0.4em;
+    background-color: #999cff;
+    border-radius: 20px;
+}
+
+.heading_form {
+    text-align: center;
+    margin: 2em;
+    color: rgb(255, 255, 255);
+    font-size: 1.2em;
+}
+
+.field_form {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    border-radius: 25px;
+    padding: 0.6em;
+    border: none;
+    outline: none;
+    color: #000000;
+    background-color: rgb(255, 204, 112);
+    box-shadow: inset 2px 5px 10px rgb(200, 80, 192);
+}
+
+.field_form label{
+    margin-right: 1em;
+}
+
+.input-field_form {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    color: rgb(0, 0, 0);
+}
+
+.input-field_form::selection {
+    background-color: #6464d5;
+}
+
+.button3 {
+    margin-bottom: 3em;
+    padding: 0.5em;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    transition: .4s ease-in-out;
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    color: rgb(0, 0, 0);
+}
+
+.button3:hover {
+    background-image: linear-gradient(43deg, #ffcc70 0%, #C850C0 46%, #4158d0 100%);
+    color: rgb(255, 255, 255);
+}
+
+.card2 {
+    width: 100%;
+    max-width: 400px; /* Larghezza massima desiderata */
+    margin: 20px auto; /* Centro la card e aggiungo spazio sopra e sotto */
+    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    border-radius: 22px;
+    transition: all .3s;
+}
+
+.card3 {
+    border-radius: 0;
+    transition: all .2s;
+}
+
+.card3:hover {
+    transform: scale(0.98);
+    border-radius: 20px;
+}
+
+.card2:hover {
+    box-shadow: 0 0 30px 1px rgba(200, 80, 192, 0.5);
+}
+
+select {
+    /* Reset */
+    appearance: none;
+    border: 0;
+    outline: 0;
+    width: 100%;
+    height: 50%;
+    background: transparent;
+    border-radius: 0.25em;
+    cursor: pointer;
+    /* Remove IE arrow */
+    &::-ms-expand {
+        display: none;
+    }
+    /* Remove focus outline */
+    &:focus {
+        outline: none;
+    }
+}
+
