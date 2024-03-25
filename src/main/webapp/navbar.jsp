@@ -84,6 +84,7 @@
                             <a href="AccessoControl?action=Logout">Logout</a>
                         <%}else{%>
                             <a href="profilo.jsp">Profilo</a>
+                            <a href="AdminControl?action=VisualizzaUtenti">Utenti</a>
                             <a href="AccessoControl?action=Logout">Logout</a>
                         <%}%>
                     </div>

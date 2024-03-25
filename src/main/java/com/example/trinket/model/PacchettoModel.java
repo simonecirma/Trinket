@@ -561,7 +561,7 @@ public class PacchettoModel {
     public void modificaPacchetto (Float prezzo, int quantita, String codice){
         try(
                 Connection con = ds.getConnection();
-                PreparedStatement ps = con.prepareStatement("UPDATE " +TABLE_NAME_PACCHETTO+ " SET Prezzo = ?, NumPacchetti = ? WHERE CodSeriale = ? ")) {
+                PreparedStatement ps = con.prepareStatement("UPDATE " +TABLE_NAME_PACCHETTO+ " SET Prezzo = ?, NumPacchetti = ?, FlagDisponibilità = 1 WHERE CodSeriale = ? ")) {
             ps.setFloat(1, prezzo);
             ps.setInt(2, quantita);
             ps.setString(3, codice);

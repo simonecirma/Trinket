@@ -2,8 +2,10 @@ package com.example.trinket.control;
 
 import com.example.trinket.model.AccessoModel;
 import com.example.trinket.model.PacchettoModel;
+import com.example.trinket.model.UtenteModel;
 import com.example.trinket.model.bean.ImmaginiBean;
 import com.example.trinket.model.bean.PacchettoBean;
+import com.example.trinket.model.bean.UtenteBean;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,6 +26,8 @@ import java.util.UUID;
 public class AdminControl extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final PacchettoModel pacchettoModel = new PacchettoModel();
+    private final UtenteModel utenteModel = new UtenteModel();
+
 
     private static final String ERROR_MESSAGE = "errorMessage";
     private static final String MESSAGGIO = "Si è verificato un errore: ";
@@ -41,6 +45,8 @@ public class AdminControl extends HttpServlet {
                     modificaPacchetto(request, response);
                 } else if (action.equalsIgnoreCase("RimuoviPacchetto")) {
                     rimuoviPacchetto(request, response);
+                } else if (action.equalsIgnoreCase("VisualizzaUtenti")) {
+                    visualizzaUtenti(request, response);
                 }
             }
         } catch (ServletException | IOException e) {
@@ -182,6 +188,14 @@ public class AdminControl extends HttpServlet {
         request.setAttribute("pacchetti", pacchetti);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("catalogo.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    public void visualizzaUtenti(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<UtenteBean> utenti = utenteModel.getUtenti();
+
+        request.setAttribute("utenti", utenti);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("elencoUtenti.jsp");
         dispatcher.forward(request, response);
     }
 }

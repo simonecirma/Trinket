@@ -50,6 +50,8 @@ public class OrdiniControl extends HttpServlet {
                     rimuoviDalCarrello(request, response);
                 } else if (action.equalsIgnoreCase("AggiornaQuantita")) {
                     aggiornaQuantita(request, response);
+                } else if (action.equalsIgnoreCase("OrdiniPerUtenteAdmin")) {
+                    ordiniPerUtenteAdmin(request, response);
                 }
             }
         } catch (Exception e) {
@@ -151,19 +153,19 @@ public class OrdiniControl extends HttpServlet {
 
         boolean flag = false;
         int counter = 0;
-        for(PacchettoBean bean : pacchetti){
-            if(bean.getCodSeriale().equals(id)){
+        for (PacchettoBean bean : pacchetti) {
+            if (bean.getCodSeriale().equals(id)) {
                 flag = true;
                 break;
             }
             counter++;
         }
 
-        if(flag){
+        if (flag) {
             int prima = quantita.get(counter);
             prima += i;
             quantita.set(counter, prima);
-        }else {
+        } else {
             pacchetti.add(pacchettoModel.getPacchettoById(id));
             quantita.add(i);
         }
@@ -241,5 +243,31 @@ public class OrdiniControl extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.print(json);
         out.flush();
+    }
+
+    public void ordiniPerUtenteAdmin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        String email = request.getParameter(EMAIL);
+        List<OrdineBean> ordini;
+        ordini = ordiniModel.ricercaOrdiniUtente(email);
+        for (OrdineBean bean : ordini) {
+            int id = bean.getIdOrdine();
+            List<CompostoBean> composto;
+            List<PacchettoBean> pacchettiOrdine = new ArrayList<>();
+            List<Integer> quantitaPacchettiOrdine = new ArrayList<>();
+            composto = ordiniModel.dettagliOrdine(id);
+            for (CompostoBean bean2 : composto) {
+                String codice = bean2.getCodSeriale();
+                PacchettoBean bean3;
+                bean3 = pacchettoModel.getPacchettoById(codice);
+                pacchettiOrdine.add(bean3);
+                int i = bean2.getQuantita();
+                quantitaPacchettiOrdine.add(i);
+            }
+            bean.setPacchetti(pacchettiOrdine);
+            bean.setQuantitaPacchetto(quantitaPacchettiOrdine);
+        }
+        request.setAttribute("Ordini", ordini);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ordini.jsp");
+        dispatcher.forward(request, response);
     }
 }

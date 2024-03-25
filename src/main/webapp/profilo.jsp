@@ -36,12 +36,14 @@
                     <tr onclick="showSection('datiPersonali')">
                         <th><button class="infProfilo">Dati personali</button></th>
                     </tr>
-                    <tr onclick="showSection('metodiPagamento')">
-                        <th><button class="infProfilo">Metodi di pagamento</button></th>
-                    </tr>
-                    <tr onclick="showSection('indirizziSpedizione')">
-                        <th><button class="infProfilo">Indirizzi di spedizione</button></th>
-                    </tr>
+                    <%if(flagAmm != null && !flagAmm){%>
+                        <tr onclick="showSection('metodiPagamento')">
+                            <th><button class="infProfilo">Metodi di pagamento</button></th>
+                        </tr>
+                        <tr onclick="showSection('indirizziSpedizione')">
+                            <th><button class="infProfilo">Indirizzi di spedizione</button></th>
+                        </tr>
+                    <%}%>
                 </table>
             </div>
         </div>

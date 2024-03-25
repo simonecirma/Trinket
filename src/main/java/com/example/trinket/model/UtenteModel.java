@@ -209,5 +209,26 @@ public class UtenteModel {
             logger.log(Level.WARNING, e.getMessage());
         }
     }
+
+    public List<UtenteBean> getUtenti (){
+        List<UtenteBean> utenti = new ArrayList<>();
+        try(
+                Connection con = ds.getConnection();
+                PreparedStatement ps = con.prepareStatement("SELECT * FROM " +TABLE_NAME_UTENTE+ " WHERE FlagAmm = 0")) {
+            try(ResultSet rs = ps.executeQuery()){
+                while (rs.next()) {
+                    UtenteBean bean = new UtenteBean();
+                    bean.setEmail(rs.getString("Email"));
+                    bean.setNome(rs.getString("Nome"));
+                    bean.setCognome(rs.getString("Cognome"));
+                    bean.setDataDiNascita(rs.getDate("DataDiNascita"));
+                    utenti.add(bean);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return utenti;
+    }
 }
 
