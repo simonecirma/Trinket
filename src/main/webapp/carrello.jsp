@@ -165,10 +165,12 @@
                         float prezzoArticolo = bean.getPrezzo() * quantita;
                         totale += prezzoArticolo;
                     }
-                  }%>
+                  }
+                  String totaleFormattato = String.format("%.2f", totale);
+                %>
                 <div class="totale">
-                    <span class="totale_scritta">Totale: <%=totale%></span>
-                    <button class="Btn" onclick="location.href='OrdiniControl?action=Checkout'">
+                    <span class="totale_scritta">Totale: <span id="totale_numero"><%=totaleFormattato%> </span></span>
+                    <button class="Btn" onclick="checkout()">
                         Checkout
                         <svg class="svgIcon" viewBox="0 0 576 512"><path d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path></svg>
                     </button>
@@ -262,6 +264,10 @@
                 url: 'OrdiniControl?action=AggiornaQuantita',
                 type: 'POST',
                 data: {index: index, quantita: quantitaVal},
+                success: function (prezzoTotale){
+                    var prezzoTot = document.getElementById('totale_numero');
+                    prezzoTot.textContent = prezzoTotale;
+                },
                 error: function (xhr, status, error) {
                     // Gestisci eventuali errori
                     console.error(error);
@@ -292,6 +298,10 @@
                 url: 'OrdiniControl?action=AggiornaQuantita',
                 type: 'POST',
                 data: {index: index, quantita: quantitaVal},
+                success: function (prezzoTotale){
+                    var prezzoTot = document.getElementById('totale_numero');
+                    prezzoTot.textContent = prezzoTotale;
+                },
                 error: function (xhr, status, error) {
                     // Gestisci eventuali errori
                     console.error(error);
@@ -304,6 +314,20 @@
             rimuovi.style.backgroundColor = "rgb(141,141,141)";
         }
     }
+
+    function checkout() {
+        var selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+        var selectedAddress = document.querySelector('input[name="indirizzi"]:checked');
+
+        // Verifica se almeno una opzione è stata selezionata sia per i metodi di pagamento che per gli indirizzi
+        if (selectedPaymentMethod && selectedAddress) {
+            location.href="OrdiniControl?action=Checkout";
+        } else {
+            // Mostra un messaggio di errore o impedisce il completamento del checkout
+            alert("Seleziona un metodo di pagamento e un indirizzo di spedizione prima di procedere con il checkout.");
+        }
+    }
+
 </script>
 
 </body>

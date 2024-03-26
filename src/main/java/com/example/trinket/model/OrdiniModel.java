@@ -83,6 +83,7 @@ public class OrdiniModel {
                     CompostoBean bean = new CompostoBean();
                     bean.setCodSeriale(rs.getString("CodSeriale"));
                     bean.setQuantita(rs.getInt("Quantità"));
+                    bean.setPrezzoUnitario(rs.getFloat("PrezzoUnitario"));
                     dettagli.add(bean);
                 }
             }
@@ -152,5 +153,53 @@ public class OrdiniModel {
             logger.log(Level.WARNING, e.getMessage());
         }
         return ordini3;
+    }
+
+    public void aggiungiOrdine (Date dataAcquisto,String fattura, Float prezzo, String email){
+        try (
+                Connection con = ds.getConnection();
+                PreparedStatement ps = con.prepareStatement
+                        ("INSERT INTO " + TABLE_NAME_ORDINE + "(DataAcquisto, Fattura, PrezzoTotale, StatoOrdine, Email) " +
+                                "VALUES(?, ?, ?, 'In Elaborazione', ?)")) {
+            ps.setDate(1, (java.sql.Date) dataAcquisto);
+            ps.setString(2,fattura);
+            ps.setFloat(3, prezzo);
+            ps.setString(4, email);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+    }
+
+    public int getLastID (){
+        int i = 0;
+        try(
+                Connection con = ds.getConnection();
+                PreparedStatement ps = con.prepareStatement("SELECT MAX(IdOrdine) AS Max FROM " +TABLE_NAME_ORDINE)){
+            try(ResultSet rs = ps.executeQuery()){
+                rs.next();
+                i = rs.getInt("Max");
+            }
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+        return i;
+    }
+
+    public void aggiungiComposto (int quantita, String codice, float prezzo){
+        int i = getLastID();
+        try (
+                Connection con = ds.getConnection();
+                PreparedStatement ps = con.prepareStatement
+                        ("INSERT INTO " + TABLE_NAME_COMPOSTO + "(Quantità, CodSeriale, IdOrdine, PrezzoUnitario) " +
+                                "VALUES(?, ?, ?, ?)")) {
+            ps.setInt(1,quantita );
+            ps.setString(2, codice);
+            ps.setInt(3, i);
+            ps.setFloat(4, prezzo);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
     }
 }

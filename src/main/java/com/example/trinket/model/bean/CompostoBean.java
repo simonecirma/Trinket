@@ -4,11 +4,13 @@ public class CompostoBean {
     private int quantita;
     private String codSeriale;
     private int idOrdine;
+    private float prezzoUnitario;
 
-    public CompostoBean(int quantita, String codSeriale, int idOrdine) {
+    public CompostoBean(int quantita, String codSeriale, int idOrdine, float prezzoUnitario) {
         this.quantita = quantita;
         this.codSeriale = codSeriale;
         this.idOrdine = idOrdine;
+        this.prezzoUnitario = prezzoUnitario;
     }
 
     public CompostoBean() {
@@ -38,12 +40,21 @@ public class CompostoBean {
         this.idOrdine = idOrdine;
     }
 
+    public float getPrezzoUnitario() {
+        return prezzoUnitario;
+    }
+
+    public void setPrezzoUnitario(float prezzoUnitario) {
+        this.prezzoUnitario = prezzoUnitario;
+    }
+
     @Override
     public String toString() {
         return "CompostoBean{" +
                 "quantita=" + quantita +
                 ", codSeriale='" + codSeriale + '\'' +
                 ", idOrdine=" + idOrdine +
+                ", prezzoUnitario=" + prezzoUnitario +
                 '}';
     }
 }

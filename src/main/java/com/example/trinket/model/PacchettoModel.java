@@ -582,4 +582,40 @@ public class PacchettoModel {
         }
     }
 
+    public void modificaNumPacchetti (int quantita, String codice){
+        try(
+                Connection con = ds.getConnection();
+                PreparedStatement ps = con.prepareStatement("UPDATE " +TABLE_NAME_PACCHETTO+ " SET NumPacchetti = NumPacchetti - ? WHERE CodSeriale = ? ")) {
+            ps.setInt(1, quantita);
+            ps.setString(2, codice);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+
+        int i = 0;
+
+        try(Connection con = ds.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT NumPacchetti FROM " +TABLE_NAME_PACCHETTO+ " WHERE CodSeriale = ?")){
+            ps.setString(1, codice);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    i = rs.getInt("NumPacchetti");
+                }
+            }
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+
+        if(i == 0){
+            try(
+                    Connection con = ds.getConnection();
+                    PreparedStatement ps = con.prepareStatement("UPDATE " +TABLE_NAME_PACCHETTO+ " SET FlagDisponibilità = 0 WHERE CodSeriale = ? ")) {
+                ps.setString(1, codice);
+                ps.executeUpdate();
+            } catch (SQLException e) {
+                logger.log(Level.WARNING, e.getMessage());
+            }
+        }
+    }
 }

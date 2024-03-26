@@ -112,6 +112,7 @@ CREATE TABLE Composto
     Quantità int NOT NULL,
     CodSeriale varchar (20) NOT NULL,
     IdOrdine int NOT NULL,
+    PrezzoUnitario float NOT NULL,
     FOREIGN KEY (CodSeriale) REFERENCES Pacchetto(CodSeriale) ON UPDATE cascade ON DELETE cascade,
     FOREIGN KEY (IdOrdine) REFERENCES Ordine(IdOrdine) ON UPDATE cascade ON DELETE cascade
 );
@@ -308,11 +309,11 @@ VALUES ('Pasta2.jpg',@SMARTBOXE8code,0);
 INSERT INTO Immagini(Nome, Codice,FlagCopertina)
 VALUES ('Pasta3.jpg',@SMARTBOXE8code,0);
 
-INSERT INTO Composto (Quantità, CodSeriale, IdOrdine)
-VALUES ('1',@SMARTBOXE1code,'01');
-INSERT INTO Composto (Quantità, CodSeriale, IdOrdine)
-VALUES ('2',@SMARTBOXE2code,'02');
-INSERT INTO Composto (Quantità, CodSeriale, IdOrdine)
-VALUES ('2',@SMARTBOXE3code,'03');
-INSERT INTO Composto (Quantità, CodSeriale, IdOrdine)
-VALUES ('1',@SMARTBOXE4code,'03');
+INSERT INTO Composto (Quantità, CodSeriale, IdOrdine, PrezzoUnitario)
+VALUES ('1',@SMARTBOXE1code,'01', '55.11');
+INSERT INTO Composto (Quantità, CodSeriale, IdOrdine, PrezzoUnitario)
+VALUES ('2',@SMARTBOXE2code,'02', '159.99');
+INSERT INTO Composto (Quantità, CodSeriale, IdOrdine, PrezzoUnitario)
+VALUES ('2',@SMARTBOXE3code,'03', '190.90');
+INSERT INTO Composto (Quantità, CodSeriale, IdOrdine, PrezzoUnitario)
+VALUES ('1',@SMARTBOXE4code,'03', '209.90');
