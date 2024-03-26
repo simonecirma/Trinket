@@ -23,15 +23,13 @@ public class OrdiniModel {
 
     private static final String TABLE_NAME_ORDINE = "Ordine";
     private static final String TABLE_NAME_COMPOSTO = "Composto";
+    private static final String TABLE_NAME_METODO = "MetodoDiPagamento";
     private static final String SELECT_FROM = "SELECT * FROM ";
     private static final String ID_ORDINE = "IdOrdine";
     private static final String DATA_ACQUISTO = "DataAcquisto";
     private static final String FATTURA = "Fattura";
     private static final String PREZZO_TOTALE = "PrezzoTotale";
     private static final String STATO_ORDINE = "StatoOrdine";
-
-
-
 
 
     private static DataSource ds;
@@ -93,12 +91,12 @@ public class OrdiniModel {
         return dettagli;
     }
 
-    public List<OrdineBean> ordiniPerData (String email, Date dataInizio, Date dataFine){
+    public List<OrdineBean> ordiniPerData(String email, Date dataInizio, Date dataFine) {
         List<OrdineBean> ordini = new ArrayList<>();
         try (
-             Connection con = ds.getConnection();
-             PreparedStatement ps = con.prepareStatement(SELECT_FROM + TABLE_NAME_ORDINE +
-             " WHERE Email = ? AND DataAcquisto >= ? AND DataAcquisto <= ?")) {
+                Connection con = ds.getConnection();
+                PreparedStatement ps = con.prepareStatement(SELECT_FROM + TABLE_NAME_ORDINE +
+                        " WHERE Email = ? AND DataAcquisto >= ? AND DataAcquisto <= ?")) {
             ps.setString(1, email);
             ps.setDate(2, (java.sql.Date) dataInizio);
             ps.setDate(3, (java.sql.Date) dataFine);
@@ -119,7 +117,7 @@ public class OrdiniModel {
         return ordini;
     }
 
-    public List<OrdineBean> ordiniPerPrezzo ( List<OrdineBean> ordini, String email, float minimo, float massimo){
+    public List<OrdineBean> ordiniPerPrezzo(List<OrdineBean> ordini, String email, float minimo, float massimo) {
         List<OrdineBean> ordini2 = new ArrayList<>();
         List<OrdineBean> ordini3 = new ArrayList<>();
 
@@ -143,8 +141,8 @@ public class OrdiniModel {
             }
 
             for (OrdineBean elemento : ordini) {
-                for( OrdineBean elemento2 : ordini2){
-                    if(Objects.equals(elemento.getIdOrdine(), elemento2.getIdOrdine())){
+                for (OrdineBean elemento2 : ordini2) {
+                    if (Objects.equals(elemento.getIdOrdine(), elemento2.getIdOrdine())) {
                         ordini3.add(elemento2);
                     }
                 }
@@ -155,14 +153,14 @@ public class OrdiniModel {
         return ordini3;
     }
 
-    public void aggiungiOrdine (Date dataAcquisto,String fattura, Float prezzo, String email){
+    public void aggiungiOrdine(Date dataAcquisto, String fattura, Float prezzo, String email) {
         try (
                 Connection con = ds.getConnection();
                 PreparedStatement ps = con.prepareStatement
                         ("INSERT INTO " + TABLE_NAME_ORDINE + "(DataAcquisto, Fattura, PrezzoTotale, StatoOrdine, Email) " +
                                 "VALUES(?, ?, ?, 'In Elaborazione', ?)")) {
             ps.setDate(1, (java.sql.Date) dataAcquisto);
-            ps.setString(2,fattura);
+            ps.setString(2, fattura);
             ps.setFloat(3, prezzo);
             ps.setString(4, email);
             ps.executeUpdate();
@@ -171,12 +169,12 @@ public class OrdiniModel {
         }
     }
 
-    public int getLastID (){
+    public int getLastID() {
         int i = 0;
-        try(
+        try (
                 Connection con = ds.getConnection();
-                PreparedStatement ps = con.prepareStatement("SELECT MAX(IdOrdine) AS Max FROM " +TABLE_NAME_ORDINE)){
-            try(ResultSet rs = ps.executeQuery()){
+                PreparedStatement ps = con.prepareStatement("SELECT MAX(IdOrdine) AS Max FROM " + TABLE_NAME_ORDINE)) {
+            try (ResultSet rs = ps.executeQuery()) {
                 rs.next();
                 i = rs.getInt("Max");
             }
@@ -186,14 +184,14 @@ public class OrdiniModel {
         return i;
     }
 
-    public void aggiungiComposto (int quantita, String codice, float prezzo){
+    public void aggiungiComposto(int quantita, String codice, float prezzo) {
         int i = getLastID();
         try (
                 Connection con = ds.getConnection();
                 PreparedStatement ps = con.prepareStatement
                         ("INSERT INTO " + TABLE_NAME_COMPOSTO + "(Quantità, CodSeriale, IdOrdine, PrezzoUnitario) " +
                                 "VALUES(?, ?, ?, ?)")) {
-            ps.setInt(1,quantita );
+            ps.setInt(1, quantita);
             ps.setString(2, codice);
             ps.setInt(3, i);
             ps.setFloat(4, prezzo);
@@ -201,5 +199,25 @@ public class OrdiniModel {
         } catch (SQLException e) {
             logger.log(Level.WARNING, e.getMessage());
         }
+    }
+
+    public boolean verificaCVV(int cvv, String numeroCarta) {
+        int i = 0;
+        boolean risultato = false;
+        try (
+                Connection con = ds.getConnection();
+                PreparedStatement ps = con.prepareStatement("SELECT Cvv FROM " + TABLE_NAME_METODO + " WHERE NumeroCarta = ?")) {
+            ps.setString(1, numeroCarta);
+            try (ResultSet rs = ps.executeQuery()) {
+                rs.next();
+                i = rs.getInt("Cvv");
+                if(cvv == i){
+                    risultato = true;
+                }
+            }
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+        return risultato;
     }
 }

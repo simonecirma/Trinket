@@ -55,6 +55,9 @@ public class OrdiniControl extends HttpServlet {
                     ordiniPerUtenteAdmin(request, response);
                 } else if (action.equalsIgnoreCase("Checkout")) {
                     checkout(request, response);
+                } else if (action.equalsIgnoreCase("VerificaCVV")) {
+                    System.out.println("CIAOOO");
+                    verificaCVV(request, response);
                 }
             }
         } catch (Exception e) {
@@ -239,7 +242,7 @@ public class OrdiniControl extends HttpServlet {
         session.setAttribute("carrello", carrello);
         float prezzoTotale = 0;
 
-        for (int i = 0; i < carrello.getPacchetti().size(); i++){
+        for (int i = 0; i < carrello.getPacchetti().size(); i++) {
             PacchettoBean pacchetto = carrello.getPacchetti().get(i);
             int numero = quantita.get(i);
             prezzoTotale += pacchetto.getPrezzo() * numero;
@@ -292,7 +295,7 @@ public class OrdiniControl extends HttpServlet {
         Date dataDiOggi = java.sql.Date.valueOf(oggi);
         float prezzo = (float) 0;
 
-        for(int i = 0; i < pacchetti_carrello.size(); i++){
+        for (int i = 0; i < pacchetti_carrello.size(); i++) {
             PacchettoBean pacchetto = pacchetti_carrello.get(i);
             String codice = pacchetto.getCodSeriale();
             int copie_acquistate = quantita.get(i);
@@ -301,11 +304,11 @@ public class OrdiniControl extends HttpServlet {
         }
 
         int lastId = ordiniModel.getLastID() + 1;
-        String fattura = "Fattura"+lastId+".pdf";
+        String fattura = "Fattura" + lastId + ".pdf";
 
-        ordiniModel.aggiungiOrdine(dataDiOggi,fattura, prezzo, email);
+        ordiniModel.aggiungiOrdine(dataDiOggi, fattura, prezzo, email);
 
-        for(int i = 0; i < pacchetti_carrello.size(); i++) {
+        for (int i = 0; i < pacchetti_carrello.size(); i++) {
             PacchettoBean pacchetto = pacchetti_carrello.get(i);
             String codice = pacchetto.getCodSeriale();
             float prezzo_unitario = pacchetto.getPrezzo();
@@ -330,5 +333,26 @@ public class OrdiniControl extends HttpServlet {
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("carrello.jsp");
         dispatcher.forward(request, response);
+    }
+
+    public void verificaCVV(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+
+        int cvv = Integer.parseInt(request.getParameter("cvv"));
+        String numeroCarta = request.getParameter("numeroCarta");
+
+        boolean risultato = ordiniModel.verificaCVV(cvv, numeroCarta);
+
+        response.setContentType("text/plain");
+        response.setCharacterEncoding("UTF-8");
+
+        if (risultato) {
+            PrintWriter out = response.getWriter();
+            out.print("giusto");
+            out.flush();
+        } else {
+            PrintWriter out = response.getWriter();
+            out.print("sbagliato");
+            out.flush();
+        }
     }
 }

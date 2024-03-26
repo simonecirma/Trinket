@@ -12,6 +12,7 @@
 <div class="error-container">
     <h2>Errore</h2>
     <p><%= request.getAttribute("errorMessage") %></p>
+    <p>Torna Alla <a href="index.jsp"> Home</a></p>
 </div>
 </body>
 </html>
