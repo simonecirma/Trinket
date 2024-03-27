@@ -3,7 +3,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page errorPage="error.jsp" %>
 
-<% PacchettoBean pacchetto = (PacchettoBean) request.getAttribute("pacchetto");%>
+<% PacchettoBean pacchetto = (PacchettoBean) request.getAttribute("pacchetto");
+   String errore = (String) request.getAttribute("errore");%>
 
 <!DOCTYPE html>
 <html lang="it">
@@ -12,8 +13,10 @@
     <link href="CSS/dettagliPacchetto.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<%@ include file="navbar.jsp" %>
 <div class="tutto">
+    <%@ include file="navbar.jsp" %>
+    <div class="secondo_blocco">
+    <%if(errore == null && pacchetto.getCodSeriale() != null){%>
     <div class="slider-wrapper">
         <div class="slider">
             <% for(ImmaginiBean bean : pacchetto.getImmagini()){
@@ -146,8 +149,12 @@
             </div>
         </div>
     </div>
-
+    <%}else{%>
+        <h1><%=errore%></h1>
+    <%}%>
+    </div>
 </div>
+<%@ include file="footer.jsp" %>
 
 <script>
     let slideIndex = 0;

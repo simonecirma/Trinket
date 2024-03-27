@@ -618,4 +618,48 @@ public class PacchettoModel {
             }
         }
     }
+
+    public PacchettoBean getPacchettoPerNome (String nome){
+        PacchettoBean bean = new PacchettoBean();
+        try(Connection con = ds.getConnection();
+            PreparedStatement ps = con.prepareStatement(SELECT_FROM +TABLE_NAME_PACCHETTO+ " WHERE Nome LIKE ? AND FlagDisponibilità = 1")){
+            ps.setString(1, nome);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    String codSeriale = rs.getString(CODSERIALE);
+                    bean.setCodSeriale(codSeriale);
+                    bean.setNome(rs.getString("Nome"));
+                    bean.setPrezzo(rs.getFloat(PREZZO));
+                    bean.setDescrizioneRidotta(rs.getString(DESCRIZIONE_RIDOTTA));
+                    bean.setDescrizione(rs.getString(DESCRIZIONE));
+                    bean.setTipo(rs.getString("Tipo"));
+                    bean.setNumGiorni(rs.getInt(NUM_GIORNI));
+                    bean.setNumPacchetti(rs.getInt(NUM_PACCHETTI));
+                    bean.setFlagDisponibilita(rs.getBoolean(FLAG_DISPONIBILITA));
+                    bean.setImmagini(immaginiPerPacchetto(codSeriale));
+                }
+            }
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+        return bean;
+    }
+
+    public List<String> getSuggerimentiPacchetto (String ricerca){
+        List<String> suggerimenti = new ArrayList<>();
+        ricerca = "%" + ricerca + "%";
+
+        try(Connection con = ds.getConnection();
+            PreparedStatement ps = con.prepareStatement("SELECT Nome FROM " +TABLE_NAME_PACCHETTO+ " WHERE Nome LIKE ? AND FlagDisponibilità = 1")){
+            ps.setString(1, ricerca);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()){
+                    suggerimenti.add(rs.getString("Nome"));
+                }
+            }
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+        return suggerimenti;
+    }
 }

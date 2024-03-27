@@ -1,13 +1,17 @@
 .tutto{
     width: 100%;
-    height: calc(100vh - 8.5vh);
-    position: relative;
-    top: 8.5vh;
+    height: 100%;
     overflow-y: auto;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: rgba(255, 204, 112, 0.7);
+}
+
+.secondo_blocco{
+    width: 100%;
+    height: 90%;
+    margin-top: auto;
 }
 
 .slider-wrapper {
@@ -17,7 +21,7 @@
     align-items: center;
     float: left;
     width: 50%;
-    height: 60%;
+    height: 100%;
     box-sizing: border-box;
 }
 

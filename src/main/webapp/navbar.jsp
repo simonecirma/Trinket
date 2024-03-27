@@ -36,6 +36,7 @@
 <head>
     <title>Easy Travel</title>
     <link href="CSS/navbar.css" rel="stylesheet" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha384-UG8ao2jwOWB7/oDdObZc6ItJmwUkR/PfMyt9Qs5AwX7PsnYn1CRKCTWyncPTWvaS" crossorigin="anonymous"></script>
 </head>
 <body>
     <nav class="navbar">
@@ -46,15 +47,17 @@
             </a>
         </div>
 
-
         <div class="cerca">
             <div class="ombre"></div>
-            <button class="bottoneRicerca">
-                    <img src="Immagini/Cerca.png" alt="Cerca">
-            </button>
-            <label class="contenitoreBarra">
-                <input type="text" name="text" class="barraRicerca" placeholder="Cerca">
-            </label>
+            <form class="ricerca" action="PacchettoControl?action=Ricerca" method="post">
+                <button type="submit" class="bottoneRicerca">
+                        <img src="Immagini/Cerca.png" alt="Cerca">
+                </button>
+                <label class="contenitoreBarra">
+                    <input type="search" class="barraRicerca" placeholder="Cerca" name="ricerca" list="suggerimentiProdotti">
+                    <datalist id="suggerimentiProdotti" class="suggerimentiProdotti"></datalist>
+                </label>
+            </form>
         </div>
         <%if(flagAmm == null || !flagAmm){%>
             <div class="carrello">
@@ -75,7 +78,7 @@
             }else{
         %>
                 <div class="profilo">
-                    <img src="Immagini/Profilo.png" alt="Profilo" id="profilo">
+                    <img src="Immagini/Profilo.png" alt="Profilo" id="profilo">z5
                     <div class="menuTendina" id="menuTendina">
                         <%if(!flagAmm){%>
                         <!-- Contenuto del menu a tendina -->
@@ -96,6 +99,30 @@
     </nav>
 
     <script>
+        $(document).ready(function(){
+            $('.barraRicerca').keyup(function (){
+                var ricerca = $(this).val();
+                if(ricerca !== ''){
+                    $.ajax({
+                        url: 'PacchettoControl?action=RicercaSuggerimenti',
+                        method: 'POST',
+                        data: {ricerca: ricerca},
+                        dataType: 'json',
+                        success: function (response) {
+                            var suggerimenti = response.suggerimenti;
+                            var suggerimentiHTML = '';
+                            for(var i = 0; i < suggerimenti.length; i++) {
+                                suggerimentiHTML += '<option value="' + suggerimenti[i] + '">';
+                            }
+                            $('.suggerimentiProdotti').html(suggerimentiHTML);
+                        }
+                    })
+                }else {
+                    $('.suggerimentiProdotti').html('');
+                }
+            })
+        });
+
         // Ottieni il link del profilo e il menu a tendina
         var profilo = document.getElementById("profilo");
         var menuTendina = document.getElementById("menuTendina");
@@ -118,7 +145,6 @@
                 menuTendina.style.display = "none";
             }
         });
-
     </script>
 </body>
 </html>

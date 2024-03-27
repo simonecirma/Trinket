@@ -3,6 +3,7 @@ package com.example.trinket.control;
 import com.example.trinket.model.PacchettoModel;
 import com.example.trinket.model.bean.ImmaginiBean;
 import com.example.trinket.model.bean.PacchettoBean;
+import com.google.gson.Gson;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,10 +40,14 @@ public class PacchettoControl extends HttpServlet {
                     ottieniPacchetti(request, response);
                 } else if (action.equalsIgnoreCase("OttieniPacchettiPerAmm")) {
                     ottieniPacchettiPerAmm(request, response);
-                }else if (action.equalsIgnoreCase("FiltriPacchetti")) {
+                } else if (action.equalsIgnoreCase("FiltriPacchetti")) {
                     filtriPacchetti(request, response);
-                }else if (action.equalsIgnoreCase("FiltriIndex")) {
+                } else if (action.equalsIgnoreCase("FiltriIndex")) {
                     filtriIndex(request, response);
+                } else if (action.equalsIgnoreCase("Ricerca")) {
+                    ricerca(request, response);
+                } else if (action.equalsIgnoreCase("RicercaSuggerimenti")) {
+                    ricercaSuggerimenti(request, response);
                 }
             }
         } catch (Exception e) {
@@ -116,7 +122,7 @@ public class PacchettoControl extends HttpServlet {
         List<PacchettoBean> pacchetti;
         pacchetti = pacchettoModel.getPacchetti();
 
-        if(options != null && options.length > 0) {
+        if (options != null && options.length > 0) {
             int[] giorni = new int[options.length];
 
             for (int i = 0; i < options.length; i++) {
@@ -124,12 +130,12 @@ public class PacchettoControl extends HttpServlet {
             }
             pacchetti = pacchettoModel.filtroDurata(giorni);
         }
-        if(!prezzoMinimo.isEmpty() && !prezzoMassimo.isEmpty()){
+        if (!prezzoMinimo.isEmpty() && !prezzoMassimo.isEmpty()) {
             float minimo = Float.parseFloat(prezzoMinimo);
             float massimo = Float.parseFloat(prezzoMassimo);
             pacchetti = pacchettoModel.filtroPrezzo(pacchetti, minimo, massimo);
         }
-        if(tipi != null && tipi.length > 0) {
+        if (tipi != null && tipi.length > 0) {
             pacchetti = pacchettoModel.filtroTipo(pacchetti, tipi);
         }
 
@@ -157,5 +163,30 @@ public class PacchettoControl extends HttpServlet {
         request.setAttribute("pacchetti", pacchetti);
         RequestDispatcher dispatcher = request.getRequestDispatcher("catalogo.jsp");
         dispatcher.forward(request, response);
+    }
+
+    public void ricerca(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String nome = request.getParameter("ricerca");
+        PacchettoBean pacchetto = pacchettoModel.getPacchettoPerNome(nome);
+        request.setAttribute("pacchetto", pacchetto);
+
+
+        if (pacchetto.getCodSeriale() == null) {
+            request.setAttribute("errore", "Nessun Prodotto Trovato!");
+        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("dettagliPacchetto.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    public void ricercaSuggerimenti(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String ricerca = request.getParameter("ricerca");
+        List<String> suggerimenti = (pacchettoModel.getSuggerimentiPacchetto(ricerca));
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+
+        PrintWriter out = response.getWriter();
+        out.print("{\"suggerimenti\": " + new Gson().toJson(suggerimenti) + "}");
+        out.flush();
     }
 }
