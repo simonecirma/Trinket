@@ -149,9 +149,8 @@
             </div>
         </div>
     </div>
+    <%@ include file="footer.jsp" %>
 </div>
-
-
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     var notification = document.getElementById('logoutAlert');

@@ -78,7 +78,7 @@
             }else{
         %>
                 <div class="profilo">
-                    <img src="Immagini/Profilo.png" alt="Profilo" id="profilo">z5
+                    <img src="Immagini/Profilo.png" alt="Profilo" id="profilo">
                     <div class="menuTendina" id="menuTendina">
                         <%if(!flagAmm){%>
                         <!-- Contenuto del menu a tendina -->

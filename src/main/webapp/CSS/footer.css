@@ -1,5 +1,6 @@
 .footer-distributed{
-    background: #666;
+    background-color: #999cff;
+    background-image: linear-gradient(43deg, #ffcc70 0%, #C850C0 46%, #FFCC70 100%);
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
     box-sizing: border-box;
     width: 100%;
@@ -8,6 +9,7 @@
     padding: 55px 50px;
     position: page;
     bottom: 0;
+    margin-top: 5px;
 }
 
 .footer-distributed .footer-left,
@@ -20,19 +22,27 @@
 /* Footer left */
 
 .footer-distributed .footer-left{
-    width: 40%;
+    width: 30%;
 }
 
 /* The company logo */
 
-.footer-distributed h3{
-    color:  #ffffff;
+.a{
+    background: linear-gradient(to right, #7EC8E3, #336B87);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
     font: normal 36px 'Open Sans', cursive;
     margin: 0;
 }
 
-.footer-distributed h3 span{
-    color:  lightseagreen;
+.b{
+    background:  linear-gradient(to right, #336B87, #9B51E0);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font: normal 36px 'Open Sans', cursive;
+    margin: 0;
 }
 
 /* Footer links */
@@ -61,7 +71,7 @@
 /* Footer Center */
 
 .footer-distributed .footer-center{
-    width: 35%;
+    width: 45%;
 }
 
 .footer-distributed .footer-center i{
@@ -88,6 +98,7 @@
     font-weight:400;
     vertical-align: middle;
     margin:0;
+    text-align: center;
 }
 
 .footer-distributed .footer-center p span{
@@ -95,11 +106,7 @@
     font-weight: normal;
     font-size:14px;
     line-height:2;
-}
-
-.footer-distributed .footer-center p a{
-    color:  lightseagreen;
-    text-decoration: none;;
+    text-align: center;
 }
 
 .footer-distributed .footer-links a:before {
@@ -142,22 +149,79 @@
     margin-top: 25px;
 }
 
-.footer-distributed .footer-icons a{
-    display: inline-block;
+.card_footer {
+    width: fit-content;
+    height: fit-content;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.055);
+}
+
+/* for all social containers*/
+.socialContainer {
     width: 35px;
     height: 35px;
-    cursor: pointer;
-    background-color:  #33383b;
-    border-radius: 2px;
-
-    font-size: 20px;
-    color: #ffffff;
-    text-align: center;
-    line-height: 35px;
-
-    margin-right: 3px;
-    margin-bottom: 5px;
+    background-color: rgb(44, 44, 44);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition-duration: .3s;
 }
+/* instagram*/
+.containerOne:hover {
+    background-color: #d62976;
+    transition-duration: .3s;
+}
+/* twitter*/
+.containerTwo:hover {
+    background-color: #00acee;
+    transition-duration: .3s;
+}
+/* linkdin*/
+.containerThree:hover {
+    background-color: #0072b1;
+    transition-duration: .3s;
+}
+/* Whatsapp*/
+.containerFour:hover {
+    background-color: #128C7E;
+    transition-duration: .3s;
+}
+
+.socialContainer:active {
+    transform: scale(0.9);
+    transition-duration: .3s;
+}
+
+.socialSvg {
+    width: 17px;
+}
+
+.socialSvg path {
+    fill: rgb(255, 255, 255);
+}
+
+.socialContainer:hover .socialSvg {
+    animation: slide-in-top 0.3s both;
+}
+
+@keyframes slide-in-top {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
 
 /* If you don't want the footer to be responsive, remove these media queries */
 

@@ -154,8 +154,6 @@
     <%}%>
     </div>
 </div>
-<%@ include file="footer.jsp" %>
-
 <script>
     let slideIndex = 0;
     const slides = document.querySelectorAll('.slider img');
