@@ -69,6 +69,29 @@ public class OrdiniModel {
         return ordini;
     }
 
+    public OrdineBean ricercaOrdiniById(int id) {
+        OrdineBean ordine = new OrdineBean();
+        try (
+                Connection con = ds.getConnection();
+                PreparedStatement ps = con.prepareStatement(SELECT_FROM + TABLE_NAME_ORDINE +
+                        " WHERE IdOrdine = ?")) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    ordine.setIdOrdine(rs.getInt(ID_ORDINE));
+                    ordine.setDataAcquisto(rs.getDate(DATA_ACQUISTO));
+                    ordine.setFattura(rs.getString(FATTURA));
+                    ordine.setPrezzoTotale(rs.getFloat(PREZZO_TOTALE));
+                    ordine.setStatoOrdine(rs.getString(STATO_ORDINE));
+                    ordine.setStatoOrdine(rs.getString("Email"));
+                }
+            }
+        } catch (SQLException e) {
+            logger.log(Level.WARNING, e.getMessage());
+        }
+        return ordine;
+    }
+
     public List<CompostoBean> dettagliOrdine(int idOrdine) {
         List<CompostoBean> dettagli = new ArrayList<>();
         try (
