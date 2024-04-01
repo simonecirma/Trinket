@@ -1,7 +1,6 @@
 .tutto{
     width: 100%;
     position: relative;
-    top: 8.5vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -49,7 +48,7 @@
 
 .sfondo {
     width: 100%;
-    height: calc(100vh - 8.5vh);
+    height: 100vh;
     position: relative;
     overflow-y: auto;
 }
@@ -228,7 +227,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 60vh;
+    height: 55vh;
 }
 
 .domanda{
@@ -245,7 +244,7 @@
     width: 100%;
     height: 40%;
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
@@ -277,7 +276,7 @@
     width: 100%;
     height: 40%;
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 }
@@ -304,4 +303,110 @@
 .tipo img{
     width: 100%;
     height: 100%;
+}
+
+@media screen and (max-width: 1000px) {
+    .suggerrimenti{
+        height: auto;
+    }
+
+    .per-cosa{
+        height: 250px;
+    }
+
+    .tipo{
+        width: 20%;
+        height: 50%;
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+}
+
+@media screen and (max-width: 620px) {
+    .sfondo{
+        height: 60vh;
+    }
+
+    .proposte img{
+        display: none;
+    }
+
+    .entry{
+        height: 30vh;
+    }
+
+    .slogan-testo{
+        font-size: 24px;
+        margin-top: 50px;
+    }
+
+    .freccia{
+        font-size: 100px;
+    }
+
+    .suggerrimenti{
+        height: auto;
+    }
+
+    .per-cosa{
+        height: 250px;
+    }
+
+    .scelte{
+        font-size: 10px;
+    }
+
+    .tipo{
+        width: 25%;
+        height: 50%;
+        font-size: 10px;
+        margin-bottom: 5px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .sfondo{
+        height: 50vh;
+    }
+
+    .animated-button{
+        font-size: 14px;
+        padding: 0 30px
+    }
+
+    .proposte img{
+        display: none;
+    }
+
+    .entry{
+        height: 30vh;
+    }
+
+    .slogan-testo{
+        font-size: 20px;
+        margin-top: 50px;
+    }
+
+    .freccia{
+        font-size: 100px;
+    }
+
+    .suggerrimenti{
+        height: auto;
+    }
+
+    .per-cosa{
+        height: 250px;
+    }
+
+    .scelte{
+        width: 50%;
+        font-size: 10px;
+    }
+
+    .tipo{
+        width: 33%;
+        height: 33%;
+        font-size: 10px;
+    }
 }

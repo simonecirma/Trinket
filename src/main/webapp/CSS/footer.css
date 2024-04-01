@@ -232,11 +232,9 @@
     }
 
     .footer-distributed .footer-left,
-    .footer-distributed .footer-center,
-    .footer-distributed .footer-right{
+    .footer-distributed .footer-center{
         display: block;
         width: 100%;
-        margin-bottom: 40px;
         text-align: center;
     }
 
@@ -244,4 +242,7 @@
         margin-left: 0;
     }
 
+    .footer-distributed .footer-right{
+        display: none;
+    }
 }

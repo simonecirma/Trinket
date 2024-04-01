@@ -9,13 +9,12 @@ html, body {
     background-color: #999cff;
     background-image: linear-gradient(43deg, #ffcc70 0%, #C850C0 46%, #FFCC70 100%);
     overflow: visible; /* Per gestire eventuali elementi che sforano la navbar */
-    padding: 10px 10px 10px 10px; /* Spaziatura interna della navbar */
     display: flex; /* Utilizzo di flexbox per il layout */
     align-items: center; /* Allineamento verticale */
-    position: fixed;
+    position: relative;
     top: 0;
-    width: 99%;
-    height: 10%;
+    width: 100%;
+    height: 7%;
     z-index: 1000;
 }
 
@@ -23,11 +22,14 @@ html, body {
 .logo {
     height: 100%; /* Altezza dell'immagine del logo */
     float: left; /* Allinea il logo a sinistra */
+    margin-left: 10px;
+
 }
 
 .logo img {
-    height: 100%; /* Altezza dell'immagine del logo */
-    width: auto; /* Larghezza automatica per mantenere le proporzioni */
+    height: 80%; /* Altezza dell'immagine del logo */
+    width: 80%; /* Larghezza automatica per mantenere le proporzioni */
+    margin-top: 6px;
     margin-left: 10px;
 }
 
@@ -47,6 +49,7 @@ html, body {
     height: 100%; /* Altezza dell'immagine del logo */
     float: right; /* Allinea il profilo a destra */
     transition: transform 0.3s; /* Aggiunge un effetto di transizione fluida */
+    margin-right: 10px; /* Aggiunge un margine destro per separare dal profilo */
     position: relative; /* Aggiungi questo per posizionare il menu a tendina rispetto a questo elemento */
     z-index: 1000;
 }
@@ -56,15 +59,13 @@ html, body {
 }
 
 .profilo img {
-    height: 100%; /* Altezza dell'immagine del logo */
+    height: 90%; /* Altezza dell'immagine del logo */
     width: auto; /* Larghezza automatica per mantenere le proporzioni */
-    margin-left: 10px; /* Aggiunge un margine sinistro tra le immagini */
 }
 
 .carrello img {
-    height: 100%; /* Altezza dell'immagine del logo */
+    height: 90%; /* Altezza dell'immagine del logo */
     width: auto; /* Larghezza automatica per mantenere le proporzioni */
-    margin-left: 10px; /* Aggiunge un margine sinistro tra le immagini */
 }
 
 /* Stili per la ricerca */
@@ -73,7 +74,6 @@ html, body {
     margin: 0 auto; /* Centra orizzontalmente il div cerca */
     position: relative;
     background: rgba(255, 255, 255, 0.664);
-    padding: 10px 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,7 +83,7 @@ html, body {
 
 .ricerca{
     width: 100%;
-    height: 100%;
+    height: 80%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -92,13 +92,12 @@ html, body {
 
 .contenitoreBarra{
     height: 100%; /* Altezza dell'immagine del logo */
-    margin: 0 2%; /* Centra orizzontalmente il div cerca */
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 22px;
-    min-width: 90%; /* Imposta una larghezza percentuale per consentire la flessibilità */
+    min-width: 80%; /* Imposta una larghezza percentuale per consentire la flessibilità */
     transition: transform 0.3s; /* Aggiunge un effetto di transizione fluida */
     padding: 0;
 }
@@ -142,7 +141,6 @@ html, body {
 }
 
 .barraRicerca {
-    flex: 1; /* Fai espandere la barra di ricerca per occupare lo spazio disponibile */
     border-radius: 20px;
     outline: none;
     border: none;
@@ -188,10 +186,6 @@ html, body {
 
 /* Media query per schermi di larghezza maggiore o uguale a 768px */
 @media screen and (min-width: 768px) {
-    .navbar {
-        height: 6vh; /* Aumenta l'altezza della navbar */
-    }
-
     .logo img {
         transform: scale(2); /* Aumenta le dimensioni del logo */
     }
@@ -212,10 +206,6 @@ html, body {
 
 /* Media query per schermi di larghezza inferiore a 768px */
 @media screen and (max-width: 767px) {
-    .navbar {
-        height: 3vh; /* Riduci l'altezza della navbar */
-    }
-
     .logo img {
         transform: scale(1.8); /* Riduci le dimensioni del logo */
     }
@@ -243,19 +233,36 @@ html, body {
 
 @media screen and (max-width: 500px) {
     .bottoneRicerca {
-        min-width: 22%; /* Aumenta la larghezza minima del bottone di ricerca */
+        display: none;
     }
 }
 
-@media screen and (max-width: 450px) {
-    .bottoneRicerca {
-        min-width: 25%; /* Aumenta la larghezza minima del bottone di ricerca */
+@media screen and (max-width: 350px) {
+    .logo img{
+        width: 50%;
+        height: 80%;
     }
-}
 
-@media screen and (max-width: 300px) {
-    .bottoneRicerca {
-        display: none
+    .profilo{
+        margin: 0;
+    }
+
+    .profilo img{
+        width: 60%;
+        height: 90%;
+    }
+
+    .carrello{
+        margin: 0;
+    }
+
+    .carrello img{
+        width: 60%;
+        height: 90%;
+    }
+
+    .barraRicerca{
+        padding: 0;
     }
 }
 

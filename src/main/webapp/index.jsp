@@ -142,7 +142,7 @@
                     <img src="Immagini/Index/Cucina.jpg" alt="Errore immagine">
                 </a>
             </div>
-            <div class="tipo">Esperienze Gastronomiche:
+            <div class="tipo">Esperienze Culinarie:
                 <a href="PacchettoControl?action=FiltriIndex&tipo=Esperienze Gastronomiche">
                     <img src="Immagini/Index/Gourmet.jpg" alt="Errore immagine">
                 </a>
