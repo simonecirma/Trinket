@@ -21,10 +21,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -437,32 +434,6 @@ public class OrdiniControl extends HttpServlet {
             float xCoordinate9 = 31;
             float yCoordinate9 = 70;
 
-            // Posizione Ricavo per ogni vendita
-            float xCoordinate12 = 370;
-            float yCoordinate12 = 422.5F;
-
-            //Posizione Soldi Spesi Corrente
-            float xCoordinate11 = 475;
-            float yCoordinate11 = 446.5F;
-            float xCoordinate13 = 475;
-            float yCoordinate13 = 192;
-
-            //Posizione Resoconto Finale
-            float xCoordinate14 = 420;
-            float yCoordinate14 = 160;
-
-            //Posizione Nome Ente Contratto
-            float xCoordinate15 = 304;
-            float yCoordinate15 = 76;
-
-            //Posizione Costo Medio Unitario
-            float xCoordinate16 = 304;
-            float yCoordinate16 = 62;
-
-            //Posizione Prezzo Vendita
-            float xCoordinate17 = 304;
-            float yCoordinate17 = 48;
-
             int numPacchetti = bean.getPacchetti().size();
             if (numPacchetti <= 10) {
                 PDDocument document = PDDocument.load(templateFile);
@@ -832,5 +803,29 @@ public class OrdiniControl extends HttpServlet {
                 log("Errore durante il reindirizzamento alla pagina di errore", ex);
             }
         }
+
+        List<OrdineBean> ordini;
+        ordini = ordiniModel.ricercaOrdiniUtente(email);
+        for (OrdineBean ord : ordini) {
+            int cod = ord.getIdOrdine();
+            List<CompostoBean> comp;
+            List<PacchettoBean> paccOrdine = new ArrayList<>();
+            List<Integer> quantPacchettiOrdine = new ArrayList<>();
+            comp = ordiniModel.dettagliOrdine(cod);
+            for (CompostoBean bean2 : comp) {
+                String codice = bean2.getCodSeriale();
+                PacchettoBean bean3;
+                bean3 = pacchettoModel.getPacchettoById(codice);
+                paccOrdine.add(bean3);
+                int i = bean2.getQuantita();
+                quantPacchettiOrdine.add(i);
+            }
+            ord.setPacchetti(paccOrdine);
+            ord.setQuantitaPacchetto(quantPacchettiOrdine);
+        }
+        request.setAttribute("Ordini", ordini);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("ordini.jsp");
+        dispatcher.forward(request, response);
     }
 }
