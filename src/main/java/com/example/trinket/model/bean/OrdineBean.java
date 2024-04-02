@@ -12,7 +12,15 @@ public class OrdineBean {
     private List<PacchettoBean> pacchetti;
     private List<Integer> quantitaPacchetto;
 
-    public OrdineBean() {}
+    public OrdineBean() {
+        this.idOrdine = 0;
+        this.dataAcquisto = null;
+        this.fattura = "";
+        this.prezzoTotale = 0;
+        this.statoOrdine = "";
+        this.pacchetti = null;
+        this.quantitaPacchetto = null;
+    }
 
     public int getIdOrdine() {
         return idOrdine;

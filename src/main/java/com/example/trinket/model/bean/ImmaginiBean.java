@@ -6,6 +6,9 @@ public class ImmaginiBean {
     private boolean flagCopertina;
 
     public ImmaginiBean() {
+        this.nome = "";
+        this.codice = "";
+        this.flagCopertina = false;
     }
 
     public String getNome() {

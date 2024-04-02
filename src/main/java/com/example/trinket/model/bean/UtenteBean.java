@@ -12,6 +12,13 @@ public class UtenteBean {
     private boolean flagAmm;
 
     public UtenteBean() {
+        this.nome = "";
+        this.cognome = "";
+        this.email = "";
+        this.password = "";
+        this.dataDiNascita = null;
+        this.immagine = "";
+        this.flagAmm = false;
     }
 
     public String getNome() {

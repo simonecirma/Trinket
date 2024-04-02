@@ -14,7 +14,17 @@ public class PacchettoBean {
     private boolean flagDisponibilita;
     private List<ImmaginiBean> immagini;
 
-    public PacchettoBean() {
+    public PacchettoBean(){
+        this.codSeriale = "";
+        this.nome = "";
+        this.prezzo = 0;
+        this.descrizioneRidotta = "";
+        this.descrizione = "";
+        this.tipo = "";
+        this.numGiorni = 0;
+        this.numPacchetti = 0;
+        this.flagDisponibilita = false;
+        this.immagini = null;
     }
 
     public String getCodSeriale() {

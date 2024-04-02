@@ -7,6 +7,10 @@ public class CompostoBean {
     private float prezzoUnitario;
 
     public CompostoBean() {
+        this.quantita = 0;
+        this.codSeriale = "";
+        this.idOrdine = 0;
+        this.prezzoUnitario = 0;
     }
 
     public int getQuantita() {

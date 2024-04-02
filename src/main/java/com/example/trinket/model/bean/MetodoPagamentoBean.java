@@ -8,7 +8,12 @@ public class MetodoPagamentoBean {
     private String titolare;
     private int cvv;
 
-    public MetodoPagamentoBean() {}
+    public MetodoPagamentoBean() {
+        this.numeroCarta = "";
+        this.scadenza = null;
+        this.titolare = "";
+        this.cvv = 0;
+    }
 
     public String getNumeroCarta() {
         return numeroCarta;

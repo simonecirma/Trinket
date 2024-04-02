@@ -10,6 +10,13 @@ public class IndirizzoBean {
     private String provincia;
 
     public IndirizzoBean() {
+        this.idIndirizzo = 0;
+        this.nome = "";
+        this.indirizzo = "";
+        this.numeroCivico = 0;
+        this.cap = 0;
+        this.citta = "";
+        this.provincia = "";
     }
 
     public int getIdIndirizzo() {
