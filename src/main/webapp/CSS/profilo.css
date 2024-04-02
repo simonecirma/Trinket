@@ -1,10 +1,8 @@
 .tutto{
     width: 100%;
-    height: calc(100vh - 8.5vh);
+    height: 100vh;
     position: relative;
-    top: 8.5vh;
-    background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
-    overflow-y: auto;
+    top: 7%;
 }
 
 .container {
@@ -847,4 +845,138 @@ select {
     }
 }
 
+@media screen and (max-width: 1270px) {
+    .card__space-25{
+        height: auto;
+    }
 
+    .card__space-75{
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .card4{
+        width: 40%;
+        min-width: 300px;
+        min-height: 200px;
+        top: 5%;
+        transform: translate(0 ,-5%);
+        left: 0;
+        z-index: 2;
+    }
+
+    .card2Elem{
+        width: 40%;
+        min-width: 300px;
+        min-height: 200px;
+        top: 5%;
+        transform: translate(0 ,-5%);
+    }
+
+    .card3Elem{
+        width: 40%;
+        min-width: 300px;
+        min-height: 200px;
+        top: 5%;
+        transform: translate(0 ,-5%);
+    }
+
+    .cardMoltiElem{
+        width: 40%;
+        min-width: 300px;
+        min-height: 200px;
+    }
+
+    .card_indirizzi{
+        width: 40%;
+        min-width: 300px;
+        min-height: 200px;
+        top: 5%;
+        transform: translate(0 ,-5%);
+        left: 0;
+        z-index: 2;
+    }
+
+    .card2Indirizzi{
+        width: 40%;
+        min-width: 300px;
+        min-height: 200px;
+        top: 5%;
+        transform: translate(0 ,-5%);
+    }
+
+    .card3Indirizzi{
+        width: 40%;
+        min-width: 300px;
+        min-height: 200px;
+        top: 5%;
+        transform: translate(0 ,-5%);
+    }
+
+    .cardMoltiIndirizzi{
+        width: 40%;
+        min-width: 300px;
+        min-height: 200px;
+    }
+}
+
+@media screen and (max-width: 820px) {
+    .card4{
+        width: 55%;
+    }
+    .card2Elem{
+        width: 55%;
+    }
+    .card3Elem{
+        width: 55%;
+    }
+    .cardMoltiElem{
+        width: 55%;
+    }
+
+    .card_indirizzi{
+        width: 55%;
+    }
+    .card2Indirizzi{
+        width: 55%;
+    }
+    .card3Indirizzi{
+        width: 55%;
+    }
+    .cardMoltiIndirizzi{
+        width: 55%;
+    }
+}
+
+@media screen and (max-height: 550px) {
+    .tutto{
+        top: 50px;
+    }
+
+    .barraMetodi{
+        min-height: 30px;
+    }
+
+    .container{
+        min-height:100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .menu{
+        height: auto;
+    }
+
+    .intestazioneProfilo{
+        height: auto;
+    }
+}
+
+@media screen and (max-height: 300px) {
+    .container{
+        min-height:300px;
+    }
+}

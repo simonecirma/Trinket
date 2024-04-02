@@ -15,29 +15,31 @@
 <body>
 <%@ include file="navbar.jsp" %>
 <div class="tutto">
-    <table class="utenti">
-        <caption style="display: none;">Elenco Utenti</caption>
-        <thead>
-            <tr class="signolo_utente">
-                <th class="campo">Email</th>
-                <th class="campo">Nome</th>
-                <th class="campo">Cognome</th>
-                <th class="campo">Data Di Nascita</th>
-                <th class="campo">Visualizza Ordini</th>
-            </tr>
-        </thead>
-        <%for(UtenteBean utente : utenti){%>
-            <tbody>
+    <div class="tabella">
+        <table class="utenti">
+            <caption style="display: none;">Elenco Utenti</caption>
+            <thead>
                 <tr class="signolo_utente">
-                    <td class="campo"><%=utente.getEmail()%></td>
-                    <td class="campo"><%=utente.getNome()%></td>
-                    <td class="campo"><%=utente.getCognome()%></td>
-                    <td class="campo"><%=utente.getDataDiNascita()%></td>
-                    <td class="campo"><a href="OrdiniControl?action=OrdiniPerUtenteAdmin&Email=<%=utente.getEmail()%>">Ordini</a> </td>
+                    <th class="campo">Email</th>
+                    <th class="campo">Nome</th>
+                    <th class="campo">Cognome</th>
+                    <th class="campo">Data Di Nascita</th>
+                    <th class="campo">Visualizza Ordini</th>
                 </tr>
-            </tbody>
-        <%}%>
-    </table>
+            </thead>
+            <%for(UtenteBean utente : utenti){%>
+                <tbody>
+                    <tr class="signolo_utente">
+                        <td class="campo"><%=utente.getEmail()%></td>
+                        <td class="campo"><%=utente.getNome()%></td>
+                        <td class="campo"><%=utente.getCognome()%></td>
+                        <td class="campo"><%=utente.getDataDiNascita()%></td>
+                        <td class="campo"><a href="OrdiniControl?action=OrdiniPerUtenteAdmin&Email=<%=utente.getEmail()%>">Ordini</a> </td>
+                    </tr>
+                </tbody>
+            <%}%>
+        </table>
+    </div>
 </div>
 
 </body>
