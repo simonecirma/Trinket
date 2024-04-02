@@ -12,16 +12,6 @@ public class OrdineBean {
     private List<PacchettoBean> pacchetti;
     private List<Integer> quantitaPacchetto;
 
-    public OrdineBean(int idOrdine, Date dataAcquisto, String fattura, float prezzoTotale, String statoOrdine, List<PacchettoBean> pacchetti, List<Integer> quantitaPacchetto) {
-        this.idOrdine = idOrdine;
-        this.dataAcquisto = dataAcquisto;
-        this.fattura = fattura;
-        this.prezzoTotale = prezzoTotale;
-        this.statoOrdine = statoOrdine;
-        this.pacchetti = pacchetti;
-        this.quantitaPacchetto = quantitaPacchetto;
-    }
-
     public OrdineBean() {}
 
     public int getIdOrdine() {

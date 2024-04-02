@@ -11,16 +11,6 @@ public class UtenteBean {
     private String immagine;
     private boolean flagAmm;
 
-    public UtenteBean(String nome, String cognome, String email, String password, Date dataDiNascita, String immagine, boolean flagAmm) {
-        this.nome = nome;
-        this.cognome = cognome;
-        this.email = email;
-        this.password = password;
-        this.dataDiNascita = dataDiNascita;
-        this.immagine = immagine;
-        this.flagAmm = flagAmm;
-    }
-
     public UtenteBean() {
     }
 

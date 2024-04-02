@@ -14,19 +14,6 @@ public class PacchettoBean {
     private boolean flagDisponibilita;
     private List<ImmaginiBean> immagini;
 
-    public PacchettoBean(String codSeriale, String nome, float prezzo, String descrizioneRidotta, String descrizione, String tipo, int numGiorni, int numPacchetti, boolean flagDisponibilita, List<ImmaginiBean> immagini) {
-        this.codSeriale = codSeriale;
-        this.nome = nome;
-        this.prezzo = prezzo;
-        this.descrizioneRidotta = descrizioneRidotta;
-        this.descrizione = descrizione;
-        this.tipo = tipo;
-        this.numGiorni = numGiorni;
-        this.numPacchetti = numPacchetti;
-        this.flagDisponibilita = flagDisponibilita;
-        this.immagini = immagini;
-    }
-
     public PacchettoBean() {
     }
 

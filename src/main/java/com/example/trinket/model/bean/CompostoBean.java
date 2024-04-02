@@ -6,13 +6,6 @@ public class CompostoBean {
     private int idOrdine;
     private float prezzoUnitario;
 
-    public CompostoBean(int quantita, String codSeriale, int idOrdine, float prezzoUnitario) {
-        this.quantita = quantita;
-        this.codSeriale = codSeriale;
-        this.idOrdine = idOrdine;
-        this.prezzoUnitario = prezzoUnitario;
-    }
-
     public CompostoBean() {
     }
 

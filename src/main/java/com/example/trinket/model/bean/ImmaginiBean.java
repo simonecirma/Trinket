@@ -5,12 +5,6 @@ public class ImmaginiBean {
     private String codice;
     private boolean flagCopertina;
 
-    public ImmaginiBean(String nome, String codice, boolean flagCopertina) {
-        this.nome = nome;
-        this.codice = codice;
-        this.flagCopertina = flagCopertina;
-    }
-
     public ImmaginiBean() {
     }
 

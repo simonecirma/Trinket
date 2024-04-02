@@ -8,11 +8,6 @@ public class CarrelloBean implements Serializable {
     private transient List<PacchettoBean> pacchetti;
     private List<Integer> quantita;
 
-    public CarrelloBean(List<PacchettoBean> pacchetti, List<Integer> quantita) {
-        this.pacchetti = pacchetti;
-        this.quantita = quantita;
-    }
-
     public CarrelloBean() {
         pacchetti = new ArrayList<>();
         quantita = new ArrayList<>();

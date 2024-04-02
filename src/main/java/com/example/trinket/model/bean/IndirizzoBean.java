@@ -9,16 +9,6 @@ public class IndirizzoBean {
     private String citta;
     private String provincia;
 
-    public IndirizzoBean(int idIndirizzo, String nome, String indirizzo, int numeroCivico, int cap, String citta, String provincia) {
-        this.idIndirizzo = idIndirizzo;
-        this.nome = nome;
-        this.indirizzo = indirizzo;
-        this.numeroCivico = numeroCivico;
-        this.cap = cap;
-        this.citta = citta;
-        this.provincia = provincia;
-    }
-
     public IndirizzoBean() {
     }
 
