@@ -11,7 +11,7 @@ html, body {
     overflow: visible; /* Per gestire eventuali elementi che sforano la navbar */
     display: flex; /* Utilizzo di flexbox per il layout */
     align-items: center; /* Allineamento verticale */
-    position: relative;
+    position: fixed;
     top: 0;
     width: 100%;
     height: 7%;
@@ -263,6 +263,12 @@ html, body {
 
     .barraRicerca{
         padding: 0;
+    }
+}
+
+@media screen and (max-height: 550px) {
+    .navbar {
+        height: 50px;
     }
 }
 

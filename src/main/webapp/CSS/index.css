@@ -410,3 +410,9 @@
         font-size: 10px;
     }
 }
+
+@media screen and (max-height: 550px) {
+    .tutto{
+        top: 50px;
+    }
+}

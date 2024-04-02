@@ -21,7 +21,7 @@
         <div class="sezione_filtri">
             <p class="heading">Applica Filtri</p>
             <div class="filtri">
-                <form action="PacchettoControl?action=FiltriPacchetti" method="post" name="filtriPacchetti" onsubmit="return validate3()">
+                <form action="PacchettoControl?action=FiltriPacchetti" method="post" name="filtriPacchetti" onsubmit="return validate3()" class="filtriPacchetti_form">
                     <fieldset>
                         <legend>Durata: </legend>
                         <div class="filtro_durata">
@@ -77,7 +77,7 @@
 
                     <div class="bottoni">
                         <button type="submit" class="button1">Applica!</button>
-                        <button type="submit" class="button1" onclick="'PacchettoControl?action=OttieniPacchetti'">Ripristina Filtri</button>
+                        <button type="submit" class="button1" onclick="'PacchettoControl?action=OttieniPacchetti'">Ripristina</button>
                     </div>
                 </form>
             </div>
