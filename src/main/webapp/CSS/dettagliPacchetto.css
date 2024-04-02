@@ -1,17 +1,13 @@
-.tutto{
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body{
     background-color: rgba(255, 204, 112, 0.7);
 }
 
-.secondo_blocco{
+.tutto{
     width: 100%;
-    height: 90%;
-    margin-top: auto;
+    height: 100%;
+    min-height: 100%;
+    position: relative;
+    top: 7%;
 }
 
 .slider-wrapper {
@@ -166,7 +162,7 @@
 }
 
 .input_quantita{
-    width: 20%;
+    width: 30%;
     height: 90%;
     box-sizing: border-box;
     font-size: 18px;
@@ -223,6 +219,13 @@
     display: flex;
     flex-direction: column;
     height: 40%;
+    width: 100%;
+}
+
+.descrizione-estesa{
+    display: flex;
+    flex-direction: column;
+    height: 60%;
     width: 100%;
 }
 
@@ -313,6 +316,7 @@
 
 .button3 {
     margin-left: 5px;
+    margin-bottom: 5px;
     padding: 0.5em;
     border-radius: 5px;
     border: none;
@@ -320,7 +324,7 @@
     transition: .4s ease-in-out;
     background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
     color: rgb(0, 0, 0);
-    width: 20%;
+    width: 100%;
     height: 30%;
 }
 
@@ -371,4 +375,123 @@
 .button:hover .bin-top {
     transition-duration: 0.5s;
     transform: rotate(160deg);
+}
+
+.afd{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 1325px) {
+    .Prezzo2 form{
+        border: 1px solid black;
+        box-sizing: border-box;
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .Prezzo2 form{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .Prezzo2 form{
+        width: 60%;
+    }
+
+    .slider-wrapper {
+        position: relative;
+        float: unset;
+        width: 100%;
+        height: 40%;
+    }
+
+    .slider {
+        width: 50%;
+    }
+
+    .destra{
+        position: relative;
+        width: 100%;
+        float: unset;
+    }
+
+    .card{
+        overflow-y: auto;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .Prezzo2 form{
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .Prezzo2 form{
+        width: 80%;
+    }
+
+    .quantita{
+        flex-direction: column;
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .Prezzo2 form{
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 435px) {
+    .Prezzo{
+        flex-direction: column;
+    }
+
+    .main-section{
+        width: 100%;
+    }
+}
+
+@media screen and (max-height: 700px) {
+    .quantita{
+        height: 50%;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    .descrizione-estesa{
+        height: auto;
+    }
+
+    .descrizione-ridotta{
+        height: auto;
+    }
+
+    .quantita{
+        height: 70%;
+    }
+}
+
+@media screen and (max-height: 550px) {
+    .tutto{
+        top: 50px;
+    }
+}
+
+@media screen and (max-height: 425px) {
+    .quantita{
+        height: 90%;
+    }
+}
+
+@media screen and (max-height: 350px) {
+    .quantita{
+        height: 100%;
+    }
 }
