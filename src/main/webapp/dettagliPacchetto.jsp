@@ -82,13 +82,13 @@
                         <form class="form" action="AdminControl?action=ModificaPacchetto&id=<%=pacchetto.getCodSeriale()%>" method="post" name="modificaInformazioni" onsubmit="return validate()">
                             <div class="campi">
                                 <div class="field">
-                                    <label>Prezzo: </label>
-                                    <input type="number" name ="Prezzo" class="input-field" value="<%= pacchetto.getPrezzo()%>" min="1" step="0.01">
+                                    <label for="Prezzo">Prezzo: </label>
+                                    <input type="number" id="Prezzo" name ="Prezzo" class="input-field" value="<%= pacchetto.getPrezzo()%>" min="1" step="0.01">
                                 </div>
 
                                 <div class="field">
-                                    <label>In Stock: </label>
-                                    <input type="number" name ="Rifornimento" class="input-field" placeholder="Seleziona la quantità" value="<%= pacchetto.getNumPacchetti()%>" min="1">
+                                    <label for="Rifornimento">In Stock: </label>
+                                    <input type="number" id="Rifornimento" name ="Rifornimento" class="input-field" placeholder="Seleziona la quantità" value="<%= pacchetto.getNumPacchetti()%>" min="1">
                                 </div>
                             </div>
                             <div class="afd">

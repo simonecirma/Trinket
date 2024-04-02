@@ -65,9 +65,9 @@
                 %>
                         <tr class="singolo_ordine">
                             <th class="top">
-                                <div class="idOrdine"><label style ="font-weight: normal;">Id Ordine: </label><%= bean.getIdOrdine()%></div>
-                                <div class="dataAcquisto"><label style ="font-weight: normal;">Data Acquisto: </label><%= bean.getDataAcquisto()%></div>
-                                <div class="Prezzo_totale"><label style ="font-weight: normal;">Prezzo: </label> <%= bean.getPrezzoTotale()%></div>
+                                <div class="idOrdine"><span style ="font-weight: normal;">Id Ordine: </span><%= bean.getIdOrdine()%></div>
+                                <div class="dataAcquisto"><span style ="font-weight: normal;">Data Acquisto: </span><%= bean.getDataAcquisto()%></div>
+                                <div class="Prezzo_totale"><span style ="font-weight: normal;">Prezzo: </span> <%= bean.getPrezzoTotale()%></div>
                                 <div class="statoOrdine"><%= bean.getStatoOrdine()%></div>
                             </th>
                         <% for(PacchettoBean bean2 : bean.getPacchetti()) {
@@ -87,8 +87,8 @@
                                 <div class="info_pacchetto">
                                     <div class="Nome"><a href="PacchettoControl?action=DettagliPacchetto&id=<%=bean2.getCodSeriale()%>"><%= bean2.getNome()%></a></div>
                                     <div class="DescrizioneRidotta"><%= bean2.getDescrizioneRidotta()%></div>
-                                    <div class="Quantita"><label style ="font-weight: normal;">Quantità: </label><%= quantita%></div>
-                                    <div class="Prezzo"><label style ="font-weight: normal;">Prezzo: </label><%= bean2.getPrezzo()%></div>
+                                    <div class="Quantita"><span style ="font-weight: normal;">Quantità: </span><%= quantita%></div>
+                                    <div class="Prezzo"><span style ="font-weight: normal;">Prezzo: </span><%= bean2.getPrezzo()%></div>
                     <%
                         }
                     %>

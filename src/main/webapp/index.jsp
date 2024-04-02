@@ -87,7 +87,7 @@
     </div>
 
     <div class="suggerrimenti">
-        <label class="domanda">Hai bisogno di un regalo?</label>
+        <span class="domanda">Hai bisogno di un regalo?</span>
         <div class="per-chi">
             <div class="scelte">Per coppia:
                 <a href="PacchettoControl?action=OttieniPacchetti">
@@ -110,7 +110,7 @@
                 </a>
             </div>
         </div>
-        <label class="domanda">Cerchi Ispirazione?</label>
+        <span class="domanda">Cerchi Ispirazione?</span>
         <div class="per-cosa">
             <div class="tipo">Terme E Spa:
                 <a href="PacchettoControl?action=FiltriIndex&tipo=Terme E Spa">

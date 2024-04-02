@@ -37,12 +37,12 @@
                                 <div class="Nome"><a href="PacchettoControl?action=DettagliPacchetto&id=<%=bean.getCodSeriale()%>"><%= bean.getNome()%></a></div>
                                 <div class="DescrizioneRidotta"><%= bean.getDescrizioneRidotta()%></div>
                                 <div class="Quantita">
-                                    <div class ="scritta"><label style="font-weight: normal;">Quantità: </label><span id="quantita<%=i%>"><%= quantita.get(i)%></span></div>
+                                    <div class ="scritta"><span style="font-weight: normal;">Quantità: </span><span id="quantita<%=i%>"><%= quantita.get(i)%></span></div>
                                     <button id="aggiungi<%=i%>" class="aggiungi" onclick="aggiungiQuantita(<%=i%>, <%=bean.getNumPacchetti()%>)"> + </button>
                                     <button id="rimuovi<%=i%>" class="rimuovi" onclick="rimuoviQuantita(<%=i%>)" <%if(quantita.get(i) == 1){%>style="background-color:rgb(141,141,141)<%}%>"> - </button>
                                 </div>
                                 <div class="Prezzo">
-                                    <div class ="scritta"><label style ="font-weight: normal;">Prezzo: </label><%= bean.getPrezzo()%></div>
+                                    <div class ="scritta"><span style ="font-weight: normal;">Prezzo: </span><%= bean.getPrezzo()%></div>
                                     <button class="button" onclick="location.href='OrdiniControl?action=RimuoviDalCarrello&id=<%=bean.getCodSeriale()%>'">
                                         <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +144,7 @@
                     <span class="dati" id="selectedPayment" style="display: none"></span><br>
                     <span class="dati" id="selectedPayment2" style="display: none"></span><br>
                     <span class="dati" id="selectedPayment3" style="display: none"></span><br>
-                    <a href="#" id="choosePayment" onclick="showPaymentOptions()">Scegli metodo di pagamento</a>
+                    <button id="choosePayment" onclick="showPaymentOptions()" style="background-color: inherit; border: none; cursor: pointer">Scegli metodo di pagamento</button>
                 </div>
             </div>
             <div class="indirizzo_spedizione">
@@ -153,7 +153,7 @@
                     <span class="dati" id="selectedPayment5" style="display: none"></span><br>
                     <span class="dati" id="selectedPayment6" style="display: none"></span><br>
                     <span class="dati" id="selectedPayment7" style="display: none"></span><br>
-                    <a href="#" id="chooseIndirizzo" onclick="showAddressOptions()">Scegli indirizzo di spedizione</a>
+                    <button id="chooseIndirizzo" onclick="showAddressOptions()" style="background-color: inherit; border: none; cursor: pointer">Scegli indirizzo di spedizione</button>
                 </div>
             </div>
             <div class="prezzo">
