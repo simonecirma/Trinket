@@ -84,6 +84,7 @@ input[type="file"]{
     border-radius: 22px;
     transition: all .3s;
     width: 20%;
+    min-width: 300px;
     height: 30%;
     z-index: 2;
 }

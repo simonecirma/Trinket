@@ -169,10 +169,7 @@ fieldset{
 .singolo_pacchetto{
     width: 20%;
     height: 250px;
-    margin-top: 4px;
-    margin-right: 5px;
-    margin-left: 5px;
-    margin-bottom: 1px;
+    margin: 3px 5px 2px 5px;
     border: 1px solid black;
     display: flex;
     flex-direction: column;
@@ -381,6 +378,11 @@ select {
     /* Remove focus outline */
     &:focus {
         outline: none;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .nome {
+        height: auto;
     }
 }
 

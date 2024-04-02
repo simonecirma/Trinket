@@ -1,8 +1,8 @@
 .tutto{
     width: 100%;
-    height: calc(100vh - 8.5vh);
+    height: auto;
     position: relative;
-    top: 8.5vh;
+    top: 7%;
     overflow-y: auto;
     background-color: rgba(255, 204, 112, 0.7);
 }
@@ -29,7 +29,6 @@
 
 .heading {
     text-align: center;
-    margin: 2em;
     color: rgb(255, 255, 255);
     font-size: 1.2em;
 }
@@ -52,6 +51,7 @@ fieldset{
     align-items: center;
     justify-content: center;
     height: 40%;
+    box-sizing: border-box;
 }
 
 .bottoni{
@@ -139,6 +139,7 @@ fieldset{
     height: 100%;
     position: relative;
     z-index: 1;
+    overflow-x: hidden;
 }
 
 .link_immagine{
@@ -147,11 +148,11 @@ fieldset{
 }
 
 .ordini{
-    width: 99%;
+    width: 100%;
 }
 
 .singolo_ordine{
-    width: 99%;
+    width: 100%;
     height: auto;
     border: 2px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 0 15px rgb(200, 80, 192);
@@ -159,6 +160,7 @@ fieldset{
     flex-direction: column;
     margin-top: 5px;
     background-color: white;
+    box-sizing: border-box;
 }
 
 .singolo_ordine .top {
@@ -278,6 +280,7 @@ fieldset{
     border-bottom: 2px solid rgba(0, 0, 0, 1);
     border-left: 2px solid rgba(0, 0, 0, 1);
     border-right: 2px solid rgba(0, 0, 0, 1);
+    box-sizing: border-box;
 }
 
 .tooltip {
@@ -324,6 +327,7 @@ fieldset{
     border-bottom: 2px solid rgb(255, 255, 255);
     border-left: 2px solid rgb(255, 255, 255);
     border-right: 2px solid rgb(255, 255, 255);
+    box-sizing: border-box;
 }
 
 .Btn:hover .svgIcon {
@@ -343,5 +347,51 @@ fieldset{
     }
 }
 
+@media screen and (max-width: 1000px) {
+    .sezione_filtri{
+        width: 30%;
+    }
 
+    .card{
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .singolo_ordine{
+        height: auto;
+    }
+
+    .singolo_ordine .top{
+        height: auto;
+    }
+
+    .singolo_ordine .bottom{
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .sezione_filtri{
+        width: 37%;
+    }
+
+    .card{
+        width: 63%;
+    }
+}
+
+@media screen and (max-height: 550px) {
+    .tutto{
+        top: 50px;
+    }
+
+    .sezione_filtri{
+        position: relative;
+    }
+}
 
