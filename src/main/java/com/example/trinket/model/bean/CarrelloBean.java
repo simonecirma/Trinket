@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarrelloBean implements Serializable {
-    private List<PacchettoBean> pacchetti;
+    private transient List<PacchettoBean> pacchetti;
     private List<Integer> quantita;
 
     public CarrelloBean(List<PacchettoBean> pacchetti, List<Integer> quantita) {

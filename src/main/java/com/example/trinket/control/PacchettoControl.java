@@ -27,6 +27,10 @@ public class PacchettoControl extends HttpServlet {
     private static final String ERROR_MESSAGE = "errorMessage";
     private static final String MESSAGGIO = "Si è verificato un errore: ";
     private static final String ERRORE = "/error.jsp";
+    private static final String PACCHETTI = "pacchetti";
+    private static final String CATALOGO = "catalogo.jsp";
+
+
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -86,11 +90,11 @@ public class PacchettoControl extends HttpServlet {
         List<String> tipi = pacchettoModel.getTipo();
         List<Integer> durata = pacchettoModel.getDurata();
 
-        request.setAttribute("pacchetti", pacchetti);
+        request.setAttribute(PACCHETTI, pacchetti);
         request.setAttribute("tipi", tipi);
         request.setAttribute("durata", durata);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("catalogo.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(CATALOGO);
         dispatcher.forward(request, response);
     }
 
@@ -105,11 +109,11 @@ public class PacchettoControl extends HttpServlet {
         List<String> tipi = pacchettoModel.getTipo();
         List<Integer> durata = pacchettoModel.getDurata();
 
-        request.setAttribute("pacchetti", pacchetti);
+        request.setAttribute(PACCHETTI, pacchetti);
         request.setAttribute("tipi", tipi);
         request.setAttribute("durata", durata);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("catalogo.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(CATALOGO);
         dispatcher.forward(request, response);
     }
 
@@ -144,14 +148,14 @@ public class PacchettoControl extends HttpServlet {
             immagini = pacchettoModel.immaginiPerPacchetto(bean.getCodSeriale());
             bean.setImmagini(immagini);
         }
-        request.setAttribute("pacchetti", pacchetti);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("catalogo.jsp");
+        request.setAttribute(PACCHETTI, pacchetti);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(CATALOGO);
         dispatcher.forward(request, response);
     }
 
     public void filtriIndex(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String tipo = request.getParameter("tipo");
-        List<PacchettoBean> pacchetti = new ArrayList<>();
+        List<PacchettoBean> pacchetti;
         pacchetti = pacchettoModel.filtroTipoIndex(tipo);
 
         for (PacchettoBean bean : pacchetti) {
@@ -160,8 +164,8 @@ public class PacchettoControl extends HttpServlet {
             bean.setImmagini(immagini);
         }
 
-        request.setAttribute("pacchetti", pacchetti);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("catalogo.jsp");
+        request.setAttribute(PACCHETTI, pacchetti);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(CATALOGO);
         dispatcher.forward(request, response);
     }
 
@@ -178,7 +182,7 @@ public class PacchettoControl extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    public void ricercaSuggerimenti(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void ricercaSuggerimenti(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String ricerca = request.getParameter("ricerca");
         List<String> suggerimenti = (pacchettoModel.getSuggerimentiPacchetto(ricerca));
 

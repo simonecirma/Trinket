@@ -30,6 +30,10 @@ public class PacchettoModel {
     private static final String NUM_GIORNI = "NumGiorni";
     private static final String NUM_PACCHETTI = "NumPacchetti";
     private static final String FLAG_DISPONIBILITA = "FlagDisponibilità";
+    private static final String INSERT_INTO = "INSERT INTO ";
+    private static final String UPDATE = "UPDATE ";
+
+
 
 
     private static DataSource ds;
@@ -121,7 +125,7 @@ public class PacchettoModel {
                 PreparedStatement ps = con.prepareStatement("SELECT NumGiorni FROM " + TABLE_NAME_DURATA )) {
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    int numGiorni = rs.getInt("NumGiorni");
+                    int numGiorni = rs.getInt(NUM_GIORNI);
                     durata.add(numGiorni);
                 }
             }
@@ -300,7 +304,7 @@ public class PacchettoModel {
     }
 
     public List<PacchettoBean> filtroTipo(List<PacchettoBean> pacchetti, String[] tipo) {
-        List<PacchettoBean> pacchetti2 = new ArrayList<>();
+        List<PacchettoBean> pacchetti2;
         List<PacchettoBean> pacchetti3 = new ArrayList<>();
         if (tipo.length == 7) {
             pacchetti2 = getPacchetti();
@@ -514,7 +518,7 @@ public class PacchettoModel {
         try (
                 Connection con = ds.getConnection();
                 PreparedStatement ps = con.prepareStatement
-                        ("INSERT INTO " + TABLE_NAME_PACCHETTO + "(CodSeriale, Nome, Prezzo, Descrizione, DescrizioneRidotta, Tipo, NumGiorni, NumPacchetti, FlagDisponibilità) " +
+                        (INSERT_INTO + TABLE_NAME_PACCHETTO + "(CodSeriale, Nome, Prezzo, Descrizione, DescrizioneRidotta, Tipo, NumGiorni, NumPacchetti, FlagDisponibilità) " +
                                 "VALUES(?, ?, ?, ?, ?, ?, ?, ?, 1)")) {
             ps.setString(1, codSeriale);
             ps.setString(2, nome);
@@ -534,7 +538,7 @@ public class PacchettoModel {
         try (
                 Connection con = ds.getConnection();
                 PreparedStatement ps = con.prepareStatement
-                        ("INSERT INTO " + TABLE_NAME_IMMAGINI + "(Nome, Codice, FlagCopertina ) " +
+                        (INSERT_INTO + TABLE_NAME_IMMAGINI + "(Nome, Codice, FlagCopertina ) " +
                                 "VALUES(?, ?, 1)")) {
             ps.setString(1, nome);
             ps.setString(2, codSeriale);
@@ -548,7 +552,7 @@ public class PacchettoModel {
         try (
                 Connection con = ds.getConnection();
                 PreparedStatement ps = con.prepareStatement
-                        ("INSERT INTO " + TABLE_NAME_IMMAGINI + "(Nome, Codice, FlagCopertina ) " +
+                        (INSERT_INTO + TABLE_NAME_IMMAGINI + "(Nome, Codice, FlagCopertina ) " +
                                 "VALUES(?, ?, 0)")) {
             ps.setString(1, nome);
             ps.setString(2, codSeriale);
@@ -561,7 +565,7 @@ public class PacchettoModel {
     public void modificaPacchetto (Float prezzo, int quantita, String codice){
         try(
                 Connection con = ds.getConnection();
-                PreparedStatement ps = con.prepareStatement("UPDATE " +TABLE_NAME_PACCHETTO+ " SET Prezzo = ?, NumPacchetti = ?, FlagDisponibilità = 1 WHERE CodSeriale = ? ")) {
+                PreparedStatement ps = con.prepareStatement(UPDATE +TABLE_NAME_PACCHETTO+ " SET Prezzo = ?, NumPacchetti = ?, FlagDisponibilità = 1 WHERE CodSeriale = ? ")) {
             ps.setFloat(1, prezzo);
             ps.setInt(2, quantita);
             ps.setString(3, codice);
@@ -574,7 +578,7 @@ public class PacchettoModel {
     public void rimuoviPacchetto (String codice){
         try(
                 Connection con = ds.getConnection();
-                PreparedStatement ps = con.prepareStatement("UPDATE " +TABLE_NAME_PACCHETTO+ " SET FlagDisponibilità = 0, NumPacchetti = 0 WHERE CodSeriale = ? ")) {
+                PreparedStatement ps = con.prepareStatement(UPDATE +TABLE_NAME_PACCHETTO+ " SET FlagDisponibilità = 0, NumPacchetti = 0 WHERE CodSeriale = ? ")) {
             ps.setString(1, codice);
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -585,7 +589,7 @@ public class PacchettoModel {
     public void modificaNumPacchetti (int quantita, String codice){
         try(
                 Connection con = ds.getConnection();
-                PreparedStatement ps = con.prepareStatement("UPDATE " +TABLE_NAME_PACCHETTO+ " SET NumPacchetti = NumPacchetti - ? WHERE CodSeriale = ? ")) {
+                PreparedStatement ps = con.prepareStatement(UPDATE +TABLE_NAME_PACCHETTO+ " SET NumPacchetti = NumPacchetti - ? WHERE CodSeriale = ? ")) {
             ps.setInt(1, quantita);
             ps.setString(2, codice);
             ps.executeUpdate();
@@ -600,7 +604,7 @@ public class PacchettoModel {
             ps.setString(1, codice);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    i = rs.getInt("NumPacchetti");
+                    i = rs.getInt(NUM_PACCHETTI);
                 }
             }
         } catch (SQLException e) {
@@ -610,7 +614,7 @@ public class PacchettoModel {
         if(i == 0){
             try(
                     Connection con = ds.getConnection();
-                    PreparedStatement ps = con.prepareStatement("UPDATE " +TABLE_NAME_PACCHETTO+ " SET FlagDisponibilità = 0 WHERE CodSeriale = ? ")) {
+                    PreparedStatement ps = con.prepareStatement(UPDATE +TABLE_NAME_PACCHETTO+ " SET FlagDisponibilità = 0 WHERE CodSeriale = ? ")) {
                 ps.setString(1, codice);
                 ps.executeUpdate();
             } catch (SQLException e) {

@@ -330,11 +330,11 @@
     transition-duration: .3s;
 }
 
-.svgIcon {
+.botChec {
     width: 16px;
 }
 
-.svgIcon path {
+.botChec path {
     fill: white;
 }
 

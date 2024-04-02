@@ -226,7 +226,7 @@ public class UtenteModel {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            logger.log(Level.WARNING, e.getMessage());
         }
         return utenti;
     }

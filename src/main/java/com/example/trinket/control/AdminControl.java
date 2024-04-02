@@ -1,6 +1,5 @@
 package com.example.trinket.control;
 
-import com.example.trinket.model.AccessoModel;
 import com.example.trinket.model.PacchettoModel;
 import com.example.trinket.model.UtenteModel;
 import com.example.trinket.model.bean.ImmaginiBean;
@@ -17,7 +16,6 @@ import javax.servlet.http.Part;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -32,6 +30,9 @@ public class AdminControl extends HttpServlet {
     private static final String ERROR_MESSAGE = "errorMessage";
     private static final String MESSAGGIO = "Si è verificato un errore: ";
     private static final String ERRORE = "/error.jsp";
+    private static final String DURATA = "durata";
+    private static final String PACCHETTI = "pacchetti";
+    private static final String CATALOGO = "catalogo.jsp";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) {
@@ -87,8 +88,8 @@ public class AdminControl extends HttpServlet {
         for (Part part : immaginiParts) {
             if (part.getName().equals("Immagini")) {
                 // Genera un nome univoco per l'immagine
-                String nome_immagine = String.valueOf(UUID.randomUUID());
-                String pathImmagine = path + nome_immagine;
+                String nomeImmagine = String.valueOf(UUID.randomUUID());
+                String pathImmagine = path + nomeImmagine;
 
                 try (FileOutputStream fos = new FileOutputStream(pathImmagine);
                      InputStream is = part.getInputStream()) {
@@ -102,13 +103,13 @@ public class AdminControl extends HttpServlet {
                     RequestDispatcher dispatcher = request.getRequestDispatcher(ERRORE);
                     dispatcher.forward(request, response);
                 }
-                pacchettoModel.aggiungiImmagini(codSeriale, nome_immagine);
+                pacchettoModel.aggiungiImmagini(codSeriale, nomeImmagine);
             }
         }
 
         Part copertina = request.getPart("Copertina");
-        String nome_copertina = String.valueOf(UUID.randomUUID());
-        String path2 = path + nome_copertina;
+        String nomeCopertina = String.valueOf(UUID.randomUUID());
+        String path2 = path + nomeCopertina;
 
         try (FileOutputStream fos = new FileOutputStream(path2);
              InputStream is = copertina.getInputStream()) {
@@ -122,7 +123,7 @@ public class AdminControl extends HttpServlet {
             dispatcher.forward(request, response);
         }
 
-        pacchettoModel.aggiungiCopertina(codSeriale, nome_copertina);
+        pacchettoModel.aggiungiCopertina(codSeriale, nomeCopertina);
         List<PacchettoBean> pacchetti = pacchettoModel.getPacchettiPerAmministratore();
         for (PacchettoBean bean : pacchetti) {
             List<ImmaginiBean> immagini;
@@ -133,10 +134,10 @@ public class AdminControl extends HttpServlet {
         List<String> tipi = pacchettoModel.getTipo();
         List<Integer> durata = pacchettoModel.getDurata();
         request.setAttribute("tipi", tipi);
-        request.setAttribute("durata", durata);
+        request.setAttribute(DURATA, durata);
 
-        request.setAttribute("pacchetti", pacchetti);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("catalogo.jsp");
+        request.setAttribute(PACCHETTI, pacchetti);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(CATALOGO);
         dispatcher.forward(request, response);
     }
 
@@ -161,11 +162,11 @@ public class AdminControl extends HttpServlet {
         List<String> tipi = pacchettoModel.getTipo();
         List<Integer> durata = pacchettoModel.getDurata();
         request.setAttribute("tipi", tipi);
-        request.setAttribute("durata", durata);
-        request.setAttribute("pacchetti", pacchetti);
+        request.setAttribute(DURATA, durata);
+        request.setAttribute(PACCHETTI, pacchetti);
 
         pacchettoModel.modificaPacchetto(prezzo, rifornimento, codice);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("catalogo.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(CATALOGO);
         dispatcher.forward(request, response);
     }
 
@@ -184,10 +185,10 @@ public class AdminControl extends HttpServlet {
         List<String> tipi = pacchettoModel.getTipo();
         List<Integer> durata = pacchettoModel.getDurata();
         request.setAttribute("tipi", tipi);
-        request.setAttribute("durata", durata);
-        request.setAttribute("pacchetti", pacchetti);
+        request.setAttribute(DURATA, durata);
+        request.setAttribute(PACCHETTI, pacchetti);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("catalogo.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(CATALOGO);
         dispatcher.forward(request, response);
     }
 

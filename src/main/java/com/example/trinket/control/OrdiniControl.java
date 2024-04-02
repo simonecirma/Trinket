@@ -39,6 +39,14 @@ public class OrdiniControl extends HttpServlet {
     private static final String MESSAGGIO = "Si è verificato un errore: ";
     private static final String ERRORE = "/error.jsp";
     private static final String EMAIL = "Email";
+    private static final String ORDINI = "Ordini";
+    private static final String ORDINIJSP = "ordini.jsp";
+    private static final String CARRELLO = "carrello";
+    private static final String FATTURA = "Fattura";
+
+
+
+
 
 
     @Override
@@ -104,8 +112,8 @@ public class OrdiniControl extends HttpServlet {
             bean.setPacchetti(pacchettiOrdine);
             bean.setQuantitaPacchetto(quantitaPacchettiOrdine);
         }
-        request.setAttribute("Ordini", ordini);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("ordini.jsp");
+        request.setAttribute(ORDINI, ordini);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(ORDINIJSP);
         dispatcher.forward(request, response);
     }
 
@@ -144,8 +152,8 @@ public class OrdiniControl extends HttpServlet {
             bean.setPacchetti(pacchettiOrdine);
             bean.setQuantitaPacchetto(quantitaPacchettiOrdine);
         }
-        request.setAttribute("Ordini", ordini);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("ordini.jsp");
+        request.setAttribute(ORDINI, ordini);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(ORDINIJSP);
         dispatcher.forward(request, response);
     }
 
@@ -155,10 +163,10 @@ public class OrdiniControl extends HttpServlet {
         String id = request.getParameter("id");
         HttpSession session = request.getSession();
 
-        CarrelloBean carrello = (CarrelloBean) session.getAttribute("carrello");
+        CarrelloBean carrello = (CarrelloBean) session.getAttribute(CARRELLO);
         if (carrello == null) {
             carrello = new CarrelloBean();
-            session.setAttribute("carrello", carrello);
+            session.setAttribute(CARRELLO, carrello);
         }
 
         List<PacchettoBean> pacchetti = carrello.getPacchetti();
@@ -186,7 +194,7 @@ public class OrdiniControl extends HttpServlet {
         carrello.setPacchetti(pacchetti);
         carrello.setQuantita(quantita);
 
-        session.setAttribute("carrello", carrello);
+        session.setAttribute(CARRELLO, carrello);
 
         List<PacchettoBean> pacchetti2;
         pacchetti2 = pacchettoModel.getPacchetti();
@@ -205,7 +213,7 @@ public class OrdiniControl extends HttpServlet {
         HttpSession session = request.getSession();
         String codice = request.getParameter("id");
 
-        CarrelloBean carrello = (CarrelloBean) session.getAttribute("carrello");
+        CarrelloBean carrello = (CarrelloBean) session.getAttribute(CARRELLO);
         List<PacchettoBean> pacchetti = carrello.getPacchetti();
         List<Integer> quantita = carrello.getQuantita();
 
@@ -222,7 +230,7 @@ public class OrdiniControl extends HttpServlet {
         carrello.setQuantita(quantita);
         carrello.setPacchetti(pacchetti);
 
-        session.setAttribute("carrello", carrello);
+        session.setAttribute(CARRELLO, carrello);
 
         String email = (String) request.getSession().getAttribute(EMAIL);
         if (email != null) {
@@ -243,10 +251,10 @@ public class OrdiniControl extends HttpServlet {
         int nuovaQuantita = Integer.parseInt(request.getParameter("quantita"));
 
         HttpSession session = request.getSession();
-        CarrelloBean carrello = (CarrelloBean) session.getAttribute("carrello");
+        CarrelloBean carrello = (CarrelloBean) session.getAttribute(CARRELLO);
         List<Integer> quantita = carrello.getQuantita();
         quantita.set(index, nuovaQuantita);
-        session.setAttribute("carrello", carrello);
+        session.setAttribute(CARRELLO, carrello);
         float prezzoTotale = 0;
 
         for (int i = 0; i < carrello.getPacchetti().size(); i++) {
@@ -288,46 +296,46 @@ public class OrdiniControl extends HttpServlet {
             bean.setPacchetti(pacchettiOrdine);
             bean.setQuantitaPacchetto(quantitaPacchettiOrdine);
         }
-        request.setAttribute("Ordini", ordini);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("ordini.jsp");
+        request.setAttribute(ORDINI, ordini);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(ORDINIJSP);
         dispatcher.forward(request, response);
     }
 
     public void checkout(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        CarrelloBean bean = (CarrelloBean) request.getSession().getAttribute("carrello");
-        List<PacchettoBean> pacchetti_carrello = bean.getPacchetti();
+        CarrelloBean bean = (CarrelloBean) request.getSession().getAttribute(CARRELLO);
+        List<PacchettoBean> pacchettiCarrello = bean.getPacchetti();
         List<Integer> quantita = bean.getQuantita();
         String email = (String) request.getSession().getAttribute(EMAIL);
         LocalDate oggi = LocalDate.now();
         Date dataDiOggi = java.sql.Date.valueOf(oggi);
-        float prezzo = (float) 0;
+        float prezzo = 0;
 
-        for (int i = 0; i < pacchetti_carrello.size(); i++) {
-            PacchettoBean pacchetto = pacchetti_carrello.get(i);
+        for (int i = 0; i < pacchettiCarrello.size(); i++) {
+            PacchettoBean pacchetto = pacchettiCarrello.get(i);
             String codice = pacchetto.getCodSeriale();
-            int copie_acquistate = quantita.get(i);
-            pacchettoModel.modificaNumPacchetti(copie_acquistate, codice);
-            prezzo += pacchetto.getPrezzo() * copie_acquistate;
+            int copieAcquistate = quantita.get(i);
+            pacchettoModel.modificaNumPacchetti(copieAcquistate, codice);
+            prezzo += pacchetto.getPrezzo() * copieAcquistate;
         }
 
         int lastId = ordiniModel.getLastID() + 1;
-        String fattura = "Fattura" + lastId + ".pdf";
+        String fattura = FATTURA + lastId + ".pdf";
 
         ordiniModel.aggiungiOrdine(dataDiOggi, fattura, prezzo, email);
 
-        for (int i = 0; i < pacchetti_carrello.size(); i++) {
-            PacchettoBean pacchetto = pacchetti_carrello.get(i);
+        for (int i = 0; i < pacchettiCarrello.size(); i++) {
+            PacchettoBean pacchetto = pacchettiCarrello.get(i);
             String codice = pacchetto.getCodSeriale();
-            float prezzo_unitario = pacchetto.getPrezzo();
-            int copie_acquistate = quantita.get(i);
-            ordiniModel.aggiungiComposto(copie_acquistate, codice, prezzo_unitario);
+            float prezzoUnitario = pacchetto.getPrezzo();
+            int copieAcquistate = quantita.get(i);
+            ordiniModel.aggiungiComposto(copieAcquistate, codice, prezzoUnitario);
         }
 
-        pacchetti_carrello.clear();
+        pacchettiCarrello.clear();
         quantita.clear();
-        bean.setPacchetti(pacchetti_carrello);
+        bean.setPacchetti(pacchettiCarrello);
         bean.setQuantita(quantita);
-        request.getSession().setAttribute("carrello", bean);
+        request.getSession().setAttribute(CARRELLO, bean);
 
         List<IndirizzoBean> indirizzi;
         List<MetodoPagamentoBean> metodi;
@@ -342,7 +350,7 @@ public class OrdiniControl extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    public void verificaCVV(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void verificaCVV(HttpServletRequest request, HttpServletResponse response) throws IOException{
 
         int cvv = Integer.parseInt(request.getParameter("cvv"));
         String numeroCarta = request.getParameter("numeroCarta");
@@ -386,15 +394,14 @@ public class OrdiniControl extends HttpServlet {
         String cognome = (String) request.getSession().getAttribute("Cognome");
 
         int n = bean.getIdOrdine();
-        String file = "Fattura" + n + ".pdf";
 
         try {
             String servletPath = request.getServletContext().getRealPath("");
-            String filePath = servletPath + "Fattura" + File.separator + "Fattura" + n + ".pdf";
+            String filePath = servletPath + FATTURA + File.separator + FATTURA + n + ".pdf";
 
             // Carica il template PDF esistente
-            File templateFile = new File(servletPath + "Fattura" + File.separator + "TemplateFattura.pdf");
-            File templateFile2 = new File(servletPath + "Fattura" + File.separator + "TemplateFattura2.pdf");
+            File templateFile = new File(servletPath + FATTURA + File.separator + "TemplateFattura.pdf");
+            File templateFile2 = new File(servletPath + FATTURA + File.separator + "TemplateFattura2.pdf");
 
             // Posizione delle celle nel template da riempire
 
@@ -823,9 +830,9 @@ public class OrdiniControl extends HttpServlet {
             ord.setPacchetti(paccOrdine);
             ord.setQuantitaPacchetto(quantPacchettiOrdine);
         }
-        request.setAttribute("Ordini", ordini);
+        request.setAttribute(ORDINI, ordini);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("ordini.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher(ORDINIJSP);
         dispatcher.forward(request, response);
     }
 }
