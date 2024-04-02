@@ -1,11 +1,11 @@
 .tutto{
     width: 100%;
-    height: calc(100vh - 8.5vh);
     position: relative;
-    top: 8.5vh;
+    top: 7%;
     display: flex;
     flex-direction: row;
     background-color: #f1f2f4;
+    overflow-y: auto;
 }
 
 .pacchetti{
@@ -79,16 +79,12 @@
 
 .Quantita{
     width: 30%;
-    height: 20%;
+    height: 35%;
     float: right;
     position: relative;
-}
-
-.scritta{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .aggiungi {
@@ -120,6 +116,7 @@
     background-color: #FF2849;
     position: relative;
     float: right;
+    margin-left: 5px;
 }
 
 .rimuovi:hover {
@@ -128,11 +125,12 @@
 
 .Prezzo{
     width: 30%;
-    height: 20%;
+    height: 35%;
     float: right;
     position: relative;
-    box-sizing: border-box;
-    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .button {
@@ -153,6 +151,7 @@
     position: relative;
     gap: 2px;
     float: right;
+    margin-left: 5px;
 }
 
 .svgIcon {
@@ -260,7 +259,7 @@
 
 .singola_carta{
     width: 33%;
-    height: 30%;
+    height: auto;
     font-size: 20px;
     box-shadow: rgba(0, 0, 0, 0.17) 0 -23px 25px 0 inset,
     rgba(0, 0, 0, 0.15) 0 -36px 30px 0 inset,
@@ -271,7 +270,6 @@
     rgba(0, 0, 0, 0.09) 0 16px 8px,
     rgba(0, 0, 0, 0.09) 0 32px 16px;
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
@@ -374,4 +372,145 @@
 .totale_scritta{
     font-size: 16px;
     font-weight: bold;
+}
+
+@media screen and (max-width: 1300px) {
+    .metodo_pagamento{
+        height: auto;
+    }
+
+    .indirizzo_spedizione{
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 1060px) {
+    .paymentOptions{
+        height: auto;
+    }
+
+    .singola_carta{
+        height: auto;
+        width: 50%;
+    }
+
+    .dati{
+        font-size: 20px;
+    }
+
+    .totale{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .dati{
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .DescrizioneRidotta{
+        width: 100%;
+        height: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 500;
+    }
+    .Prezzo{
+        width: 50%;
+        height: 30%;
+        float: left;
+    }
+
+    .Quantita{
+        width: 50%;
+        height: 30%;
+    }
+    .singola_carta{
+        width: 100%;
+    }
+
+    .dati{
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .dati{
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .dati{
+        font-size: 12px;
+    }
+
+    .checkout{
+        width: 25%;
+    }
+
+    .pacchetti{
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .singolo_pacchetto .contenuto {
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .link_immagine{
+        width: 50%;
+        height: 50%;
+    }
+
+    .singola_carta{
+        width: 100%;
+    }
+
+    .paymentOptions{
+        width: 80%;
+    }
+
+    .checkout{
+        width: 40%;
+    }
+
+    .pacchetti{
+        width: 60%;
+    }
+
+    .aggiungi{
+        width: 20px;
+        height: 20px;
+    }
+
+    .rimuovi{
+        width: 20px;
+        height: 20px;
+    }
+
+    .button{
+        width: 25px;
+        height: 25px;
+        margin: 0;
+    }
+}
+
+@media screen and (max-height: 550px) {
+    .tutto{
+        top: 50px;
+    }
+
+    .checkout{
+        height: 100vh;
+        position: relative;
+    }
 }
