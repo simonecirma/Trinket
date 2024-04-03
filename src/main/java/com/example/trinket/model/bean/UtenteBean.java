@@ -17,7 +17,6 @@ public class UtenteBean {
         this.email = "";
         this.password = "";
         this.dataDiNascita = null;
-        this.immagine = "";
         this.flagAmm = false;
     }
 

@@ -14,6 +14,7 @@
 </head>
 <body>
 <%@ include file="navbar.jsp" %>
+<%if(flagAmm){%>
 <div class="tutto">
     <div class="tabella">
         <table class="utenti">
@@ -41,6 +42,6 @@
         </table>
     </div>
 </div>
-
+<%}%>
 </body>
 </html>

@@ -105,6 +105,7 @@ public class OrdiniControl extends HttpServlet {
                 String codice = bean2.getCodSeriale();
                 PacchettoBean bean3;
                 bean3 = pacchettoModel.getPacchettoById(codice);
+                bean3.setPrezzo(bean2.getPrezzoUnitario());
                 pacchettiOrdine.add(bean3);
                 int i = bean2.getQuantita();
                 quantitaPacchettiOrdine.add(i);
@@ -289,6 +290,7 @@ public class OrdiniControl extends HttpServlet {
                 String codice = bean2.getCodSeriale();
                 PacchettoBean bean3;
                 bean3 = pacchettoModel.getPacchettoById(codice);
+                bean3.setPrezzo(bean2.getPrezzoUnitario());
                 pacchettiOrdine.add(bean3);
                 int i = bean2.getQuantita();
                 quantitaPacchettiOrdine.add(i);

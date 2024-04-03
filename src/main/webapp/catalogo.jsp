@@ -77,7 +77,7 @@
 
                     <div class="bottoni">
                         <button type="submit" class="button1">Applica!</button>
-                        <button type="submit" class="button1" onclick="'PacchettoControl?action=OttieniPacchetti'">Ripristina</button>
+                        <button type="button" class="button1" onclick="location.href='PacchettoControl?action=OttieniPacchetti'">Ripristina</button>
                     </div>
                 </form>
             </div>

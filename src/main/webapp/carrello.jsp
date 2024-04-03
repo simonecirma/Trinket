@@ -100,6 +100,7 @@
     <div class="paymentOptions" id="paymentOptions" style="display: none;">
         <div class="carte">
             <%int i=0;
+            if(!metodi.isEmpty()){
                 for(MetodoPagamentoBean bean : metodi){%>
             <div class="singola_carta">
                 <input type="radio" id="metodo<%=i%>" name="paymentMethod">
@@ -109,7 +110,10 @@
                     <span><%=bean.getScadenza()%></span></label><br>
             </div>
             <%  i++;
-            }%>
+            }
+            }else{%>
+            <a href="profilo.jsp" class="link_profilo">Aggiungi Metodo Di Pagamento!</a>
+            <%}%>
         </div>
         <div class="bottone">
             <button class="conferma" onclick="selectPaymentMethod()">Conferma</button>
@@ -119,6 +123,7 @@
     <div class="paymentOptions" id="indirizziOptions" style="display: none;">
         <div class="carte">
             <%
+                if(!indirizzi.isEmpty()){
                 for(IndirizzoBean bean : indirizzi){%>
             <div class="singola_carta">
                 <input type="radio" id="metodo<%=i%>" name="indirizzi">
@@ -130,7 +135,10 @@
 
             </div>
             <%  i++;
-            }%>
+            }
+            }else{%>
+            <a href="profilo.jsp" class="link_profilo">Aggiungi Indirizzo Di Spedizione!</a>
+            <%}%>
         </div>
         <div class="bottone">
             <button class="conferma" onclick="selectIndirizzi()">Conferma</button>

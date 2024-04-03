@@ -110,22 +110,25 @@ public class AccessoControl extends HttpServlet {
         String password = request.getParameter(PASSWORD);
         Date dataDiNascita = Date.valueOf(request.getParameter("dataDiNascita"));
         Part file = request.getPart("immagine");
-        String immagine = String.valueOf(UUID.randomUUID());
-        String directory = "Immagini/ImgUtente/";
-        String path = request.getServletContext().getRealPath("/") +directory;
-        String path2 = path + immagine;
-        try(FileOutputStream fos = new FileOutputStream(path2);
-            InputStream is = file.getInputStream()){
-            byte[] data = new byte[is.available()];
-            if(is.read(data) > 0)
-            {
-                fos.write(data);
+        String immagine = "";
+        if(file.getSize() > 0) {
+            immagine = String.valueOf(UUID.randomUUID());
+            String directory = "Immagini/ImgUtente/";
+            String path = request.getServletContext().getRealPath("/") + directory;
+            String path2 = path + immagine;
+            try (FileOutputStream fos = new FileOutputStream(path2);
+                 InputStream is = file.getInputStream()) {
+                byte[] data = new byte[is.available()];
+                if (is.read(data) > 0) {
+                    fos.write(data);
+                }
+            } catch (IOException e) {
+                request.setAttribute(ERROR_MESSAGE, MESSAGGIO + e.getMessage());
+                RequestDispatcher dispatcher = request.getRequestDispatcher(ERRORE);
+                dispatcher.forward(request, response);
             }
-        }catch(IOException e){
-            request.setAttribute(ERROR_MESSAGE, MESSAGGIO + e.getMessage());
-            RequestDispatcher dispatcher = request.getRequestDispatcher(ERRORE);
-            dispatcher.forward(request, response);
         }
+
         accessoModel.registrati(nome, cognome, email, password, dataDiNascita, immagine);
         request.setAttribute(NOTIFICA, "Registrazione Effettuata! ");
         RequestDispatcher dispatcher = request.getRequestDispatcher(LOGIN);

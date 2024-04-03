@@ -20,7 +20,7 @@
                             <input type="file" id="uploadInput" style="display: none;" name="immagineProfilo">
                             <button id="uploadLabel" class="uploadLabel" type="button" onclick="document.getElementById('uploadInput').click()">Scegli Immagine</button>
                         <% }else{ %>
-                            <img src="Immagini/ImgUtente/<%=immagine%>" class="iconaProfilo" alt="Foto Profilo">
+                            <img src="Immagini/ImgUtente/<%=immagine%>" class="iconaProfilo" alt="Immagine Profilo">
                             <input type="file" id="uploadInput" style="display: none;" name="immagineProfilo">
                             <button id="uploadLabel" class="uploadLabel" type="button" onclick="document.getElementById('uploadInput').click()">Cambia Immagine</button>
                         <% } %>
